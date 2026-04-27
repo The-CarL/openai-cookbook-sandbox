@@ -17,7 +17,7 @@ print("Unlike code_interpreter (Python only), shell supports any command.")
 print()
 
 response = client.responses.create(
-    model="gpt-5.4",
+    model="gpt-5.5",
     tools=[{"type": "shell", "environment": {"type": "container_auto"}}],
     input="Check what tools are available in this environment: Python version, Node version, and list /mnt/data contents.",
 )
@@ -38,7 +38,7 @@ print("=" * 60)
 print()
 
 response2 = client.responses.create(
-    model="gpt-5.4",
+    model="gpt-5.5",
     tools=[{"type": "shell", "environment": {"type": "container_auto"}}],
     instructions="Use shell commands to complete the task. Show your work.",
     input="""Create a CSV file with this data, then use shell tools to analyze it:
@@ -78,7 +78,7 @@ print("=" * 60)
 print()
 
 response3 = client.responses.create(
-    model="gpt-5.4",
+    model="gpt-5.5",
     tools=[
         {"type": "shell", "environment": {"type": "container_auto"}},
         {"type": "code_interpreter", "container": {"type": "auto"}},
@@ -118,5 +118,10 @@ Key points:
   - Response items: shell_call (command) + shell_call_output (result)
   - Can combine with other tools (code_interpreter, web_search, etc.)
   - Ideal for: file processing, system commands, multi-language execution
-  - Model: works with gpt-5.4 family
+  - Model: gpt-5.5 (default in shell docs); gpt-5.4 family also supported
+
+Environment options:
+  container_auto       — OpenAI provisions and tears down the container
+  container_reference  — Reuse an existing container by container_id
+  local                — Run commands in your own runtime (you implement the executor)
 """)
