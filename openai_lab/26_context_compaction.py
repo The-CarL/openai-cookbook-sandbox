@@ -145,6 +145,10 @@ compaction item alongside subsequent turns.
     compacted = client.responses.compact(
         model="gpt-5.5",
         input=long_input_items_array,
+        # prompt_cache_retention controls how the server caches the compacted
+        # context. "in_memory" (default) keeps it in fast ephemeral cache for
+        # reuse within the same session. Added in API/SDK update 2026-04-28.
+        prompt_cache_retention="in_memory",
     )
 
     next_input = [

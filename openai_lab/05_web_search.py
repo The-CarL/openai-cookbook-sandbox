@@ -36,3 +36,29 @@ for i, item in enumerate(response.output):
 print(f"\n=== Usage ===")
 print(f"Input:  {response.usage.input_tokens} tokens")
 print(f"Output: {response.usage.output_tokens} tokens")
+
+# --- Example 2: include raw search results (SDK 2.33 / 2026-04-28) ---
+# Pass include=["web_search_call.results"] to get the raw hits back in the
+# web_search_call item — useful when you want to post-process sources yourself.
+print("\n=== Example 2: include=['web_search_call.results'] ===\n")
+
+response2 = client.responses.create(
+    model="gpt-4.1-mini",
+    tools=[{"type": "web_search"}],
+    include=["web_search_call.results"],
+    input="What OpenAI models were released in April 2026?",
+)
+
+print(response2.output_text)
+print("\n=== Raw search hits from web_search_call.results ===")
+for item in response2.output:
+    if item.type == "web_search_call":
+        results = getattr(item, "results", None)
+        if results:
+            print(f"  {len(results)} raw hit(s) returned:")
+            for r in results[:5]:
+                print(f"    - {getattr(r, 'title', '(no title)')}: {getattr(r, 'url', '')}")
+        else:
+            print("  (no results field — check that include=[\"web_search_call.results\"] is set)")
+
+print(f"\nInput: {response2.usage.input_tokens} tokens | Output: {response2.usage.output_tokens} tokens")
