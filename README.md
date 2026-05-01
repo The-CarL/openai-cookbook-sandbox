@@ -75,6 +75,7 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | gpt-image-2 (Apr 28, 2026) | Standalone Images API: generate, edit, HD quality, transparent BG, Batch 50% off |
 
 ## Model lineup snapshot (verified April 27, 2026)
 
@@ -94,6 +95,10 @@ Numbered to be read in order — each builds on the previous.
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
+### Image model notes
+- **DALL-E 2 and DALL-E 3 shut down May 12, 2026.** The repo does not use them (exercises 19 and 32 use the Responses API `image_generation` tool and `gpt-image-2` respectively), but migrate any external DALL-E callers before that date.
+- `gpt-image-2` (exercise 32) uses the standalone `/v1/images/generations` endpoint with token-based pricing. The Responses API `image_generation` tool (exercise 19) is preferable when image generation is one step in a multi-tool workflow.
+
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
@@ -104,7 +109,6 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
