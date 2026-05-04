@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified May 4, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -104,7 +104,8 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off. Note: DALL-E 2 and DALL-E 3 are shut down in the API on **May 12, 2026** — `gpt-image-1` / `gpt-image-2` are the direct replacements (different endpoint shape, token-based billing)
+- **OpenAI on AWS / Amazon Bedrock** (Apr 28, Limited Preview) — GPT-5.5, GPT-5.4, Codex, and Managed Agents now available via Amazon Bedrock; use the standard OpenAI Python client pointed at the Bedrock endpoint. See: https://openai.com/index/openai-on-aws/
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
