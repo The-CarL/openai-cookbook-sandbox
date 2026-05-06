@@ -99,6 +99,7 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-5.5 long-context surcharge:** prompts with >272K input tokens are priced at **2× input and 1.5× output for the entire session** (not just the tokens above the threshold). At $5.00 input / $30.00 output standard, that becomes $10.00 / $45.00 once you exceed 272K tokens.
 
 ### Other 2026 API capabilities not yet covered
 
@@ -115,4 +116,4 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Realtime API** — GA version (`gpt-realtime-1.5`) continues; the Realtime API **Beta** is deprecated and removed **May 7, 2026**

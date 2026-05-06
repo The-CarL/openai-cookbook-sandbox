@@ -9,6 +9,10 @@ client = OpenAI()
 
 # Pricing per 1M tokens (verified April 27, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
+# LONG-CONTEXT SURCHARGE (gpt-5.5 only): prompts with >272K input tokens are
+# billed at 2x input ($10.00/M) and 1.5x output ($45.00/M) for the ENTIRE
+# session — not just the tokens above 272K. Use Exercise 25 caching to stay
+# under the threshold if your context is near the boundary.
 PRICING = {
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
