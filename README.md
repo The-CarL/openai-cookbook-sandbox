@@ -75,6 +75,7 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | gpt-image-2 (May 2026) | Direct Images API: generation, editing, token-based pricing, Batch |
 
 ## Model lineup snapshot (verified April 27, 2026)
 
@@ -104,7 +105,7 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** — ✅ covered in Exercise 32
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
