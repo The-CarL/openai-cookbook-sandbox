@@ -27,7 +27,9 @@ MODELS = [
     "gpt-5.5",
 ]
 
-# Pricing per 1M tokens (verified April 27, 2026)
+# Pricing per 1M tokens (verified May 7, 2026)
+# GPT-5.5 long-context surcharge: sessions >272K input tokens are billed at
+# 2x input ($10.00/M) and 1.5x output ($45.00/M) for the ENTIRE session.
 PRICING = {
     "gpt-4.1-nano":  {"input": 0.10, "output": 0.40},
     "gpt-4.1-mini":  {"input": 0.40, "output": 1.60},
@@ -35,7 +37,8 @@ PRICING = {
     "gpt-5.4-nano":  {"input": 0.20, "output": 1.25},
     "gpt-5.4-mini":  {"input": 0.75, "output": 4.50},
     "gpt-5.4":       {"input": 2.50, "output": 15.00},
-    "gpt-5.5":       {"input": 5.00, "output": 30.00},
+    "gpt-5.5":       {"input": 5.00, "output": 30.00},  # standard (<=272K input)
+    "gpt-5.5-lc":    {"input": 10.00, "output": 45.00}, # long-context (>272K input)
 }
 
 results = []
@@ -84,7 +87,13 @@ for r in results:
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in April 2026 ---")
+print("\n--- GPT-5.5 long-context pricing gotcha (May 2026) ---")
+print("Sessions with >272K input tokens trigger long-context rates for the full session:")
+print("  Standard (<=272K):    $5.00 input / $30.00 output per 1M tokens")
+print("  Long-context (>272K): $10.00 input / $45.00 output per 1M tokens")
+print("The surcharge applies to ALL tokens once the threshold is crossed.")
+print()
+print("\n--- Picking a model in May 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
