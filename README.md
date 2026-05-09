@@ -75,6 +75,7 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | Realtime API 2 (May 2026) | `gpt-realtime-2` (GPT-5 reasoning voice), translate, whisper — GA |
 
 ## Model lineup snapshot (verified April 27, 2026)
 
@@ -106,7 +107,9 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- ~~**`gpt-realtime-1.5`** (Feb 23) — Realtime API Beta (removed May 7, 2026; superseded by Realtime API 2)~~ → **covered in exercise 32**
+- **`gpt-realtime-translate`** (May 7) — Live speech translation, 70+ → 13 languages, $0.034/min → **covered in exercise 32**
+- **`gpt-realtime-whisper`** (May 7) — Streaming speech-to-text, $0.017/min → **covered in exercise 32**
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
