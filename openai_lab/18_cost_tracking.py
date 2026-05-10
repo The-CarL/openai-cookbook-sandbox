@@ -7,10 +7,13 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified April 27, 2026)
+# Pricing per 1M tokens (verified May 10, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
+# GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
+# ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 PRICING = {
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
+    # Standard pricing applies only to sessions with <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
@@ -181,3 +184,8 @@ print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
 print("you've set up the extended prompt caching path (see prompt-caching docs).")
+print()
+print("GPT-5.5 long-context gotcha: sessions with >272K input tokens are billed")
+print("at 2x input ($10.00/1M) and 1.5x output ($45.00/1M) for the FULL session.")
+print("The calculate_cost() above uses standard rates — add a check if you send")
+print("large contexts to avoid underestimating costs by 2x on input.")
