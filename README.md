@@ -106,7 +106,10 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **Realtime API v2** (May 7, 2026 — now GA, exited beta): three new models:
+  - **`gpt-realtime-2`** — first voice model with GPT-5-class reasoning, 128K context; $32/$64 per 1M audio input/output tokens ($0.40/1M cached input)
+  - **`gpt-realtime-translate`** — live speech translation, 70+ input → 13 output languages; $0.034/min
+  - **`gpt-realtime-whisper`** — streaming speech-to-text (transcription as speaker talks); $0.017/min
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
