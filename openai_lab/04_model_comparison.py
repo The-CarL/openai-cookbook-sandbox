@@ -25,17 +25,23 @@ MODELS = [
     # but ~2x per-token price. Often cheaper end-to-end. Use this as the new default
     # for any task where 5.4-mini is too weak.
     "gpt-5.5",
+    # GPT-5.5-instant — May 5, 2026. Same price as 5.5, lower latency, reduced
+    # hallucination in sensitive domains (law, medicine, finance). ChatGPT default.
+    "gpt-5.5-instant",
 ]
 
-# Pricing per 1M tokens (verified April 27, 2026)
+# Pricing per 1M tokens (verified May 12, 2026)
+# Note: gpt-5.5 and gpt-5.5-instant apply a 2× input / 1.5× output surcharge
+# for the entire session when the prompt exceeds 272K input tokens.
 PRICING = {
-    "gpt-4.1-nano":  {"input": 0.10, "output": 0.40},
-    "gpt-4.1-mini":  {"input": 0.40, "output": 1.60},
-    "gpt-4.1":       {"input": 2.00, "output": 8.00},
-    "gpt-5.4-nano":  {"input": 0.20, "output": 1.25},
-    "gpt-5.4-mini":  {"input": 0.75, "output": 4.50},
-    "gpt-5.4":       {"input": 2.50, "output": 15.00},
-    "gpt-5.5":       {"input": 5.00, "output": 30.00},
+    "gpt-4.1-nano":     {"input": 0.10, "output": 0.40},
+    "gpt-4.1-mini":     {"input": 0.40, "output": 1.60},
+    "gpt-4.1":          {"input": 2.00, "output": 8.00},
+    "gpt-5.4-nano":     {"input": 0.20, "output": 1.25},
+    "gpt-5.4-mini":     {"input": 0.75, "output": 4.50},
+    "gpt-5.4":          {"input": 2.50, "output": 15.00},
+    "gpt-5.5":          {"input": 5.00, "output": 30.00},
+    "gpt-5.5-instant":  {"input": 5.00, "output": 30.00},
 }
 
 results = []
@@ -95,7 +101,9 @@ print("  nano:  Budget reasoning. Better than 4.1-nano on hard tasks.")
 print("  mini:  The default for most new agentic workloads.")
 print("  5.4:   Still strong; cheaper per-token than 5.5 — keep for cost-sensitive flows.")
 print()
-print("GPT-5.5 (April 23, 2026):")
-print("  More token-efficient than 5.4 for most tasks, so often cheaper end-to-end")
-print("  even at 2x the per-token price. Default choice for new high-quality flows.")
-print("  Note: shell tool docs and most new examples use gpt-5.5.")
+print("GPT-5.5 family (April–May 2026):")
+print("  5.5:         More token-efficient than 5.4 for most tasks, so often cheaper")
+print("               end-to-end even at 2x the per-token price.")
+print("  5.5-instant: Same price, lower latency, reduced hallucination in law/medicine/")
+print("               finance. ChatGPT default as of May 5, 2026.")
+print("  Both:        2× input / 1.5× output surcharge kicks in for prompts > 272K tokens.")

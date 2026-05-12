@@ -7,11 +7,14 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified April 27, 2026)
+# Pricing per 1M tokens (verified May 12, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
+# Long-context surcharge: gpt-5.5 and gpt-5.5-instant charge 2× input and
+# 1.5× output for the full session when the prompt exceeds 272K input tokens.
 PRICING = {
-    # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
-    "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
+    # GPT-5.5 family — same per-token price; instant variant is lower latency
+    "gpt-5.5":         {"input": 5.00, "output": 30.00, "cached_input": 0.50},
+    "gpt-5.5-instant": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
     "gpt-5.4": {"input": 2.50, "output": 15.00, "cached_input": 0.25},
