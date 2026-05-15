@@ -106,9 +106,11 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — GPT-5-class reasoning voice model; 128K context, adjustable reasoning effort; $32/1M audio-in, $64/1M audio-out; replaces `gpt-realtime-1.5`
+- **`gpt-realtime-translate`** (May 7) — live multilingual speech, 70+ input languages, 13 output languages; $0.034/min
+- **`gpt-realtime-whisper`** (May 7) — streaming low-latency speech-to-text; $0.017/min
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
-- **WebSocket mode for Responses API** (Feb 23)
+- **WebSocket mode for Responses API** (Feb 23) — note: legacy Realtime API Beta deprecated May 12, 2026; new models use updated Realtime API
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
