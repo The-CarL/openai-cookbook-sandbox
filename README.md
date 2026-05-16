@@ -106,7 +106,7 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — Realtime API voice model with GPT-5-class reasoning, 128K context, parallel tool calls ($32/$64/M audio tokens). Supersedes `gpt-realtime-1.5`. Also launched: `gpt-realtime-translate` (70+ input → 13 output languages; $0.034/min) and `gpt-realtime-whisper` (streaming STT; $0.017/min). Note: **Realtime API Beta deprecated May 12, 2026** — the GA Realtime API is now the only supported path.
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -114,5 +114,4 @@ The following exist on the platform and are worth follow-up exercises:
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
-- **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Fine-tuning + distillation** — wind-down announced May 7, 2026: new users can no longer create training jobs; existing customers can continue through Jan 6, 2027.
