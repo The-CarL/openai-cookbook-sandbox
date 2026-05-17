@@ -1,4 +1,9 @@
 """Exercise 4: Compare GPT-4.1, GPT-5.4, and GPT-5.5 model families."""
+# Pricing note (verified May 17, 2026):
+# GPT-5.5 long-context surcharge: sessions with >272K input tokens are billed at
+# 2× input and 1.5× output for the *full* session (not just the excess).
+# Applies to standard, batch, and flex tiers.
+# https://developers.openai.com/api/docs/changelog
 
 import time
 
@@ -27,7 +32,8 @@ MODELS = [
     "gpt-5.5",
 ]
 
-# Pricing per 1M tokens (verified April 27, 2026)
+# Pricing per 1M tokens (verified May 17, 2026)
+# gpt-5.5 long-context: >272K input tokens → 2× input ($10.00) + 1.5× output ($45.00) for full session
 PRICING = {
     "gpt-4.1-nano":  {"input": 0.10, "output": 0.40},
     "gpt-4.1-mini":  {"input": 0.40, "output": 1.60},
@@ -84,7 +90,7 @@ for r in results:
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in April 2026 ---")
+print("\n--- Picking a model in May 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -99,3 +105,8 @@ print("GPT-5.5 (April 23, 2026):")
 print("  More token-efficient than 5.4 for most tasks, so often cheaper end-to-end")
 print("  even at 2x the per-token price. Default choice for new high-quality flows.")
 print("  Note: shell tool docs and most new examples use gpt-5.5.")
+print()
+print("GPT-5.5 long-context surcharge (May 2026):")
+print("  If a session's input tokens exceed 272K, the FULL session is re-billed at")
+print("  2× input ($10.00/M) and 1.5× output ($45.00/M). Applies to standard,")
+print("  batch, and flex. Budget accordingly for RAG or document-heavy workloads.")

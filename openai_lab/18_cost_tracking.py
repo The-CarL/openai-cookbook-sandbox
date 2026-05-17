@@ -7,10 +7,17 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified April 27, 2026)
+# Pricing per 1M tokens (verified May 17, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
+#
+# GPT-5.5 LONG-CONTEXT SURCHARGE (added May 2026):
+#   Sessions where input tokens exceed 272K are billed at 2× input and 1.5× output
+#   for the *full* session — not just the excess. Applies to standard, batch, flex.
+#   Surcharge prices: input $10.00/M, output $45.00/M.
+#   See: https://developers.openai.com/api/docs/changelog
 PRICING = {
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
+    # Long-context surcharge: >272K input tokens → $10.00 input / $45.00 output (full session)
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
@@ -26,6 +33,10 @@ PRICING = {
     "gpt-4.1-mini-2025-04-14": {"input": 0.40, "output": 1.60, "cached_input": 0.10},
     "gpt-4.1-2025-04-14": {"input": 2.00, "output": 8.00, "cached_input": 0.50},
 }
+
+
+GPT55_LONGCTX_THRESHOLD = 272_000  # tokens; above this, full-session surcharge applies
+GPT55_LONGCTX_PRICES = {"input": 10.00, "output": 45.00}  # $/M surcharge prices
 
 
 def calculate_cost(response):
@@ -44,10 +55,20 @@ def calculate_cost(response):
     cached_tokens = usage.input_tokens_details.cached_tokens if usage.input_tokens_details else 0
     non_cached_input = input_tokens - cached_tokens
 
+    # GPT-5.5 long-context surcharge: if the session's input tokens exceed 272K,
+    # OpenAI bills the *entire* session at 2× input / 1.5× output (May 2026).
+    longctx_surcharge = False
+    base_model = model.split("-202")[0]
+    if base_model in ("gpt-5.5", "gpt-5.5-pro") and input_tokens > GPT55_LONGCTX_THRESHOLD:
+        effective_prices = GPT55_LONGCTX_PRICES
+        longctx_surcharge = True
+    else:
+        effective_prices = prices
+
     # Cost calculation
-    input_cost = (non_cached_input / 1_000_000) * prices["input"]
+    input_cost = (non_cached_input / 1_000_000) * effective_prices["input"]
     cached_cost = (cached_tokens / 1_000_000) * prices.get("cached_input", prices["input"])
-    output_cost = (output_tokens / 1_000_000) * prices["output"]
+    output_cost = (output_tokens / 1_000_000) * effective_prices["output"]
     total_cost = input_cost + cached_cost + output_cost
 
     return {
@@ -61,6 +82,7 @@ def calculate_cost(response):
         "cached_cost": cached_cost,
         "output_cost": output_cost,
         "total_cost": total_cost,
+        "longctx_surcharge": longctx_surcharge,
     }
 
 
@@ -74,6 +96,9 @@ def print_cost_report(cost):
     print(f"  Cached cost:      ${cost['cached_cost']:.6f}")
     print(f"  Output cost:      ${cost['output_cost']:.6f}")
     print(f"  TOTAL COST:       ${cost['total_cost']:.6f}")
+    if cost.get("longctx_surcharge"):
+        print(f"  *** LONG-CONTEXT SURCHARGE APPLIED: input >{GPT55_LONGCTX_THRESHOLD:,} tokens")
+        print(f"  *** Full session billed at $10.00/M input, $45.00/M output (2×/1.5×)")
 
 
 # --- Run a few calls and track costs ---
@@ -181,3 +206,9 @@ print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
 print("you've set up the extended prompt caching path (see prompt-caching docs).")
+print()
+print("GPT-5.5 long-context surcharge (May 2026):")
+print(f"  Requests where input tokens exceed {GPT55_LONGCTX_THRESHOLD:,} are billed at 2× input")
+print("  and 1.5× output for the *full session* — not just the excess. Applies to")
+print("  standard, batch, and flex tiers. Surcharge prices: $10.00/M in, $45.00/M out.")
+print("  calculate_cost() above detects this automatically and flags it in the report.")
