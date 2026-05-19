@@ -104,9 +104,11 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) / **`gpt-image-1-mini`** (May 2026) — image gen + edits, token-based pricing, Batch; `dall-e-2` and `dall-e-3` removed May 12 — migrate to `gpt-image-*` family
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — GPT-5-class speech-to-speech with configurable reasoning; replaces `gpt-realtime-1.5`
+- **Realtime Translate** (May 7) — streaming speech-to-speech translation via Realtime API
+- **Realtime Whisper** (May 7) — streaming speech-to-text via Realtime API
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
