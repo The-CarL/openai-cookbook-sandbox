@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified May 20, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -106,7 +106,9 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — GPT-5-class voice reasoning, 128K context; $32/M audio input, $64/M audio output. Supersedes `gpt-realtime-1.5`. Realtime API Beta removed May 12 — use GA Realtime API interface
+- **`gpt-realtime-translate`** (May 7) — Streaming speech translation, 70+ input languages → 13 output languages; $0.034/min
+- **`gpt-realtime-whisper`** (May 7) — Streaming speech-to-text transcription; $0.017/min
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -114,5 +116,5 @@ The following exist on the platform and are worth follow-up exercises:
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
-- **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Fine-tuning** — winding down; no new orgs from May 7, 2026; existing customers can create jobs until Jan 6, 2027; inference on existing fine-tuned models continues until base model deprecation
+- **Realtime API** (voice / audio streaming, end-to-end) — see `gpt-realtime-2` above
