@@ -75,8 +75,9 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | Realtime voice models (May 2026) | `gpt-realtime-2` (GPT-5 reasoning), `gpt-realtime-translate`, `gpt-realtime-whisper` |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified May 22, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -93,6 +94,11 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
+| `gpt-realtime-2` | $32/1M audio in¹ | $64/1M audio out | 128K | May 7: GPT-5-class reasoning speech-to-speech voice agent |
+| `gpt-realtime-translate` | $0.034/min | — | — | May 7: live speech translation, 70+ input → 13 output languages |
+| `gpt-realtime-whisper` | $0.017/min | — | — | May 7: streaming speech-to-text, lowest-latency transcription |
+
+¹ Cached audio input for `gpt-realtime-2`: $0.40/1M tokens.
 
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
@@ -106,7 +112,6 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -115,4 +120,5 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- ~~**`gpt-realtime-1.5`**~~ — **Deprecated May 12, 2026.** Covered by Exercise 32 (`gpt-realtime-2`).
+- ~~**DALL-E-2 / DALL-E-3**~~ — **Removed from Images API May 12, 2026.** Use `gpt-image-1`, `gpt-image-1-mini`, or `gpt-image-2`. Exercise 19 (`image_generation` built-in tool) is unaffected.
