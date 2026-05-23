@@ -75,8 +75,9 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | Realtime API (gpt-realtime-2, May 2026) | GPT-5-class reasoning in voice agents; reasoning effort levels; WebSocket pattern |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified May 23, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -93,6 +94,9 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
+| `gpt-realtime-2` | $32/M audio-in | $64/M audio-out | 128K | Realtime voice with GPT-5-class reasoning (May 7, 2026) |
+| `gpt-realtime-translate` | $0.034/min | — | — | Live speech translation (70+ input, 13 output languages) |
+| `gpt-realtime-whisper` | $0.017/min | — | — | Streaming speech-to-text transcription |
 
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
@@ -106,7 +110,10 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — now covered in Exercise 32
+- **`gpt-realtime-translate`** (May 7) — live speech translation, 70+ input / 13 output languages
+- **`gpt-realtime-whisper`** (May 7) — streaming speech-to-text, low-latency transcription pipeline
+- **Note (May 12)**: Realtime API Beta shut down; use the GA Realtime API endpoint
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
