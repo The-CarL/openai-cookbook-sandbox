@@ -104,9 +104,12 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off. Note: `dall-e-2` and `dall-e-3` were deprecated and removed from the API on May 12, 2026; migrate to `gpt-image-2`.
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **Realtime API v2** (May 7) — three new models replacing `gpt-realtime-1.5` (Beta, deprecated May 12):
+  - `gpt-realtime-2` — GPT-5-class reasoning, speech-to-speech, $32/$64 per M audio in/out
+  - `gpt-realtime-translate` — live speech translation, 70+ input langs → 13 output langs, $0.034/min
+  - `gpt-realtime-whisper` — streaming speech-to-text, $0.017/min
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -115,4 +118,4 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Realtime API** (voice / audio streaming, end-to-end) — see Realtime API v2 above
