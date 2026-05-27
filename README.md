@@ -104,9 +104,14 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off.
+  ⚠️ **DALL-E 2 and DALL-E 3 deprecated May 12, 2026** — removed from the API. Use `gpt-image-1`, `gpt-image-1.5`, or `gpt-image-2` instead. Exercise 19 is unaffected (uses the `image_generation` Responses API built-in tool, not the DALL-E endpoint directly).
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **Realtime voice model suite** (May 7, 2026) — replaces `gpt-realtime-1.5`.
+  ⚠️ **Realtime API Beta deprecated May 12, 2026.** New models use the updated Realtime API surface:
+  - `gpt-realtime-2` — speech-to-speech with configurable reasoning; $32/M audio input, $64/M audio output ($0.40/M cached input)
+  - `gpt-realtime-translate` — live translation, 70+ input languages → 13 output languages; $0.034/min
+  - `gpt-realtime-whisper` — streaming speech-to-text; $0.017/min
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -115,4 +120,3 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
