@@ -104,7 +104,7 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off. **DALL-E 2 and DALL-E 3 deprecated and removed from the API May 12, 2026.** Current image generation models: `gpt-image-1`, `gpt-image-1.5`, `gpt-image-2`.
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
@@ -114,5 +114,5 @@ The following exist on the platform and are worth follow-up exercises:
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
-- **Fine-tuning + distillation**
+- **Fine-tuning** — **deprecated May 2026.** Distillation options remain; check Batch API + model distillation docs.
 - **Realtime API** (voice / audio streaming, end-to-end)
