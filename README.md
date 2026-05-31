@@ -75,8 +75,9 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | Realtime Voice API (May 2026) | `gpt-realtime-2`, `gpt-realtime-translate`, `gpt-realtime-whisper` |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified May 31, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -93,6 +94,9 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
+| `gpt-realtime-2` | 32†/M | 64†/M | 128K | May 7: voice agent w/ GPT-5-class reasoning; †audio tokens |
+| `gpt-realtime-translate` | 0.034/min | — | — | May 7: live speech translation, 70+ → 13 languages |
+| `gpt-realtime-whisper` | 0.017/min | — | — | May 7: streaming speech-to-text |
 
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
@@ -104,9 +108,11 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off. Note: `dall-e-2` and `dall-e-3` were removed from the API May 12, 2026 — `gpt-image-2` is now the standalone image-gen option.
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — supersedes `gpt-realtime-1.5`; GPT-5-class reasoning voice agent (covered: exercise 32, text-mode; audio loop requires hardware)
+- **`gpt-realtime-translate`** (May 7) — live speech translation, 70+ → 13 languages (covered: pattern shown in exercise 32)
+- **`gpt-realtime-whisper`** (May 7) — streaming speech-to-text (covered: pattern shown in exercise 32)
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -115,4 +121,4 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- ~~**Realtime API Beta**~~ (removed May 12, 2026 — use GA interface; see exercise 32)
