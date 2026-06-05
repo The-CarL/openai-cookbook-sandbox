@@ -104,7 +104,7 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **Image generation API** (direct Images API — distinct from the built-in `image_generation` Responses tool) — current models: `gpt-image-2` (flagship, Apr 21), `gpt-image-1.5`, `gpt-image-1-mini`; token-based pricing; 50% off via Batch; `gpt-image-1` deprecates Oct 23, 2026; DALL·E 2 and DALL·E 3 retired May 12, 2026
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
