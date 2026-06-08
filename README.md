@@ -75,6 +75,7 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | Inline moderation (Jun 2026) | `moderation` param: safety scores alongside generation, one API call |
 
 ## Model lineup snapshot (verified April 27, 2026)
 
