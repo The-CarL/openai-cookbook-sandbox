@@ -106,7 +106,10 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — Realtime voice model with GPT-5-class reasoning, configurable effort, tool use. Supersedes `gpt-realtime-1.5`; Realtime API Beta deprecated May 12, 2026.
+- **`gpt-realtime-mini`** (May 7) — Cost-efficient realtime voice model (WebRTC / WebSocket / SIP)
+- **`gpt-realtime-translate`** (May 7) — Streaming speech translation (70+ input → 13 output languages)
+- **`gpt-realtime-whisper`** (May 7) — Streaming speech-to-text transcription
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
