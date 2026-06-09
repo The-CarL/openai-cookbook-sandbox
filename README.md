@@ -106,7 +106,9 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — GPT-5-class speech-to-speech: adjustable reasoning effort (minimal → very-high), 128K context window. Replaces `gpt-realtime-1.5`. ⚠️ Realtime API Beta deprecated and removed May 12; migrate to the released Realtime API.
+- **`gpt-realtime-translate`** (May 7) — Live speech translation, 70+ input → 13 output languages. $0.034/min
+- **`gpt-realtime-whisper`** (May 7) — Low-latency streaming speech-to-text. $0.017/min
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -115,4 +117,6 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Secure MCP Tunnel** (May 27) — outbound-only tunnel-client lets ChatGPT / Codex / Responses API reach private on-prem MCP servers without public exposure; pairs with Workload Identity Federation (AWS/Azure/GCP IAM instead of API keys)
+- **DALL-E 2 / DALL-E 3 removed from API** (May 12) — use `gpt-image-2`, `gpt-image-1`, or `gpt-image-1-mini`
+- **Container session billing** (Jun 2) — per-minute billing with 5-minute minimum instead of full 20-minute session rate; same per-minute price, lower cost for short sessions (Exercise 22)
