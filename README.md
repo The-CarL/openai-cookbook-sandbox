@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 10, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -104,13 +104,15 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off. *DALL-E 2 and DALL-E 3 removed from API May 12, 2026; gpt-image-1 family is the current replacement for the Images API.*
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — New flagship voice model: speech-to-speech with GPT-5 reasoning, 128K context. Companion models: `gpt-realtime-translate` (simultaneous interpretation, 70+ languages) and `gpt-realtime-whisper` (streaming STT). *Realtime API Beta was removed May 12, 2026 — use the GA Realtime API.*
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
+- **Inline moderation scores** (May 2026) — Pass `moderation` in a Responses API or Chat Completions request to receive safety category scores alongside generated output in the same API call
+- **`return_token_budget` for `web_search`** (May 2026) — Set `"unlimited"` to opt in to longer GPT-5+ reasoning web search runs for high-effort research; default caps token budget. GPT-5+ models only.
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
