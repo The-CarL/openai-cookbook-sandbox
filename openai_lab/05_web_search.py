@@ -36,3 +36,32 @@ for i, item in enumerate(response.output):
 print(f"\n=== Usage ===")
 print(f"Input:  {response.usage.input_tokens} tokens")
 print(f"Output: {response.usage.output_tokens} tokens")
+
+# --- return_token_budget: longer reasoning-backed web search (May 2026) ---
+# Only applies to GPT-5+ reasoning models via the Responses API web_search tool.
+# Default behaviour caps the number of tokens the model can consume from search
+# results; "unlimited" removes that cap for high-effort research or eval runs.
+# Use selectively — it increases latency and cost.
+print("\n=== return_token_budget=unlimited (high-effort research) ===\n")
+print("GPT-5+ reasoning models only. Removes the default search-result token cap.")
+print("Useful for deep research tasks that need to read many pages.")
+print()
+
+response2 = client.responses.create(
+    model="gpt-5.4-mini",
+    tools=[{
+        "type": "web_search",
+        "return_token_budget": "unlimited",
+    }],
+    input=(
+        "What are the three most significant OpenAI API changes released in "
+        "May and June 2026? Be specific about model IDs and parameter names."
+    ),
+)
+
+print(response2.output_text)
+print(f"\nTokens: {response2.usage.input_tokens} in, {response2.usage.output_tokens} out")
+print()
+print("Note: compare token counts vs. the default web_search call above.")
+print("return_token_budget=unlimited typically produces higher token consumption")
+print("because the model reads more search-result content before summarising.")
