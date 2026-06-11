@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified April 27, 2026; re-checked June 11, 2026 — pricing unchanged)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -104,9 +104,11 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off; replaces DALL-E 2/3 (removed from API May 12, 2026)
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7, 2026) — New-gen Realtime API voice model; GPT-5-class reasoning, 128K ctx, configurable effort (minimal/low/medium/high/xhigh), $32/$64 per 1M audio in/out; supersedes `gpt-realtime-1.5` (old Realtime API Beta deprecated May 12)
+- **`gpt-realtime-translate`** (May 7, 2026) — Live speech-to-speech translation, 70+ input / 13 output languages
+- **`gpt-realtime-whisper`** (May 7, 2026) — Low-latency streaming speech-to-text for captions and meeting notes
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -115,4 +117,3 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
