@@ -105,14 +105,15 @@ Numbered to be read in order — each builds on the previous.
 The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
-- **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
+- **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch ⚠️ model aliases deprecated Mar 24; removal Sep 24, 2026 — future exercise must use dated snapshot IDs
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
-- **Hosted Evals product** (`client.evals.*`)
+- ~~**Hosted Evals product** (`client.evals.*`)~~ — **deprecated Jun 3, 2026; read-only Oct 31, shutdown Nov 30, 2026.** Use programmatic evals (Exercise 28) or migrate to Datasets.
+- **Inline moderation scores** (Jun 4, 2026) — pass a `moderation` object in a Responses API or Chat Completions request to receive moderation scores for input + output in the same response; no separate moderation call needed
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Realtime API** (voice / audio streaming, end-to-end) — Realtime API Beta removed May 12, 2026; use the released Realtime API
