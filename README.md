@@ -104,9 +104,8 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off; **⚠ `dall-e-2` and `dall-e-3` were removed from the API on May 12, 2026 — `gpt-image-2` (or `gpt-image-1`/`gpt-image-1-mini`) is now the only standalone image model**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
@@ -115,4 +114,5 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Realtime API GA** (May 7, 2026) — Beta (`gpt-realtime-1.5`) removed May 12, 2026; GA launched with three new models: `gpt-realtime-2` (GPT-5-class reasoning voice), `gpt-realtime-translate` (streaming translation, 70+ input langs), `gpt-realtime-whisper` (streaming transcription); new GA API shape (removed beta header, new client-secret and SDP endpoints)
+- **Container per-minute billing** (Jun 2, 2026) — shell/code-interpreter container sessions now billed per minute with 5-min minimum instead of the previous 20-min flat rate; per-minute rate unchanged
