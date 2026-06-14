@@ -11,7 +11,13 @@ client = OpenAI()
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
 PRICING = {
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
-    "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
+    # Long-context tier: >272K input tokens → 2x input ($10/M), 1.5x output ($45/M) for the full session
+    "gpt-5.5": {
+        "input": 5.00, "output": 30.00, "cached_input": 0.50,
+        "long_context_threshold": 272_000,
+        "long_context_input": 10.00,
+        "long_context_output": 45.00,
+    },
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
     "gpt-5.4": {"input": 2.50, "output": 15.00, "cached_input": 0.25},
@@ -44,10 +50,19 @@ def calculate_cost(response):
     cached_tokens = usage.input_tokens_details.cached_tokens if usage.input_tokens_details else 0
     non_cached_input = input_tokens - cached_tokens
 
+    # Long-context tier: some models charge higher rates above a token threshold
+    lc_threshold = prices.get("long_context_threshold", 0)
+    if lc_threshold and input_tokens > lc_threshold:
+        input_rate = prices.get("long_context_input", prices["input"])
+        output_rate = prices.get("long_context_output", prices["output"])
+    else:
+        input_rate = prices["input"]
+        output_rate = prices["output"]
+
     # Cost calculation
-    input_cost = (non_cached_input / 1_000_000) * prices["input"]
+    input_cost = (non_cached_input / 1_000_000) * input_rate
     cached_cost = (cached_tokens / 1_000_000) * prices.get("cached_input", prices["input"])
-    output_cost = (output_tokens / 1_000_000) * prices["output"]
+    output_cost = (output_tokens / 1_000_000) * output_rate
     total_cost = input_cost + cached_cost + output_cost
 
     return {

@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 14, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -87,7 +87,7 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 (10.00 >272K) | 30.00 (45.00 >272K) | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
@@ -99,6 +99,7 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-5.5 long-context pricing:** requests where `input_tokens > 272K` are billed at **2× input / 1.5× output** for the **full session** (not just the overflow). See Exercise 18 for the tiered cost calculation.
 
 ### Other 2026 API capabilities not yet covered
 
