@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 15, 2026 — pricing unchanged since April 27)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -106,13 +106,14 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — Realtime voice model with configurable reasoning for speech-to-speech agents ($32/$64 per M audio in/out, cached audio $0.40/M). `gpt-realtime-translate` (speech-to-speech translation, $0.034/min) and `gpt-realtime-whisper` (speech-to-text, $0.017/min) also released May 7. **Realtime API Beta was removed May 12, 2026 — GA Realtime API only.**
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
+- **Moderation scores in Responses/Completions API** (May 2026) — Pass a `moderation` object in a generation request to receive input + output moderation scores inline without a separate moderation call.
+- **Container billing** (Jun 2, 2026) — Shell and code interpreter containers now billed per-minute with a 5-min minimum, replacing the previous 20-min session rate.
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
