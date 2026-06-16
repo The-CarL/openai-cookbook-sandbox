@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 16, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -88,6 +88,7 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
 | `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5-instant` | 5.00 | 30.00 | 1M | May 5: low-latency default ChatGPT model; reduced hallucinations vs 5.5 |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
