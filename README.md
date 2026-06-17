@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 17, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -97,7 +97,8 @@ Numbered to be read in order — each builds on the previous.
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
-- **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
+- **GPT-5.5 only supports extended prompt caching (24h) — in-memory is unsupported.**
+- **June 2026**: `prompt_cache_retention` now defaults to `24h` for non-ZDR orgs (extended caching is on by default). ZDR orgs still default to `in_memory`; pass `prompt_cache_retention='24h'` in the request to opt in.
 - GPT-5.5 reasoning effort defaults to `medium`.
 
 ### Other 2026 API capabilities not yet covered

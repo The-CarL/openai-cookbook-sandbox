@@ -119,8 +119,11 @@ print("""
 
 3. Minimum cacheable prefix is 1024 tokens. Below that, no caching happens.
 
-4. Cache TTL is ~5–10 min idle, longer under sustained traffic. For chat
-   apps with bursty traffic, keep a "warming" thread.
+4. Cache retention (June 2026 change): orgs *without* ZDR enabled now get
+   24h extended caching by default (prompt_cache_retention='24h'). ZDR orgs
+   still default to in_memory (~5–10 min idle). Pass
+   prompt_cache_retention='24h' explicitly on ZDR plans to opt in to
+   extended retention. Check your org settings at platform.openai.com.
 
 5. Verify hits via response.usage.input_tokens_details.cached_tokens.
    Do NOT assume — instrument it. Cache hit rate is a top-line cost metric.
