@@ -120,6 +120,10 @@ Key points:
   - Ideal for: file processing, system commands, multi-language execution
   - Model: gpt-5.5 (default in shell docs); gpt-5.4 family also supported
 
+Billing (updated Jun 2 2026):
+  Containers are billed per minute with a 5-minute minimum (was: flat 20-min session rate).
+  Same per-minute rate; shorter sessions are now cheaper.
+
 Environment options:
   container_auto       — OpenAI provisions and tears down the container
   container_reference  — Reuse an existing container by container_id

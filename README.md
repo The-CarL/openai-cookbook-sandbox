@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 18, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -87,10 +87,10 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Flagship (Apr 24). Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
-| `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
-| `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
+| `gpt-5.3-codex` | — | — | — | Feb 24: agentic coding model. **Deprecated in Codex UI; API available until Dec 31 2026.** |
+| `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation. **⚠️ API blocked Jun 30 2026; removed Dec 31 2026.** |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
@@ -106,13 +106,17 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — GPT-5-class speech-to-speech with configurable reasoning; $32/$64 per M audio in/out tokens. Supersedes `gpt-realtime-1.5`.
+- **`gpt-realtime-translate`** (May 7) — streaming speech translation companion to gpt-realtime-2
+- **`gpt-realtime-whisper`** (May 7) — streaming speech-to-text companion to gpt-realtime-2
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
+- **Inline moderation in Responses API** (Jun 2026) — pass a `moderation` object in `responses.create()` to receive harm scores for input and output in the same response, no separate moderation call needed
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
-- **Fine-tuning + distillation**
+- **Fine-tuning + distillation** — note: as of May 7 2026, new organizations can no longer create self-serve fine-tuning jobs
 - **Realtime API** (voice / audio streaming, end-to-end)
+- **Container billing** (Jun 2 2026) — eligible container sessions now billed per minute with 5-min minimum, down from a flat 20-min session rate (affects exercise 22)
