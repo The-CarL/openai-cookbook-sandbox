@@ -104,15 +104,17 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off; see also `gpt-image-1` / `gpt-image-1-mini` / `gpt-image-1.5` (DALL-E 2/3 removed from API May 12, 2026)
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model; Realtime API Beta removed May 12, 2026; GA Realtime API now available
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
-- **Hosted Evals product** (`client.evals.*`)
+- **Inline moderation** (May 2026) — pass `moderation={"model": "omni-moderation-latest"}` in `responses.create` or `chat.completions.create`; returns `response.moderation.input` + `.output` scores alongside generated text in one call
+- **Secure MCP Tunnel** (May 27, 2026 GA) — tunnel-client connects private/on-prem MCP servers to Responses API, ChatGPT, and Codex via outbound-only HTTPS; no inbound firewall rules
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Realtime API** (voice / audio streaming, end-to-end; GA released, Beta removed May 12, 2026)
+- **Hosted Evals product** (`client.evals.*`) — deprecated June 3, 2026; read-only Oct 31, shutdown Nov 30. Use Exercise 28 pattern + Datasets API instead.
