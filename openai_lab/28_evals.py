@@ -225,9 +225,10 @@ The hardest part of evals is the dataset, not the harness.
 4. Evaluate in CI. Block prompt PRs that regress pass rate by > N%. This is
    the single best habit for a prompt-heavy codebase.
 
-5. OpenAI has a hosted Evals product (client.evals.* in the SDK) for running
-   these at scale with versioned datasets and dashboards. Use it once your
-   eval suite outgrows a single script.
+5. OpenAI's hosted Evals product (client.evals.*) was deprecated June 2026
+   (read-only Oct 31, shutdown Nov 30, 2026). The eval-as-code pattern in
+   this script is now the recommended approach; see the Datasets API for
+   hosted dataset management.
 
 6. Things to eval beyond accuracy:
    - Cost per case (mean tokens × price)
