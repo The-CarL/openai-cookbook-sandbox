@@ -104,15 +104,17 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21, API-available May 2026) — image gen + edits, token-based pricing, Batch with 50% off; DALL-E 2/3 removed from the API on May 12 — gpt-image-2 is now the images API
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 7) — Realtime API voice model with GPT-5-class reasoning; supersedes `gpt-realtime-1.5` (Realtime API Beta removed May 12)
+- **`gpt-realtime-translate`** (May 7) — streaming speech translation, 70+ input languages, 13 output languages
+- **`gpt-realtime-whisper`** (May 7) — streaming speech-to-text, 70+ languages
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
+- **Secure MCP Tunnel** (May 27) — connect ChatGPT, Responses API, and Codex to private/on-prem MCP servers without opening inbound firewall ports
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
