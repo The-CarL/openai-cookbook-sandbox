@@ -124,4 +124,9 @@ Environment options:
   container_auto       — OpenAI provisions and tears down the container
   container_reference  — Reuse an existing container by container_id
   local                — Run commands in your own runtime (you implement the executor)
+
+Billing (from June 2, 2026):
+  container_auto sessions are billed per-minute with a 5-minute minimum.
+  Before June 2, 2026 they were billed at the flat 20-minute session rate.
+  Per-minute rate is the same; you just pay for actual minutes used (min 5).
 """)
