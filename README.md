@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 22, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -89,8 +89,8 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
 | `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
-| `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
-| `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
+| `gpt-5.3-codex` (**deprecated**) | — | — | — | Feb 24: agentic coding model. **New API requests blocked Jun 30, 2026; full removal Dec 31. Migrate to `gpt-5.5`.** |
+| `gpt-5.2-codex` (**deprecated**) | — | — | — | Jan 14: earlier codex generation. **Deprecated — migrate to `gpt-5.5`.** |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
@@ -106,13 +106,12 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
-- **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
+- **`gpt-realtime-2`** (May 7) — Realtime API: speech-to-speech with GPT-5-class reasoning, configurable effort (minimal→xhigh), 128K context; launched alongside **`gpt-realtime-translate`** (streaming speech translation) and **`gpt-realtime-whisper`** (streaming speech-to-text). Supersedes `gpt-realtime-1.5` and `gpt-audio-1.5`.
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
-- **Fine-tuning + distillation**
+- **Fine-tuning + distillation** (note: self-serve fine-tuning API is being wound down as of May 7, 2026; new orgs cannot create training jobs)
 - **Realtime API** (voice / audio streaming, end-to-end)
