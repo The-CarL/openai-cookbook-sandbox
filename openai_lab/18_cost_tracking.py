@@ -27,6 +27,14 @@ PRICING = {
     "gpt-4.1-2025-04-14": {"input": 2.00, "output": 8.00, "cached_input": 0.50},
 }
 
+# Long-context surcharge (confirmed May 2026): GPT-5.5 family requests whose
+# input_tokens exceed this threshold are billed at 2× input / 1.5× output for
+# the full request — including cached and non-cached portions.
+LONG_CTX_THRESHOLDS = {
+    "gpt-5.5": 272_000,
+    "gpt-5.5-pro": 272_000,
+}
+
 
 def calculate_cost(response):
     """Extract usage and calculate cost from a Responses API response."""
@@ -44,10 +52,18 @@ def calculate_cost(response):
     cached_tokens = usage.input_tokens_details.cached_tokens if usage.input_tokens_details else 0
     non_cached_input = input_tokens - cached_tokens
 
+    # Long-context surcharge: GPT-5.5 family bills at 2× input / 1.5× output when
+    # total input_tokens exceed the threshold — applies to the whole request.
+    base_model = model.split("-202")[0]
+    lc_threshold = LONG_CTX_THRESHOLDS.get(model) or LONG_CTX_THRESHOLDS.get(base_model)
+    long_context = bool(lc_threshold and input_tokens > lc_threshold)
+    input_mult = 2.0 if long_context else 1.0
+    output_mult = 1.5 if long_context else 1.0
+
     # Cost calculation
-    input_cost = (non_cached_input / 1_000_000) * prices["input"]
-    cached_cost = (cached_tokens / 1_000_000) * prices.get("cached_input", prices["input"])
-    output_cost = (output_tokens / 1_000_000) * prices["output"]
+    input_cost = (non_cached_input / 1_000_000) * prices["input"] * input_mult
+    cached_cost = (cached_tokens / 1_000_000) * prices.get("cached_input", prices["input"]) * input_mult
+    output_cost = (output_tokens / 1_000_000) * prices["output"] * output_mult
     total_cost = input_cost + cached_cost + output_cost
 
     return {
@@ -61,6 +77,7 @@ def calculate_cost(response):
         "cached_cost": cached_cost,
         "output_cost": output_cost,
         "total_cost": total_cost,
+        "long_context": long_context,
     }
 
 
@@ -74,6 +91,8 @@ def print_cost_report(cost):
     print(f"  Cached cost:      ${cost['cached_cost']:.6f}")
     print(f"  Output cost:      ${cost['output_cost']:.6f}")
     print(f"  TOTAL COST:       ${cost['total_cost']:.6f}")
+    if cost.get('long_context'):
+        print(f"  !! Long-context surcharge: input >{272_000:,} tokens → 2× input / 1.5× output")
 
 
 # --- Run a few calls and track costs ---
@@ -181,3 +200,7 @@ print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
 print("you've set up the extended prompt caching path (see prompt-caching docs).")
+print()
+print("GPT-5.5 long-context surcharge (May 2026): requests exceeding 272K input")
+print("tokens are billed at 2× input / 1.5× output for the full request. This")
+print("calculate_cost() function detects this automatically and adjusts the estimate.")

@@ -35,7 +35,7 @@ PRICING = {
     "gpt-5.4-nano":  {"input": 0.20, "output": 1.25},
     "gpt-5.4-mini":  {"input": 0.75, "output": 4.50},
     "gpt-5.4":       {"input": 2.50, "output": 15.00},
-    "gpt-5.5":       {"input": 5.00, "output": 30.00},
+    "gpt-5.5":       {"input": 5.00, "output": 30.00},  # >272K input → 2× in / 1.5× out
 }
 
 results = []
@@ -99,3 +99,6 @@ print("GPT-5.5 (April 23, 2026):")
 print("  More token-efficient than 5.4 for most tasks, so often cheaper end-to-end")
 print("  even at 2x the per-token price. Default choice for new high-quality flows.")
 print("  Note: shell tool docs and most new examples use gpt-5.5.")
+print("  Long-context surcharge (May 2026): >272K input tokens bills at 2× input /")
+print("  1.5× output for the full request. The PRICING dict above does NOT reflect")
+print("  this — use exercise 18's calculate_cost() for accurate long-context estimates.")

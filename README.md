@@ -99,6 +99,7 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-5.5 long-context surcharge (May 2026)** — requests >272K input tokens billed at 2× input / 1.5× output for the full request. Exercise 18's `calculate_cost()` accounts for this automatically.
 
 ### Other 2026 API capabilities not yet covered
 
@@ -106,9 +107,10 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-2`** (May 2026) — Realtime voice with configurable reasoning; replaces `gpt-realtime-1.5` (Realtime API Beta deprecated May 12, 2026). Also: `gpt-realtime-translate` for streaming speech translation, `gpt-realtime-whisper` for STT
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
+- **Inline moderation** (May 2026) — pass a `moderation` object in a generation request to receive input/output moderation scores alongside the response, without a separate API call
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
