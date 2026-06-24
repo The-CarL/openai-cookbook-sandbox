@@ -104,15 +104,18 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
-- **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
-- **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
+- **`gpt-image-2`** (Apr 21) — current image gen flagship, token-based pricing, Batch with 50% off; `gpt-image-1.5` is the previous flagship; `gpt-image-1` deprecating Oct 23, 2026
+- **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p for sora-2-pro, character references, Batch; `POST /v1/videos/edits` (GA) replaces `POST /v1/videos/{video_id}/remix` (deprecated ~Dec 2026)
+- **`gpt-realtime-2`** (May 7) — GPT-5-class reasoning voice model; $32/$64 per 1M audio in/out tokens; replaces `gpt-realtime-1.5` as the flagship Realtime API model
+- **`gpt-realtime-translate`** (May 7) — live speech translation, 70+ input languages → 13 output languages; $0.034/min
+- **`gpt-realtime-whisper`** (May 7) — streaming speech-to-text; $0.017/min
+- **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model (not Realtime)
 - **WebSocket mode for Responses API** (Feb 23)
+- **Moderation in Responses API** (May/Jun 2026) — pass `moderation={"model": "omni-moderation-latest"}` to `responses.create()` to receive input + output moderation scores in the same response; no separate `/v1/moderations` call needed
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Realtime API Beta deprecated** (May 12, 2026) — replaced by the GA Realtime API; migrate any `gpt-realtime-1.5` integrations to `gpt-realtime-2`
