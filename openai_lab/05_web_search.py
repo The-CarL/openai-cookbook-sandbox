@@ -7,6 +7,8 @@ load_dotenv()
 
 client = OpenAI()
 
+# --- Example 1: Basic web search ---
+print("=== Example 1: Basic web search ===\n")
 response = client.responses.create(
     model="gpt-4.1-mini",
     tools=[{"type": "web_search"}],
@@ -36,3 +38,35 @@ for i, item in enumerate(response.output):
 print(f"\n=== Usage ===")
 print(f"Input:  {response.usage.input_tokens} tokens")
 print(f"Output: {response.usage.output_tokens} tokens")
+
+# --- Example 2: Domain filtering ---
+print("\n\n=== Example 2: Domain filtering ===\n")
+response2 = client.responses.create(
+    model="gpt-4.1-mini",
+    tools=[{
+        "type": "web_search",
+        "allowed_domains": ["arxiv.org", "semanticscholar.org"],
+    }],
+    input="Summarize recent research on retrieval-augmented generation (RAG) performance benchmarks.",
+)
+print(response2.output_text)
+
+# --- Example 3: return_token_budget (GPT-5+ reasoning web search, May 2026) ---
+# return_token_budget controls how much search content the tool can return.
+# Set "unlimited" for deep-research or eval runs that need to inspect many pages.
+# Has no effect on non-reasoning models or web_search_preview.
+print("\n\n=== Example 3: High-effort research with return_token_budget=unlimited ===\n")
+response3 = client.responses.create(
+    model="gpt-5.5",
+    tools=[{
+        "type": "web_search",
+        "return_token_budget": "unlimited",
+    }],
+    input=(
+        "Do a thorough comparison of the top three vector database solutions "
+        "available today: feature set, pricing, managed vs self-hosted options, "
+        "and which workloads each excels at. Cite sources."
+    ),
+)
+print(response3.output_text)
+print(f"\nTokens: {response3.usage.input_tokens} in, {response3.usage.output_tokens} out")

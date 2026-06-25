@@ -75,6 +75,7 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | Moderation in Responses API (Jun 2026) | Input + output moderation scores in one API call |
 
 ## Model lineup snapshot (verified April 27, 2026)
 
@@ -114,5 +115,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
-- **Fine-tuning + distillation**
+- **Fine-tuning** (API wind-down announced May 7; new training jobs now blocked; full shutdown Jan 6, 2027 — skip for new exercises)
+- **Moderation scores in Responses API** (Jun 2026) — pass `moderation={}` in generation requests to get input + output category scores in the same response; eliminates a separate `/moderations` call ← **covered in Exercise 32**
+- **`return_token_budget`** for `web_search` tool — set `"return_token_budget": "unlimited"` for high-effort GPT-5+ reasoning web searches that need to inspect many pages (see Exercise 05 Example 3)
 - **Realtime API** (voice / audio streaming, end-to-end)
