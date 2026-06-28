@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 28, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -87,12 +87,23 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Flagship (Apr 24). Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-5.6-sol` *(limited preview)* | 5.00 | 30.00 | — | Jun 26: 5.6 flagship — software eng, security, scientific research |
+| `gpt-5.6-terra` *(limited preview)* | 2.50 | 15.00 | — | Jun 26: 5.6 balanced — high-volume business tasks, 2x cheaper than Sol |
+| `gpt-5.6-luna` *(limited preview)* | 1.00 | 6.00 | — | Jun 26: 5.6 fast/cheap — summarization, drafting, routine automation |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
+
+### GPT-5.6 naming convention
+Starting with the 5.6 generation, OpenAI introduced durable tier names that advance independently:
+- **Sol** = flagship (hardest problems: coding, security, research)
+- **Terra** = balanced (high-volume business tasks; ~GPT-5.5 quality at 2x lower cost per token)
+- **Luna** = fast/cheap (everyday tasks; cheaper than gpt-5.4-mini)
+
+GPT-5.6 is in **limited preview** (trusted partners only as of June 26, 2026). GA expected in coming weeks.
 
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
@@ -104,6 +115,7 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
+- **GPT-5.6 Sol / Terra / Luna** (Jun 26, limited preview) — next-generation model family; GA expected soon. Sol=$5/$30, Terra=$2.50/$15, Luna=$1/$6 per 1M tokens.
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
