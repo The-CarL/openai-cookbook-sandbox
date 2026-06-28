@@ -104,11 +104,12 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off; `dall-e-2` / `dall-e-3` snapshots removed from API May 12
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **Realtime voice models** (May 7) — `gpt-realtime-2` (voice-to-voice agents, $32/$64 per 1M audio tokens), `gpt-realtime-translate` (streaming translation, $0.034/min), `gpt-realtime-whisper` (streaming transcription, $0.017/min); supersedes `gpt-realtime-1.5`; Realtime API Beta endpoint removed May 12
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
+- **Inline moderation in Responses/Chat Completions APIs** (May 2026) — pass a top-level `moderation` object in a generation request to receive moderation scores for input and output in the same response, no separate `/moderations` call needed
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
