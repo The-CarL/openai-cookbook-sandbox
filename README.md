@@ -111,7 +111,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
-- **Hosted Evals product** (`client.evals.*`)
+- **Hosted Evals product** (`client.evals.*`) — deprecated June 3 2026, API + platform shutdown November 30 2026; migrate to Promptfoo or programmatic evals (Exercise 28)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
