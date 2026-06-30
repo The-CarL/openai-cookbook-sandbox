@@ -119,8 +119,12 @@ print("""
 
 3. Minimum cacheable prefix is 1024 tokens. Below that, no caching happens.
 
-4. Cache TTL is ~5–10 min idle, longer under sustained traffic. For chat
-   apps with bursty traffic, keep a "warming" thread.
+4. Cache TTL is ~5–10 min idle for GPT-4.1/5.4/5.5, longer under sustained
+   traffic. For chat apps with bursty traffic, keep a "warming" thread.
+   GPT-5.6 guarantees a 30-minute minimum cache lifetime and adds explicit
+   cache breakpoints. However, cache writes on 5.6 cost 1.25× the uncached
+   input rate — you need ≥2 cache reads per write to break even. Check your
+   read:write ratio before relying on caching for 5.6 cost savings.
 
 5. Verify hits via response.usage.input_tokens_details.cached_tokens.
    Do NOT assume — instrument it. Cache hit rate is a top-line cost metric.

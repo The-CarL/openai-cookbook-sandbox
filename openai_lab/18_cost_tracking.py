@@ -10,6 +10,12 @@ client = OpenAI()
 # Pricing per 1M tokens (verified April 27, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
 PRICING = {
+    # GPT-5.6 family (June 2026, limited preview — trusted partners only, not yet GA)
+    # New caching model: writes billed at 1.25x uncached rate, reads at 10%, 30-min min TTL.
+    # Uncomment when your account has access:
+    # "gpt-5.6-sol":   {"input": 5.00, "output": 30.00, "cached_input": 0.50},
+    # "gpt-5.6-terra": {"input": 2.50, "output": 15.00, "cached_input": 0.25},
+    # "gpt-5.6-luna":  {"input": 1.00, "output":  6.00, "cached_input": 0.10},
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},

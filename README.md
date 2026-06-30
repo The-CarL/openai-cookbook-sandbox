@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified June 30, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -87,23 +87,28 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Flagship (Apr 24). Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-5.6-luna` | 1.00 | 6.00 | — | *Limited preview* (Jun 2026). Fastest/cheapest 5.6; strong capability at lowest cost |
+| `gpt-5.6-terra` | 2.50 | 15.00 | — | *Limited preview* (Jun 2026). GPT-5.5-competitive at 2× lower cost per token |
+| `gpt-5.6-sol` | 5.00 | 30.00 | — | *Limited preview* (Jun 2026). Frontier reasoning, long-horizon agentic work |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
 ### Caching gotchas
-- Cached input is ~10% of standard input across the GPT families.
+- Cached input is ~10% of standard input across the GPT-4.1/5.4/5.5 families.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-5.6 changes the caching economics**: cache *writes* are billed at 1.25× the uncached input rate (vs free on earlier families); cache reads remain 10% of uncached. Minimum cache lifetime is 30 minutes (vs ~5–10 min on 4.1/5.4/5.5). Explicit cache breakpoints available. You need ≥2 cache reads per write to come out ahead; check your read:write ratio before assuming caching helps.
 
 ### Other 2026 API capabilities not yet covered
 
 The following exist on the platform and are worth follow-up exercises:
 
+- **`gpt-5.6-sol` / `gpt-5.6-terra` / `gpt-5.6-luna`** (Jun 2026, limited preview — GA expected soon) — next frontier family. New caching economics: writes at 1.25× uncached, 30-min minimum lifetime, explicit breakpoints.
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
