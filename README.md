@@ -104,6 +104,7 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
+- **GPT-5.6 Sol / Terra / Luna** (Jun 26, 2026 — limited preview) — Next-gen model family, currently available to ~20 partner orgs before GA. Sol: $5/$30/1M tokens; Terra: $2.50/$15; Luna: $1/$6. New caching pricing model: cache *writes* billed at 1.25× uncached input rate (vs the flat 10%-of-input rule on prior models). Model IDs (preview): `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`. GA date TBD.
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
