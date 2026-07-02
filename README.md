@@ -75,6 +75,7 @@ Numbered to be read in order — each builds on the previous.
 | 29 | Apply patch (Mar 2026) | Codex-style file editing via V4A diffs |
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
+| 32 | Realtime API GA (May 2026) | `gpt-realtime-2` voice+reasoning, `-translate`, `-whisper` |
 
 ## Model lineup snapshot (verified April 27, 2026)
 
@@ -106,8 +107,7 @@ The following exist on the platform and are worth follow-up exercises:
 
 - **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
-- **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
+- **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model; also `gpt-audio-mini`
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
@@ -115,4 +115,10 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
+- **Moderation scores in Responses / Chat Completions API** (May 2026) — inline moderation without a separate request
+- ~~**`gpt-realtime-1.5`**~~ **deprecated May 12, 2026** — see Exercise 32
+
+### Deprecation notes (post-April 2026)
+
+- **DALL-E 2 / DALL-E 3 removed May 12, 2026** — use `gpt-image-2` or `gpt-image-1` (Exercise 19 already uses the `image_generation` built-in tool, not DALL-E directly).
+- **Realtime API Beta deprecated May 12, 2026** — replaced by GA release; see Exercise 32 for new model IDs.
