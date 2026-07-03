@@ -104,14 +104,18 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off. Note: `dall-e-2` and `dall-e-3` were **removed from the API on May 12, 2026** — `gpt-image-1` / `gpt-image-2` are the only image-generation endpoints remaining.
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model. Note: the **Realtime API Beta was removed May 12, 2026**; use the GA Realtime API going forward.
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
-- **Hosted Evals product** (`client.evals.*`)
+- **`web_search` → `return_token_budget`** (Jun 2026) — new param on the Responses API `web_search` tool enabling longer GPT-5+ reasoning web-search runs for high-effort research/eval workloads (only on `{"type": "web_search"}`, not the legacy `web_search_preview`).
+- **Amazon Bedrock** (Jun 2026) — OpenAI models now available via Amazon Bedrock through an OpenAI-compatible Responses API endpoint; supported models/features vary by AWS region.
+- **Container per-minute billing** (Jun 2, 2026) — eligible container sessions (exercise 22 shell tool) are now billed per minute with a 5-minute minimum rather than the full 20-minute session rate.
+- ~~**Hosted Evals product** (`client.evals.*`)~~ — **deprecated June 3, 2026; removed November 30, 2026.** Exercise 28 covers the equivalent pattern via programmatic + LLM-as-judge evals without the hosted product.
+- ~~**Agent Builder**~~ — **deprecated June 3, 2026; removed November 30, 2026.**
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
