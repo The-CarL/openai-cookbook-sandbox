@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 
-## Model lineup snapshot (verified April 27, 2026)
+## Model lineup snapshot (verified July 4, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -104,10 +104,13 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **`gpt-image-2`** (Apr 21) — image gen + edits, token-based pricing, Batch with 50% off
+- **GPT Image models** — `gpt-image-2` (flagship, Apr 21), `gpt-image-1.5`, `gpt-image-1-mini`; token-based pricing, Batch 50% off. **`dall-e-2` and `dall-e-3` removed from the API on May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
-- **`gpt-realtime-1.5`** (Feb 23) — Realtime API voice model
+- **Realtime voice models** (May 7, 2026) — `gpt-realtime-2` (GPT-5-class reasoning, speech-to-speech), `gpt-realtime-translate` (streaming speech translation), `gpt-realtime-whisper` (streaming transcription). The old Realtime API Beta (including `gpt-realtime-1.5`) was removed on May 12, 2026
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
+- **Moderation scores in Responses API** (June 2026) — Pass a `moderation` object in any `responses.create()` or Chat Completions request to receive inline content-moderation results for both input and output in a single API call
+- **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
@@ -115,4 +118,3 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
-- **Realtime API** (voice / audio streaming, end-to-end)
