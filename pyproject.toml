@@ -9,4 +9,5 @@ dependencies = [
     "openai>=2.24.0",
     "openai-agents>=0.2.0",
     "python-dotenv>=1.2.2",
+    "websockets>=13.0",
 ]
