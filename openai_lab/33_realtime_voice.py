@@ -1,9 +1,15 @@
-"""Exercise 33: Realtime API — gpt-realtime-2, gpt-realtime-translate, gpt-realtime-whisper.
+"""Exercise 33: Realtime API — gpt-realtime-2.1 family, translate, whisper.
 
 The Realtime API (GA May 7, 2026) delivers low-latency, bidirectional voice
-agents via a persistent WebSocket session. Three models serve distinct jobs:
+agents via a persistent WebSocket session. Voice agent models serve distinct jobs:
 
-  gpt-realtime-2         — GPT-5-class reasoning for full voice agents.
+  gpt-realtime-2.1       — Updated Jul 6, 2026. Improved alphanumeric recognition,
+                           silence/noise handling, and interruption detection.
+                           Adds configurable reasoning effort. p95 latency -25%.
+                           Billing: audio tokens (input ~$32/M, output ~$64/M).
+  gpt-realtime-2.1-mini  — Same Jul 6 update; lower cost tier.
+                           Billing: audio tokens (input ~$10/M, output ~$20/M).
+  gpt-realtime-2         — Previous generation (still available).
                            Billing: audio tokens (input ~$32/M, output ~$128/M).
   gpt-realtime-translate — Live speech-to-speech translation, 70+ → 13 languages.
                            Billing: per minute of input audio.
@@ -13,7 +19,7 @@ agents via a persistent WebSocket session. Three models serve distinct jobs:
 Unlike the Responses API (REST + stateless), the Realtime API is WebSocket-based:
   - Persistent session — no previous_response_id chaining needed.
   - Bidirectional: you stream audio in while transcript/audio events stream out.
-  - gpt-realtime-2 supports text-only mode — useful for testing without hardware.
+  - gpt-realtime-2.1 supports text-only mode — useful for testing without hardware.
 
 Requires: uv add websockets
 Reference: https://developers.openai.com/api/docs/realtime
@@ -59,13 +65,13 @@ async def example_1_text_convo():
         return
 
     print("=" * 60)
-    print("EXAMPLE 1: Text conversation with gpt-realtime-2")
+    print("EXAMPLE 1: Text conversation with gpt-realtime-2.1")
     print("=" * 60)
     print()
-    print("Connecting to wss://api.openai.com/v1/realtime?model=gpt-realtime-2")
+    print("Connecting to wss://api.openai.com/v1/realtime?model=gpt-realtime-2.1")
     print()
 
-    url = "wss://api.openai.com/v1/realtime?model=gpt-realtime-2"
+    url = "wss://api.openai.com/v1/realtime?model=gpt-realtime-2.1"
     headers = {"Authorization": f"Bearer {API_KEY}"}
 
     async with websockets.connect(url, additional_headers=headers) as ws:
@@ -224,35 +230,48 @@ def summary():
     print("""
 Model                   Use case                            Billing
 ─────────────────────────────────────────────────────────────────────
-gpt-realtime-2          Full voice agent with GPT-5          Audio tokens
-                        reasoning, function calls,           (in ~$32/M,
-                        interruption handling                out ~$128/M)
+gpt-realtime-2.1        Full voice agent. Jul 6 update:     Audio tokens
+                        better alphanumeric recognition,    (in ~$32/M,
+                        silence/noise handling, interrupts, out ~$64/M)
+                        configurable reasoning effort,
+                        p95 latency −25%.
 
-gpt-realtime-translate  Live speech-to-speech translation    Per minute
-                        70+ input → 13 output languages      of input
+gpt-realtime-2.1-mini   Same Jul 6 improvements at lower   Audio tokens
+                        cost. Reasoning + tool use at       (in ~$10/M,
+                        mini pricing.                       out ~$20/M)
 
-gpt-realtime-whisper    Streaming speech-to-text             Per minute
-                        Lowest-latency transcription         of input
+gpt-realtime-2          Previous generation (still works).  Audio tokens
+                                                            (in ~$32/M,
+                                                            out ~$128/M)
+
+gpt-realtime-translate  Live speech-to-speech translation   Per minute
+                        70+ input → 13 output languages     of input
+
+gpt-realtime-whisper    Streaming speech-to-text            Per minute
+                        Lowest-latency transcription        of input
 
 Key differences from the Responses API:
   ✗ Not REST — a persistent WebSocket session per conversation
   ✗ No previous_response_id — the session IS the context
   ✓ Bidirectional: send audio in, receive audio+transcript simultaneously
   ✓ Server VAD: model detects end-of-speech automatically
-  ✓ Function calling works in gpt-realtime-2 (same as Responses API)
+  ✓ Function calling works in gpt-realtime-2.1 (same as Responses API)
+  ✓ gpt-realtime-2.1: set reasoning effort via session.update reasoning field
 
 When to use which:
-  gpt-realtime-2         — Customer support bots, voice assistants, any
+  gpt-realtime-2.1       — Default choice for new voice agents (Jul 2026+).
+                           Customer support bots, voice assistants, any
                            agent that needs to reason, use tools, or handle
                            interruptions in real time.
+  gpt-realtime-2.1-mini  — High-volume voice workloads where cost matters.
   gpt-realtime-translate — Call center translation, live interpreting,
                            multilingual customer service.
   gpt-realtime-whisper   — Meeting transcription, live captioning,
                            voice-to-text where you control the LLM layer.
 
 Prompt caching:
-  gpt-realtime-2 supports prompt caching on audio tokens.
-  Typical discount: ~98% on cached input audio.
+  gpt-realtime-2.1 supports prompt caching on audio tokens.
+  Cached audio input: ~$0.30/M for mini; ~98% discount on the full model.
 
 Session timeout:
   Sessions expire after ~30 minutes of inactivity. Reconnect and replay
