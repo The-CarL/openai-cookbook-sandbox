@@ -78,8 +78,9 @@ Numbered to be read in order — each builds on the previous.
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
+| 35 | GPT-5.6 (Jul 2026) | Luna/Terra/Sol tiers, programmatic tool calling, persisted reasoning |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified July 12, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -90,12 +91,15 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Apr 24 flagship. Token-efficient; long-context gotcha at 272K |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-5.6-luna` | 1.00 | 6.00 | 1M | Jul 9 GA. Fastest/cheapest 5.6 tier |
+| `gpt-5.6-terra` | 2.50 | 15.00 | 1M | Jul 9 GA. Balanced; GPT-5.5-class quality at Terra price |
+| `gpt-5.6-sol` | 5.00 | 30.00 | 1M | Jul 9 GA. Flagship; `gpt-5.6` aliases here. Programmatic tools, persisted reasoning |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
-| `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
+| `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual. API shutdown Oct 23, 2026 |
 
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
@@ -110,7 +114,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
-- **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **GPT-5.6 family** (covered by ex. 35) — GA July 9, 2026. Sol/Terra/Luna tiers, programmatic tool calling, persisted reasoning, multi-agent beta.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
