@@ -23,7 +23,7 @@ Numbered to be read in order — each builds on the previous.
 | 01 | Basic Responses API call | The core primitive: `client.responses.create()` |
 | 02 | Multi-turn via `previous_response_id` | API-managed conversation state |
 | 03 | Streaming events | TTFT, event types, `response.completed` |
-| 04 | Model comparison (4.1 / 5.4 / 5.5) | Cost vs latency vs quality picker |
+| 04 | Model comparison (4.1 / 5.4 / 5.5 / 5.6) | Cost vs latency vs quality picker |
 
 ### Built-in tools
 | # | Topic | Why |
@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified July 13, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -88,10 +88,13 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-4.1` | 2.00 | 8.00 | 1M | 1M context without needing reasoning |
 | `gpt-5.4-nano` | 0.20 | 1.25 | — | Budget reasoning. Compaction only (no tool search / computer) |
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
-| `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
+| `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5/5.6; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Apr 24 flagship. Token-efficient; consider 5.6-sol for new work |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-5.6-luna` | 1.00 | 6.00 | 1.05M | High-vol; full tool set (search, code, computer, MCP, …) |
+| `gpt-5.6-terra` | 2.50 | 15.00 | 1.05M | Cost-capability balance; default for new agentic work |
+| `gpt-5.6-sol` | 5.00 | 30.00 | 1.05M | Frontier tier (Jul 9 GA). `gpt-5.6` aliases here |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
@@ -102,6 +105,8 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-5.6+: cache writes cost 1.25× the input rate; cache reads remain 10% of input.**
+- GPT-5.6 supports explicit cache breakpoints (mark the end of a stable prefix) with a guaranteed 30-min minimum cache lifetime.
 
 ### Other 2026 API capabilities not yet covered
 
@@ -110,7 +115,9 @@ The following exist on the platform and are worth follow-up exercises:
 - **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
-- **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **Programmatic tool calling** (Jul 9, GPT-5.6+) — model writes JavaScript to orchestrate tool calls in an isolated V8 runtime; replaces the one-tool-per-round-trip pattern with loops, conditionals, and aggregation over your tools
+- **Persisted reasoning** (Jul 9, GPT-5.6+) — `reasoning.context` carries reasoning state across turns so a multi-turn agent doesn't rebuild its chain of thought from zero each call
+- **Multi-agent orchestration in Responses API** (Jul 9, beta) — native multi-agent coordination available directly via `responses.create()` without the separate Agents SDK
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
