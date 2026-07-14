@@ -7,11 +7,18 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified July 14, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.6+: cache WRITES cost 1.25x the uncached input rate; cache reads
+# still receive the standard 90% discount (10% of input rate). Minimum
+# cache lifetime is 30 minutes (vs. 5-10 min idle TTL on older models).
 PRICING = {
+    # GPT-5.6 family (GA July 9, 2026) — cache write rate = 1.25x input
+    "gpt-5.6-sol":   {"input": 5.00, "output": 30.00, "cached_input": 0.50, "cache_write": 6.25},
+    "gpt-5.6-terra": {"input": 2.50, "output": 15.00, "cached_input": 0.25, "cache_write": 3.125},
+    "gpt-5.6-luna":  {"input": 1.00, "output": 6.00,  "cached_input": 0.10, "cache_write": 1.25},
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
     # Standard pricing applies only to sessions with <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
@@ -178,8 +185,8 @@ if c2['total_cost'] > 0:
     print(f"  5.4-mini is   {c5['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
     print(f"  5.5 is        {c6['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
 print()
-print("Watch token *count* not just per-token price — 5.5 is often cheaper")
-print("end-to-end than 5.4 because it produces more concise reasoning.")
+print("Watch token *count* not just per-token price — 5.5/5.6 are often cheaper")
+print("end-to-end than 5.4 because they produce more concise reasoning.")
 print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
@@ -189,3 +196,8 @@ print("GPT-5.5 long-context gotcha: sessions with >272K input tokens are billed"
 print("at 2x input ($10.00/1M) and 1.5x output ($45.00/1M) for the FULL session.")
 print("The calculate_cost() above uses standard rates — add a check if you send")
 print("large contexts to avoid underestimating costs by 2x on input.")
+print()
+print("GPT-5.6 caching gotcha: cache WRITES cost 1.25x the uncached input rate.")
+print("The PRICING dict above includes 'cache_write' keys for 5.6 models.")
+print("Cache reads are still 90% off (cached_input = 10% of input rate).")
+print("Minimum cache lifetime is 30 minutes — sustained traffic stays hot longer.")
