@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
-| 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
+| 33 | Realtime API v2.1 (Jul 2026) | `gpt-realtime-2.1` / mini / translate / whisper — 25% lower latency, mini tier |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
 ## Model lineup snapshot (verified July 4, 2026)
@@ -102,6 +102,13 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+
+### Realtime models (Jul 6, 2026)
+
+| Model | Audio in $/M | Audio out $/M | Cached audio $/M | Notes |
+|---|---|---|---|---|
+| `gpt-realtime-2.1` | 32.00 | 64.00 | 0.40 | Flagship voice agent. Text in $4/M, text out $24/M. 25% lower p95 latency vs 2. |
+| `gpt-realtime-2.1-mini` | 10.00 | 20.00 | 0.40 | Budget voice tier. Same cached audio rate. |
 
 ### Other 2026 API capabilities not yet covered
 
