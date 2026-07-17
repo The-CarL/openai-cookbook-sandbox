@@ -7,11 +7,20 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified July 17, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.6 CACHE BILLING CHANGE: writes are billed at 1.25x input rate;
+# reads remain at 10% (cached_input below). Use cache_write in calculate_cost()
+# for accurate GPT-5.6 bills (see comment in that function).
 PRICING = {
+    # GPT-5.6 family (GA July 9, 2026) — Sol / Terra / Luna
+    # Cache write billing: 1.25x input rate (new — earlier families wrote for free)
+    # cache_write = 1.25 * input; cached_input = 0.10 * input
+    "gpt-5.6-sol":   {"input": 5.00, "output": 30.00, "cached_input": 0.50, "cache_write": 6.25},
+    "gpt-5.6-terra": {"input": 2.50, "output": 15.00, "cached_input": 0.25, "cache_write": 3.125},
+    "gpt-5.6-luna":  {"input": 1.00, "output":  6.00, "cached_input": 0.10, "cache_write": 1.25},
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
     # Standard pricing applies only to sessions with <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
@@ -44,23 +53,30 @@ def calculate_cost(response):
     # Token breakdown
     input_tokens = usage.input_tokens
     output_tokens = usage.output_tokens
-    cached_tokens = usage.input_tokens_details.cached_tokens if usage.input_tokens_details else 0
-    non_cached_input = input_tokens - cached_tokens
+    details = usage.input_tokens_details
+    cached_tokens = details.cached_tokens if details else 0
+    # GPT-5.6+ only: cache writes are billed at 1.25x input rate.
+    # Earlier models always return 0 here.
+    write_tokens = getattr(details, "cache_write_tokens", 0) if details else 0
+    non_cached_input = input_tokens - cached_tokens - write_tokens
 
     # Cost calculation
     input_cost = (non_cached_input / 1_000_000) * prices["input"]
+    write_cost  = (write_tokens / 1_000_000) * prices.get("cache_write", prices["input"])
     cached_cost = (cached_tokens / 1_000_000) * prices.get("cached_input", prices["input"])
     output_cost = (output_tokens / 1_000_000) * prices["output"]
-    total_cost = input_cost + cached_cost + output_cost
+    total_cost = input_cost + write_cost + cached_cost + output_cost
 
     return {
         "model": model,
         "input_tokens": input_tokens,
         "cached_tokens": cached_tokens,
+        "write_tokens": write_tokens,
         "non_cached_input": non_cached_input,
         "output_tokens": output_tokens,
         "total_tokens": usage.total_tokens,
         "input_cost": input_cost,
+        "write_cost": write_cost,
         "cached_cost": cached_cost,
         "output_cost": output_cost,
         "total_cost": total_cost,
@@ -70,10 +86,11 @@ def calculate_cost(response):
 def print_cost_report(cost):
     """Pretty-print a cost breakdown."""
     print(f"  Model:            {cost['model']}")
-    print(f"  Input tokens:     {cost['input_tokens']:>8} (cached: {cost['cached_tokens']})")
+    print(f"  Input tokens:     {cost['input_tokens']:>8} (cached: {cost['cached_tokens']}, writes: {cost['write_tokens']})")
     print(f"  Output tokens:    {cost['output_tokens']:>8}")
     print(f"  Total tokens:     {cost['total_tokens']:>8}")
     print(f"  Input cost:       ${cost['input_cost']:.6f}")
+    print(f"  Write cost:       ${cost['write_cost']:.6f}  (GPT-5.6: 1.25x input rate)")
     print(f"  Cached cost:      ${cost['cached_cost']:.6f}")
     print(f"  Output cost:      ${cost['output_cost']:.6f}")
     print(f"  TOTAL COST:       ${cost['total_cost']:.6f}")
