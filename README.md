@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
-| 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
+| 33 | Realtime API v2 (May 2026, updated Jul 2026) | `gpt-realtime-2.1` / 2.1-mini / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
 ## Model lineup snapshot (verified July 4, 2026)
@@ -111,6 +111,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **gpt-realtime-2.1 / 2.1-mini** (July 6, 2026) — now covered in ex. 33. 25% lower p95 latency, better alphanumeric recognition and noise handling. 2.1-mini adds a 6× cheaper audio option for budget voice workloads. Audio output cost halved vs 2.0 ($64/M vs $128/M for 2.1).
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
