@@ -7,12 +7,18 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
-# Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
+# Pricing per 1M tokens (verified July 23, 2026)
+# Cached input READS follow the standard 10% rule for all families.
+# GPT-5.6 additionally bills cache WRITES at 1.25x the input rate (new behavior).
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 PRICING = {
-    # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
+    # GPT-5.6 family (July 9, 2026 GA) — Sol/Terra/Luna naming replaces base/mini/nano.
+    # Cache writes: 1.25x input price. Cache reads: 10% input (same 10% rule as others).
+    "gpt-5.6-sol":   {"input": 5.00,  "output": 30.00, "cached_input": 0.50},
+    "gpt-5.6-terra": {"input": 2.50,  "output": 15.00, "cached_input": 0.25},
+    "gpt-5.6-luna":  {"input": 1.00,  "output": 6.00,  "cached_input": 0.10},
+    # GPT-5.5 (April 23, 2026 flagship) — largely superseded by 5.6-sol/terra.
     # Standard pricing applies only to sessions with <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
@@ -178,8 +184,15 @@ if c2['total_cost'] > 0:
     print(f"  5.4-mini is   {c5['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
     print(f"  5.5 is        {c6['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
 print()
-print("Watch token *count* not just per-token price — 5.5 is often cheaper")
-print("end-to-end than 5.4 because it produces more concise reasoning.")
+print("Watch token *count* not just per-token price — 5.6-sol is often cheaper")
+print("end-to-end than 5.5 because it produces more concise output.")
+print()
+print("GPT-5.6 caching gotcha: cache WRITES are billed at 1.25x the input rate.")
+print("  sol:   $6.25/1M to write; $0.50/1M to read back.")
+print("  terra: $3.125/1M to write; $0.25/1M to read back.")
+print("  luna:  $1.25/1M to write; $0.10/1M to read back.")
+print("calculate_cost() tracks cache read cost. Cache write cost must be tracked")
+print("separately if you use explicit prompt cache breakpoints (new in GPT-5.6).")
 print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
