@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified July 24, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -90,8 +90,11 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Apr 24 flagship. Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-5.6-luna` | 1.00 | 6.00 | 1.05M | Jul 9: cost-optimized 5.6. Budget agentic work |
+| `gpt-5.6-terra` | 2.50 | 15.00 | 1.05M | Jul 9: balanced 5.6. Strong coding + reasoning |
+| `gpt-5.6-sol` | 5.00 | 30.00 | 1.05M | Jul 9: 5.6 flagship. Best coding, cybersecurity, complex reasoning |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
@@ -102,6 +105,8 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-5.6 introduces explicit cache breakpoints** (up to 4 writes per request, reads back 50 breakpoints). Cache writes cost **1.25× the input rate**; cache reads remain 10% of input. Minimum cache lifetime is 30 minutes.
+- `gpt-5.6` (no suffix) is an alias for `gpt-5.6-sol`.
 
 ### Other 2026 API capabilities not yet covered
 
@@ -110,7 +115,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
-- **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **GPT-5.6 family** (GA July 9, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); 1.05M context. Stronger reasoning, coding, and cybersecurity vs 5.5. Introduces explicit cache breakpoints (30-min minimum lifetime, writes billed at 1.25× input). Model IDs: `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna` (alias `gpt-5.6` → Sol). Added to ex. 04 + 18; a dedicated exercise (35) covering the new caching model is a natural next step
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
