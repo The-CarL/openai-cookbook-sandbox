@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified July 27, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -87,13 +87,16 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-4.1-mini` | 0.40 | 1.60 | 1M | High-volume production where 5.x is overkill |
 | `gpt-4.1` | 2.00 | 8.00 | 1M | 1M context without needing reasoning |
 | `gpt-5.4-nano` | 0.20 | 1.25 | — | Budget reasoning. Compaction only (no tool search / computer) |
-| `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
-| `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
+| `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Agentic workhorse; 5.6-terra now competitive at same price point |
+| `gpt-5.4` | 2.50 | 15.00 | 1M | Prefer 5.6-terra for new work (same price, stronger) |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Legacy flagship (Apr 2026). Prefer 5.6-sol for new work |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-5.6-luna` | 1.00 | 6.00 | 1M | **GA Jul 9.** Fast, affordable; good for classification/routing |
+| `gpt-5.6-terra` | 2.50 | 15.00 | 1M | **GA Jul 9.** Balanced; same price as 5.4, stronger. New default |
+| `gpt-5.6-sol` | 5.00 | 30.00 | 1M | **GA Jul 9. New flagship.** Strongest reasoning, coding, security |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
-| `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
+| `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation. **Retired Jul 23, 2026.** |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
@@ -102,6 +105,7 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-5.6 uses explicit cache breakpoints** (`prompt_cache_breakpoint`): reads cost 10% of standard input; writes cost 1.25× standard input; 30-min minimum cache lifetime. Same 272K long-context threshold as 5.5 (sol: $10/$45, terra: $5/$22.50, luna: $2/$9 per 1M when exceeded).
 
 ### Other 2026 API capabilities not yet covered
 
@@ -110,7 +114,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
-- **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **GPT-5.6 family** (GA July 9, 2026) — `gpt-5.6-sol` ($5/$30/M), `gpt-5.6-terra` ($2.50/$15/M), `gpt-5.6-luna` ($1/$6/M). Pricing added to exercises 04 and 18. Explicit cache breakpoints and per-tier long-context pricing noted in caching gotchas above. A dedicated exercise for cache breakpoints (`prompt_cache_breakpoint`) not yet written.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
