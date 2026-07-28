@@ -78,6 +78,7 @@ Numbered to be read in order — each builds on the previous.
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
+| 35 | Programmatic tool calling (Jul 2026) | Model writes JS to coordinate tools in parallel; `{"type": "programmatic_tool_calling"}` |
 
 ## Model lineup snapshot (verified July 4, 2026)
 
@@ -111,6 +112,8 @@ The following exist on the platform and are worth follow-up exercises:
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **Programmatic Tool Calling** (covered by ex. 35) — `{"type": "programmatic_tool_calling"}` tool; available with GPT-5.6 models
+- **GPT-Live-1 / GPT-Live-1 mini** (Jul 8, 2026) — full-duplex voice model; ChatGPT only for now, API pricing "coming soon"
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
