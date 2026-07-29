@@ -78,6 +78,7 @@ Numbered to be read in order — each builds on the previous.
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
+| 35 | GPT-Transcribe (Jul 2026) | `gpt-transcribe` vs whisper-1: context hints, WER, pricing |
 
 ## Model lineup snapshot (verified July 4, 2026)
 
@@ -119,3 +120,4 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
+- **`gpt-live-transcribe`** (Jul 28, 2026) — WebSocket streaming transcription, $0.017/min. See ex. 35 for context; full demo requires Realtime API WebSocket (see ex. 33 pattern).
