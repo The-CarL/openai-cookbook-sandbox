@@ -7,27 +7,37 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
-# Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
-# GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
-# ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# Pricing per 1M tokens (verified July 30, 2026)
+# cached_input = price for reading a cached token (standard: 10% of input rate).
+# GPT-5.6 ONLY: cache WRITES are billed at 1.25x the input rate on first use.
+#   Cache write cost is NOT exposed in the API response; it appears on your invoice.
+#   To estimate: (tokens_entering_cache / 1M) * prices["input"] * 1.25
+# Long-context surcharge (sessions >272K input tokens — billed for ENTIRE session):
+#   5.5:         $10.00 input / $45.00 output per 1M
+#   5.6-sol:     $10.00 input / $45.00 output per 1M
+#   5.6-terra:   $5.00  input / $22.50 output per 1M
+#   5.6-luna:    $2.00  input / $9.00  output per 1M
 PRICING = {
-    # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
-    # Standard pricing applies only to sessions with <=272K input tokens.
-    "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
-    "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
+    # GPT-5.6 family (July 9, 2026 GA) — 1.05M context, 128K max output
+    # gpt-5.6 aliases to gpt-5.6-sol in the API.
+    "gpt-5.6-sol":   {"input": 5.00,  "output": 30.00,  "cached_input": 0.50},
+    "gpt-5.6-terra": {"input": 2.50,  "output": 15.00,  "cached_input": 0.25},
+    "gpt-5.6-luna":  {"input": 1.00,  "output": 6.00,   "cached_input": 0.10},
+    # GPT-5.5 (April 23, 2026 flagship) — standard pricing for <=272K input
+    "gpt-5.5":       {"input": 5.00,  "output": 30.00,  "cached_input": 0.50},
+    "gpt-5.5-pro":   {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
-    "gpt-5.4": {"input": 2.50, "output": 15.00, "cached_input": 0.25},
-    "gpt-5.4-mini": {"input": 0.75, "output": 4.50, "cached_input": 0.075},
-    "gpt-5.4-nano": {"input": 0.20, "output": 1.25, "cached_input": 0.02},
+    "gpt-5.4":       {"input": 2.50,  "output": 15.00,  "cached_input": 0.25},
+    "gpt-5.4-mini":  {"input": 0.75,  "output": 4.50,   "cached_input": 0.075},
+    "gpt-5.4-nano":  {"input": 0.20,  "output": 1.25,   "cached_input": 0.02},
     # GPT-4.1 family (cost-effective workhorse)
-    "gpt-4.1": {"input": 2.00, "output": 8.00, "cached_input": 0.50},
-    "gpt-4.1-mini": {"input": 0.40, "output": 1.60, "cached_input": 0.10},
-    "gpt-4.1-nano": {"input": 0.10, "output": 0.40, "cached_input": 0.025},
+    "gpt-4.1":       {"input": 2.00,  "output": 8.00,   "cached_input": 0.50},
+    "gpt-4.1-mini":  {"input": 0.40,  "output": 1.60,   "cached_input": 0.10},
+    "gpt-4.1-nano":  {"input": 0.10,  "output": 0.40,   "cached_input": 0.025},
     # Dated snapshots
-    "gpt-4.1-nano-2025-04-14": {"input": 0.10, "output": 0.40, "cached_input": 0.025},
-    "gpt-4.1-mini-2025-04-14": {"input": 0.40, "output": 1.60, "cached_input": 0.10},
-    "gpt-4.1-2025-04-14": {"input": 2.00, "output": 8.00, "cached_input": 0.50},
+    "gpt-4.1-nano-2025-04-14": {"input": 0.10, "output": 0.40,  "cached_input": 0.025},
+    "gpt-4.1-mini-2025-04-14": {"input": 0.40, "output": 1.60,  "cached_input": 0.10},
+    "gpt-4.1-2025-04-14":      {"input": 2.00, "output": 8.00,  "cached_input": 0.50},
 }
 
 
