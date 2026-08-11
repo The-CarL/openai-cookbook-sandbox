@@ -7,13 +7,18 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified August 11, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.6 caching: writes billed at 1.25x input (not 10% like reads); reads at 10%.
+# Terra/Luna prices reflect the Jul 30 cut (Terra: $2.50→$2, Luna: $1→$0.20).
 PRICING = {
-    # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
-    # Standard pricing applies only to sessions with <=272K input tokens.
+    # GPT-5.6 family (GA July 9, 2026) — 1.05M context
+    "gpt-5.6-sol":   {"input": 5.00, "output": 30.00, "cached_input": 0.50},
+    "gpt-5.6-terra": {"input": 2.00, "output": 12.00, "cached_input": 0.20},
+    "gpt-5.6-luna":  {"input": 0.20, "output":  1.20, "cached_input": 0.02},
+    # GPT-5.5 (April 23, 2026) — standard pricing for sessions <=272K input tokens
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
