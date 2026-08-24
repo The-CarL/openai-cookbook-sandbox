@@ -25,11 +25,16 @@ MODELS = [
     # but ~2x per-token price. Often cheaper end-to-end. Use this as the new default
     # for any task where 5.4-mini is too weak.
     "gpt-5.5",
+    # GPT-5.6 family — GA July 9, 2026 (Sol/Terra/Luna tiers). 1.05M context, 128K max output.
+    # Introduces explicit cache breakpoints + 30-min min cache lifetime + cache writes at 1.25x input.
+    # Luna and Terra prices as of July 30, 2026 (80% and 20% cuts respectively).
+    "gpt-5.6-luna", "gpt-5.6-terra", "gpt-5.6-sol",
 ]
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified August 24, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.6 long-context: Sol $10/$45, Terra $4/$18, Luna $0.40/$1.80 past 272K input.
 PRICING = {
     "gpt-4.1-nano":  {"input": 0.10, "output": 0.40},
     "gpt-4.1-mini":  {"input": 0.40, "output": 1.60},
@@ -38,6 +43,10 @@ PRICING = {
     "gpt-5.4-mini":  {"input": 0.75, "output": 4.50},
     "gpt-5.4":       {"input": 2.50, "output": 15.00},
     "gpt-5.5":       {"input": 5.00, "output": 30.00},  # standard (<=272K input)
+    # GPT-5.6 — standard rates (Jul 30 cuts reflected for Terra/Luna)
+    "gpt-5.6-luna":  {"input": 0.20, "output": 1.20},   # 80% cut Jul 30; was $1/$6
+    "gpt-5.6-terra": {"input": 2.00, "output": 12.00},  # 20% cut Jul 30; was $2.50/$15
+    "gpt-5.6-sol":   {"input": 5.00, "output": 30.00},  # standard (<=272K input)
 }
 
 results = []
@@ -86,7 +95,7 @@ for r in results:
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in April 2026 ---")
+print("\n--- Picking a model in August 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -99,7 +108,16 @@ print("  5.4:   Still strong; cheaper per-token than 5.5 — keep for cost-sensi
 print()
 print("GPT-5.5 (April 23, 2026):")
 print("  More token-efficient than 5.4 for most tasks, so often cheaper end-to-end")
-print("  even at 2x the per-token price. Default choice for new high-quality flows.")
-print("  Note: shell tool docs and most new examples use gpt-5.5.")
+print("  even at 2x the per-token price.")
 print("  Long-context gotcha: sessions >272K input tokens are billed at")
 print("  $10.00/$45.00 per 1M (2x/1.5x) for the full session, not just the overage.")
+print()
+print("GPT-5.6 family (GA July 9, 2026 — Sol/Terra/Luna):")
+print("  luna:  Fastest/cheapest 5.6 tier. $0.20/$1.20/M (after 80% Jul-30 cut).")
+print("         Competes with 4.1-nano on price; 5.6 quality on hard tasks.")
+print("  terra: Balanced everyday model. $2.00/$12.00/M (after 20% Jul-30 cut).")
+print("         Roughly 4.1-mini pricing with GPT-5.6 quality.")
+print("  sol:   New flagship for highest-quality tasks. $5.00/$30.00/M standard.")
+print("         Explicit cache breakpoints + 30-min min cache lifetime.")
+print("         Cache writes billed at 1.25x input rate (new in 5.6).")
+print("         Long-context: >272K input → $10/$45/M for full session.")
