@@ -94,7 +94,7 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
-| `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
+| ~~`o3`~~ | 2.00 | 8.00 | — | **Deprecated** — ChatGPT retired Aug 26, 2026; API (o3-2025-04-16) removed Dec 11, 2026. Use `gpt-5.6-sol` instead |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
 ### Caching gotchas
