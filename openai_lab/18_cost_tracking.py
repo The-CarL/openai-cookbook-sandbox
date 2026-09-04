@@ -7,11 +7,14 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified September 4, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
-# GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
-# ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.5 / GPT-6 Astra long-context: sessions >272K input tokens are billed
+# at 2x input and 1.5x output for the ENTIRE session.
 PRICING = {
+    # GPT-6 Astra (September 3, 2026) — frontier flagship
+    # Cached: $1.00/1M. Batch/Flex: half rate. Fast: 2x rate.
+    "gpt-6-astra": {"input": 10.00, "output": 50.00, "cached_input": 1.00},
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
     # Standard pricing applies only to sessions with <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
