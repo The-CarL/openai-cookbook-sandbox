@@ -96,6 +96,7 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
+| `gpt-6-astra` | 10.00 | 50.00 | 1.05M | Sep 3, 2026 frontier flagship. SOTA on ARC-AGI 3, FrontierMath, TerminalBench-4.0 |
 
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
@@ -119,3 +120,4 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
+- **GPT-6 Astra** (Sep 3, 2026; added to ex. 04 + 18) — $10/$50/M, 1.05M context, 128K max output, cached input $1/M. SOTA on FrontierMath Tier 4, ARC-AGI 3, TerminalBench-4.0. A dedicated exercise on frontier-model cost/quality tradeoffs (vs 5.6-sol) would be valuable
