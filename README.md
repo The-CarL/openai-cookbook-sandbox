@@ -79,6 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 | 35 | GPT-5.6 family (Jul 2026) | Sol/Terra/Luna comparison; breakpoint caching model |
+| 36 | GPT-6 Astra — async tools & mid-turn steering (Sep 2026) | `async: true` on tools; `response.update` over WebSocket |
 
 ## Model lineup snapshot (verified Sept 5, 2026)
 
@@ -95,7 +96,8 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
 | `gpt-5.6-luna` | 0.20 | 1.20 | — | Budget reasoning tier; 80% cheaper than preview pricing |
 | `gpt-5.6-terra` | 2.00 | 12.00 | — | Balanced mid-tier; breakpoint caching (see ex. 35) |
-| `gpt-5.6-sol` | 4.00 | 20.00 | — | Strongest reasoning + coding; new default flagship (Aug 2026 price cut) |
+| `gpt-5.6-sol` | 4.00 | 20.00 | — | Strongest reasoning + coding; breakpoint caching (Aug 2026 price cut) |
+| `gpt-6-astra` | 10.00 | 50.00 | — | New flagship (Sep 3, 2026). Async tool calling, mid-turn steering |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning; API snapshots deprecated Dec 11, 2026 (→ gpt-5.6-sol) |
@@ -116,6 +118,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **GPT-5.6 family** — covered in ex. 35. Broadly available July 30, 2026. Pricing after Aug 2026 cuts: Sol $4/$20/M, Terra $2/$12/M, Luna $0.20/$1.20/M. Breakpoint caching: writes at 1.25× input rate, 30-min guaranteed lifetime.
+- **GPT-6 Astra** — covered in ex. 36 (async tool calling, mid-turn steering). Launched Sep 3, 2026; $10/$50/M.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
