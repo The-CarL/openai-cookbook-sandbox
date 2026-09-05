@@ -15,6 +15,9 @@ client = OpenAI()
 # cache lifetime, and cache WRITES are billed at 1.25x input rate. Cache reads
 # are discounted; the cached_input field below reflects the read rate only.
 PRICING = {
+    # GPT-6 Astra (September 3, 2026) — new absolute flagship
+    # Standard 10% caching rule applies (no breakpoint mechanism)
+    "gpt-6-astra": {"input": 10.00, "output": 50.00, "cached_input": 1.00},
     # GPT-5.6 family (broadly available July 30, 2026)
     # Sol: 20% input / 33% output price cut Aug 2026 (was $5/$30)
     "gpt-5.6-sol":   {"input": 4.00, "output": 20.00, "cached_input": 0.40},

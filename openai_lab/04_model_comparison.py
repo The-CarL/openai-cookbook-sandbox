@@ -28,6 +28,9 @@ MODELS = [
     #   Terra: balanced mid-tier
     #   Luna: budget / high-volume
     "gpt-5.6-sol",
+    # GPT-6 Astra — September 3, 2026. New flagship for hardest end-to-end work.
+    # New Responses API features: async tool calling, mid-turn steering (see ex. 36).
+    "gpt-6-astra",
 ]
 
 # Pricing per 1M tokens (verified Sept 5, 2026)
@@ -46,6 +49,7 @@ PRICING = {
     "gpt-5.6-sol":   {"input": 4.00, "output": 20.00},  # 20% input / 33% output cut Aug 2026
     "gpt-5.6-terra": {"input": 2.00, "output": 12.00},  # price drop July 30, 2026
     "gpt-5.6-luna":  {"input": 0.20, "output": 1.20},   # 80% cut July 30, 2026
+    "gpt-6-astra":   {"input": 10.00, "output": 50.00}, # Sept 3, 2026 flagship
 }
 
 results = []
@@ -113,5 +117,9 @@ print()
 print("GPT-5.6 family (broadly available July 30, 2026):")
 print("  luna:  $0.20/$1.20/M — cheapest reasoning tier; high-volume classification.")
 print("  terra: $2.00/$12.00/M — balanced; use where 5.4-mini was the right call.")
-print("  sol:   $4.00/$20.00/M — strongest reasoning & coding; new default for")
-print("         high-quality flows. Caching uses breakpoints (see ex. 35).")
+print("  sol:   $4.00/$20.00/M — strongest reasoning & coding. Breakpoint caching.")
+print()
+print("GPT-6 Astra (September 3, 2026):")
+print("  gpt-6-astra $10.00/$50.00/M — new absolute flagship.")
+print("  Async tool calling + mid-turn steering (see ex. 36).")
+print("  Use for: complex multi-step research, coding, computer use.")
