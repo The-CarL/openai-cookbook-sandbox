@@ -27,7 +27,7 @@ MODELS = [
     "gpt-5.5",
 ]
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified Sep 6, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 PRICING = {
@@ -38,6 +38,8 @@ PRICING = {
     "gpt-5.4-mini":  {"input": 0.75, "output": 4.50},
     "gpt-5.4":       {"input": 2.50, "output": 15.00},
     "gpt-5.5":       {"input": 5.00, "output": 30.00},  # standard (<=272K input)
+    # GPT-6 Astra (Sep 2026 flagship) — SOTA computer use, coding, cybersecurity
+    "gpt-6-astra":   {"input": 10.00, "output": 50.00},
 }
 
 results = []
