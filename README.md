@@ -23,7 +23,7 @@ Numbered to be read in order — each builds on the previous.
 | 01 | Basic Responses API call | The core primitive: `client.responses.create()` |
 | 02 | Multi-turn via `previous_response_id` | API-managed conversation state |
 | 03 | Streaming events | TTFT, event types, `response.completed` |
-| 04 | Model comparison (4.1 / 5.4 / 5.5) | Cost vs latency vs quality picker |
+| 04 | Model comparison (4.1 / 5.4 / 5.5 / 6.x) | Cost vs latency vs quality picker |
 
 ### Built-in tools
 | # | Topic | Why |
@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified September 10, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -87,20 +87,22 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-4.1-mini` | 0.40 | 1.60 | 1M | High-volume production where 5.x is overkill |
 | `gpt-4.1` | 2.00 | 8.00 | 1M | 1M context without needing reasoning |
 | `gpt-5.4-nano` | 0.20 | 1.25 | — | Budget reasoning. Compaction only (no tool search / computer) |
-| `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
+| `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Agentic workloads where 5.5+ is overkill. Tool search, computer |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Apr 24 flagship; superseded by gpt-6-astra for new top-quality work |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-6-astra` | 10.00 | 50.00 | 1.05M | GA Sep 3. Current flagship: analysis, coding, deep research, long-horizon agents |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
 ### Caching gotchas
-- Cached input is ~10% of standard input across the GPT families.
+- Cached input reads are ~10% of standard input across the GPT families.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
+- **GPT-6 Astra cache**: reads $1/M (10% of $10 input); writes $12.50/M (1.25× input). Same breakpoint mechanic as 5.6.
 - GPT-5.5 reasoning effort defaults to `medium`.
 
 ### Other 2026 API capabilities not yet covered
@@ -119,3 +121,4 @@ The following exist on the platform and are worth follow-up exercises:
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
+- **Assistants API** — shut down August 26, 2026. No exercises affected (repo uses Responses API throughout).
