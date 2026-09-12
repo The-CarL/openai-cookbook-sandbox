@@ -7,11 +7,19 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
-# Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
+# Pricing per 1M tokens (verified Sept 12, 2026)
+# Cached input prices follow the standard 10% rule for 4.1/5.4/5.5 and 5.6.
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.6 cache WRITES are billed at 1.25x the uncached input rate (new for 5.6+).
+#   Example: Sol promo $4/M uncached -> cache writes $5/M, cache reads $0.40/M.
+# GPT-5.6 Sol promotional: $4/$20 through Nov 21, 2026 (standard $5/$30, cached $0.50).
 PRICING = {
+    # GPT-5.6 family (GA July 9, 2026). Post-cut prices as of Sept 12, 2026.
+    # Luna -80% on Jul 30, Terra -20% on Jul 30, Sol promo -20%/-33% from Aug 21.
+    "gpt-5.6-sol":   {"input": 4.00, "output": 20.00, "cached_input": 0.40},
+    "gpt-5.6-terra": {"input": 2.00, "output": 12.00, "cached_input": 0.20},
+    "gpt-5.6-luna":  {"input": 0.20, "output": 1.20,  "cached_input": 0.02},
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
     # Standard pricing applies only to sessions with <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
@@ -137,8 +145,8 @@ c5 = calculate_cost(r5)
 costs.append(c5)
 print_cost_report(c5)
 
-# Call 6: Current flagship — pricier per token but often more token-efficient
-print("\n--- Call 6: Same question on gpt-5.5 (April 23, 2026 flagship) ---")
+# Call 6: GPT-5.5 flagship
+print("\n--- Call 6: Same question on gpt-5.5 ---")
 r6 = client.responses.create(
     model="gpt-5.5",
     input="Write a detailed 5-step implementation plan for deploying a RAG system in an enterprise environment.",
@@ -146,6 +154,26 @@ r6 = client.responses.create(
 c6 = calculate_cost(r6)
 costs.append(c6)
 print_cost_report(c6)
+
+# Call 7: GPT-5.6 Sol (current flagship tier)
+print("\n--- Call 7: Same question on gpt-5.6-sol (5.6 flagship, promo $4/$20) ---")
+r7 = client.responses.create(
+    model="gpt-5.6-sol",
+    input="Write a detailed 5-step implementation plan for deploying a RAG system in an enterprise environment.",
+)
+c7 = calculate_cost(r7)
+costs.append(c7)
+print_cost_report(c7)
+
+# Call 8: GPT-5.6 Luna (budget 5.6 tier)
+print("\n--- Call 8: Same question on gpt-5.6-luna (budget 5.6 tier, $0.20/$1.20) ---")
+r8 = client.responses.create(
+    model="gpt-5.6-luna",
+    input="Write a detailed 5-step implementation plan for deploying a RAG system in an enterprise environment.",
+)
+c8 = calculate_cost(r8)
+costs.append(c8)
+print_cost_report(c8)
 
 # --- Summary ---
 print("\n" + "=" * 60)
@@ -173,13 +201,17 @@ print(f"  4.1-mini:  {c2['total_tokens']:>6} tokens, ${c2['total_cost']:.6f}")
 print(f"  4.1:       {c4['total_tokens']:>6} tokens, ${c4['total_cost']:.6f}")
 print(f"  5.4-mini:  {c5['total_tokens']:>6} tokens, ${c5['total_cost']:.6f}")
 print(f"  5.5:       {c6['total_tokens']:>6} tokens, ${c6['total_cost']:.6f}")
+print(f"  5.6-sol:   {c7['total_tokens']:>6} tokens, ${c7['total_cost']:.6f}  (promo $4/$20)")
+print(f"  5.6-luna:  {c8['total_tokens']:>6} tokens, ${c8['total_cost']:.6f}")
 if c2['total_cost'] > 0:
     print(f"\n  4.1 is        {c4['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
     print(f"  5.4-mini is   {c5['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
     print(f"  5.5 is        {c6['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
+    print(f"  5.6-sol is    {c7['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini (promo rate)")
+    print(f"  5.6-luna is   {c8['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
 print()
-print("Watch token *count* not just per-token price — 5.5 is often cheaper")
-print("end-to-end than 5.4 because it produces more concise reasoning.")
+print("Watch token *count* not just per-token price — 5.6 often beats 5.5 end-to-end")
+print("because it produces more concise reasoning.")
 print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
@@ -187,5 +219,8 @@ print("you've set up the extended prompt caching path (see prompt-caching docs).
 print()
 print("GPT-5.5 long-context gotcha: sessions with >272K input tokens are billed")
 print("at 2x input ($10.00/1M) and 1.5x output ($45.00/1M) for the FULL session.")
-print("The calculate_cost() above uses standard rates — add a check if you send")
-print("large contexts to avoid underestimating costs by 2x on input.")
+print()
+print("GPT-5.6 cache write gotcha (new for 5.6+): cache WRITES are billed at")
+print("1.25x the uncached input rate. For Sol promo: writes = $5/M, reads = $0.40/M.")
+print("Explicit cache breakpoints + 30-min minimum cache life give more control.")
+print("Sol promo pricing ($4/$20) runs through Nov 21, 2026; standard $5/$30 after.")
