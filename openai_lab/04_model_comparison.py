@@ -1,4 +1,4 @@
-"""Exercise 4: Compare GPT-4.1, GPT-5.4, and GPT-5.5 model families."""
+"""Exercise 4: Compare GPT-4.1, GPT-5.4, GPT-5.5, and GPT-6 Astra model families."""
 
 import time
 
@@ -25,9 +25,13 @@ MODELS = [
     # but ~2x per-token price. Often cheaper end-to-end. Use this as the new default
     # for any task where 5.4-mini is too weak.
     "gpt-5.5",
+    # GPT-6 Astra — September 3, 2026 new flagship. $10/$50/M, 1M context.
+    # Available in Responses API as gpt-6-astra. Staged rollout; some cyber-sensitive
+    # capabilities gated behind a trusted-access program.
+    "gpt-6-astra",
 ]
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified Sept 12, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 PRICING = {
@@ -38,6 +42,8 @@ PRICING = {
     "gpt-5.4-mini":  {"input": 0.75, "output": 4.50},
     "gpt-5.4":       {"input": 2.50, "output": 15.00},
     "gpt-5.5":       {"input": 5.00, "output": 30.00},  # standard (<=272K input)
+    # GPT-6 Astra (Sept 3, 2026) — new flagship
+    "gpt-6-astra":   {"input": 10.00, "output": 50.00},
 }
 
 results = []
@@ -79,14 +85,14 @@ print("-" * 60)
 for r in results:
     print(f"{r['model']:<18} {r['elapsed']:>7.2f}s {r['input_tokens']:>8} {r['output_tokens']:>8} ${r['cost']:>10.6f}")
 
-print("\n--- Relative to gpt-5.5 (current flagship) ---")
-base = results[-1]  # gpt-5.5
+print("\n--- Relative to gpt-6-astra (current flagship) ---")
+base = results[-1]  # gpt-6-astra
 for r in results:
     cost_ratio = r["cost"] / base["cost"] if base["cost"] > 0 else 0
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in April 2026 ---")
+print("\n--- Picking a model in Sept 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -94,12 +100,24 @@ print("  4.1:   When you need 1M context but not reasoning.")
 print()
 print("GPT-5.4 family (native reasoning, computer use, image gen):")
 print("  nano:  Budget reasoning. Better than 4.1-nano on hard tasks.")
-print("  mini:  The default for most new agentic workloads.")
+print("  mini:  The default for most agentic workloads.")
 print("  5.4:   Still strong; cheaper per-token than 5.5 — keep for cost-sensitive flows.")
 print()
 print("GPT-5.5 (April 23, 2026):")
 print("  More token-efficient than 5.4 for most tasks, so often cheaper end-to-end")
-print("  even at 2x the per-token price. Default choice for new high-quality flows.")
-print("  Note: shell tool docs and most new examples use gpt-5.5.")
+print("  even at 2x the per-token price. Strong default for high-quality flows.")
 print("  Long-context gotcha: sessions >272K input tokens are billed at")
 print("  $10.00/$45.00 per 1M (2x/1.5x) for the full session, not just the overage.")
+print()
+print("GPT-6 Astra (September 3, 2026 — current flagship):")
+print("  New top-of-stack model: $10/$50/M, 1M context, 128K output.")
+print("  Model ID: gpt-6-astra. Available in Responses API.")
+print("  Staged rollout — some cyber-sensitive capabilities require trusted-access program.")
+print("  Use for your hardest tasks where GPT-5.5 falls short.")
+print()
+print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
+print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
+print("you've set up the extended prompt caching path (see prompt-caching docs).")
+print()
+print("GPT-5.5 long-context gotcha: sessions with >272K input tokens are billed")
+print("at 2x input ($10.00/1M) and 1.5x output ($45.00/1M) for the FULL session.")

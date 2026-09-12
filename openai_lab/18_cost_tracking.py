@@ -7,11 +7,13 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified Sept 12, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 PRICING = {
+    # GPT-6 Astra (September 3, 2026) — new flagship
+    "gpt-6-astra": {"input": 10.00, "output": 50.00, "cached_input": 1.00},
     # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
     # Standard pricing applies only to sessions with <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
@@ -137,8 +139,8 @@ c5 = calculate_cost(r5)
 costs.append(c5)
 print_cost_report(c5)
 
-# Call 6: Current flagship — pricier per token but often more token-efficient
-print("\n--- Call 6: Same question on gpt-5.5 (April 23, 2026 flagship) ---")
+# Call 6: Previous flagship
+print("\n--- Call 6: Same question on gpt-5.5 ---")
 r6 = client.responses.create(
     model="gpt-5.5",
     input="Write a detailed 5-step implementation plan for deploying a RAG system in an enterprise environment.",
@@ -146,6 +148,16 @@ r6 = client.responses.create(
 c6 = calculate_cost(r6)
 costs.append(c6)
 print_cost_report(c6)
+
+# Call 7: Current flagship
+print("\n--- Call 7: Same question on gpt-6-astra (Sept 3, 2026 flagship, $10/$50) ---")
+r7 = client.responses.create(
+    model="gpt-6-astra",
+    input="Write a detailed 5-step implementation plan for deploying a RAG system in an enterprise environment.",
+)
+c7 = calculate_cost(r7)
+costs.append(c7)
+print_cost_report(c7)
 
 # --- Summary ---
 print("\n" + "=" * 60)
@@ -173,13 +185,15 @@ print(f"  4.1-mini:  {c2['total_tokens']:>6} tokens, ${c2['total_cost']:.6f}")
 print(f"  4.1:       {c4['total_tokens']:>6} tokens, ${c4['total_cost']:.6f}")
 print(f"  5.4-mini:  {c5['total_tokens']:>6} tokens, ${c5['total_cost']:.6f}")
 print(f"  5.5:       {c6['total_tokens']:>6} tokens, ${c6['total_cost']:.6f}")
+print(f"  6-astra:   {c7['total_tokens']:>6} tokens, ${c7['total_cost']:.6f}")
 if c2['total_cost'] > 0:
     print(f"\n  4.1 is        {c4['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
     print(f"  5.4-mini is   {c5['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
     print(f"  5.5 is        {c6['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
+    print(f"  6-astra is    {c7['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
 print()
-print("Watch token *count* not just per-token price — 5.5 is often cheaper")
-print("end-to-end than 5.4 because it produces more concise reasoning.")
+print("Watch token *count* not just per-token price — 6-astra often beats 5.5 end-to-end")
+print("because it produces more concise outputs for hard tasks.")
 print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
