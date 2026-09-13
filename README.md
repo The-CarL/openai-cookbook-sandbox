@@ -78,6 +78,7 @@ Numbered to be read in order — each builds on the previous.
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
+| 36 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 
 ## Model lineup snapshot (verified July 4, 2026)
 
@@ -110,7 +111,8 @@ The following exist on the platform and are worth follow-up exercises:
 - **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
-- **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
+- **GPT-5.6 family** (GA July 9, 2026) — Sol, Terra, Luna. Post-cut pricing: Sol $4/$20/M, Terra $2/$12/M, Luna $0.20/$1.20/M. See ex. 04, 18.
+- **GPT-Live-1** (Sep 10, 2026) — full-duplex voice at $0.05/min; delegates reasoning to backend; covered in ex. 36
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
