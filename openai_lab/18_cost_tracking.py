@@ -7,13 +7,19 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified September 13, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
-# GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
-# ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.5/5.6 long-context: sessions >272K input tokens are billed at 2x input
+# and 1.5x output for the ENTIRE session.
+# GPT-5.6 cache WRITES are billed at 1.25x input (unlike 5.5 and earlier which
+# are free to write). cached_input below reflects the read (10% discount) rate.
 PRICING = {
-    # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
-    # Standard pricing applies only to sessions with <=272K input tokens.
+    # GPT-5.6 family (GA July 9, 2026; Sol cut Aug 21, Terra/Luna cut July 30)
+    # Explicit cache breakpoints; 30-min minimum cache lifetime.
+    "gpt-5.6-sol":   {"input": 4.00, "output": 20.00, "cached_input": 0.40},
+    "gpt-5.6-terra": {"input": 2.00, "output": 12.00, "cached_input": 0.20},
+    "gpt-5.6-luna":  {"input": 0.20, "output": 1.20,  "cached_input": 0.02},
+    # GPT-5.5 (April 23, 2026) — standard pricing applies to sessions <=272K input tokens.
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
@@ -181,11 +187,14 @@ print()
 print("Watch token *count* not just per-token price — 5.5 is often cheaper")
 print("end-to-end than 5.4 because it produces more concise reasoning.")
 print()
-print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
-print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
-print("you've set up the extended prompt caching path (see prompt-caching docs).")
+print("GPT-5.5 caching: only EXTENDED prompt caching supported; in-memory cache unsupported.")
 print()
-print("GPT-5.5 long-context gotcha: sessions with >272K input tokens are billed")
-print("at 2x input ($10.00/1M) and 1.5x output ($45.00/1M) for the FULL session.")
+print("GPT-5.6 caching: explicit cache breakpoints via prompt_cache_breakpoint.")
+print("  Cache reads: 10% of input (same as other families).")
+print("  Cache writes: 1.25x input rate — a new cost vs. earlier models.")
+print("  calculate_cost() above tracks read savings but not write costs.")
+print()
+print("Long-context gotcha (GPT-5.5 and 5.6): sessions with >272K input tokens are")
+print("billed at 2x input and 1.5x output for the FULL session.")
 print("The calculate_cost() above uses standard rates — add a check if you send")
 print("large contexts to avoid underestimating costs by 2x on input.")
