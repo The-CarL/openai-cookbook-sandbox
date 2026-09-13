@@ -78,6 +78,7 @@ Numbered to be read in order — each builds on the previous.
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
+| 35 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
 
 ## Model lineup snapshot (verified July 4, 2026)
 
@@ -115,6 +116,7 @@ The following exist on the platform and are worth follow-up exercises:
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
+- **Agents API** (public beta Sep 10, 2026) — server-managed sessions, `client.beta.agents`; covered in ex. 35
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
