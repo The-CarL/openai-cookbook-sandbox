@@ -10,7 +10,8 @@ Three operation types:
   update_file  — V4A diff with additions / deletions
   delete_file  — path only
 
-Models: gpt-5.1, 5.2, 5.4, 5.5 (Responses API, Chat Completions, Assistants).
+Models: gpt-5.4, 5.5, 5.6-sol/terra, 6-astra (Responses API, Chat Completions).
+Note: Assistants API was shut down August 26, 2026.
 
 Reference: https://developers.openai.com/api/docs/guides/tools-apply-patch
 """
