@@ -107,7 +107,7 @@ Numbered to be read in order — each builds on the previous.
 
 The following exist on the platform and are worth follow-up exercises:
 
-- **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
+- **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.** **gpt-image-2.5-sunburst** (quality) and **gpt-image-2.5-flare** (speed, 50% lower latency) released September 8, 2026; both use GPT Image 2 token rates and add new `xhigh` / `max` quality settings. Transparent backgrounds now in preview for gpt-image-2 family. Exercise 32 still references gpt-image-2 directly — update model param to try the new variants.
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available
