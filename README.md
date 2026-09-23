@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified September 23, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -92,6 +92,7 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
 | `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-6-astra` | 10.00 | 50.00 | 1M | Sep 3: new frontier model. Built for reasoning, coding, computer use |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
@@ -102,12 +103,15 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-6 Astra long-context**: sessions >272K input tokens are billed at $20/$75 per 1M for the entire request. Regional data residency adds 10%.
+- **GPT-6 Astra Batch/Flex** pricing: $5/$25 per 1M. Fast mode: $20/$100 per 1M.
 
 ### Other 2026 API capabilities not yet covered
 
 The following exist on the platform and are worth follow-up exercises:
 
 - **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
+- **gpt-image-2.5 Flare + Sunburst** (Sep 8, 2026) — two-tier image 2.5 family; Flare=speed, Sunburst=precision. Identical pricing: $5/$30 text tokens, $8 image-input / $30 image-output per 1M; per-image ~$0.006 (low) to ~$0.211 (max) at 1024×1024. Ex. 32 uses gpt-image-2 — a 35 exercise for 2.5 is warranted
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **GPT-5.6 family** (limited preview, June 26, 2026) — Sol ($5/$30/M), Terra ($2.50/$15/M), Luna ($1/$6/M); stronger reasoning, coding, and cybersecurity. Introduces explicit cache breakpoints with 30-min minimum cache lifetime; cache writes billed at 1.25× input rate. Not yet broadly available

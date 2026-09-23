@@ -12,8 +12,11 @@ client = OpenAI()
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 PRICING = {
-    # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
-    # Standard pricing applies only to sessions with <=272K input tokens.
+    # GPT-6 Astra (September 3, 2026 frontier model)
+    # Standard pricing for sessions <=272K input tokens.
+    # Long-context (>272K): $20/$75 per 1M for the full request.
+    "gpt-6-astra": {"input": 10.00, "output": 50.00, "cached_input": 1.00},
+    # GPT-5.5 (April 23, 2026) — standard pricing for sessions <=272K input tokens
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
