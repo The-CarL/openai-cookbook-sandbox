@@ -19,17 +19,19 @@ PROMPT = (
 MODELS = [
     # GPT-4.1 family — cost-effective workhorse (1M context, no native reasoning)
     "gpt-4.1-nano", "gpt-4.1-mini", "gpt-4.1",
-    # GPT-5.4 family — March 2026 flagship (native reasoning, computer use, image gen)
+    # GPT-5.4 family — March 2026 (native reasoning, computer use, image gen)
     "gpt-5.4-nano", "gpt-5.4-mini", "gpt-5.4",
-    # GPT-5.5 — April 23, 2026 flagship. More token-efficient than 5.4 on most tasks
-    # but ~2x per-token price. Often cheaper end-to-end. Use this as the new default
-    # for any task where 5.4-mini is too weak.
+    # GPT-5.5 — April 23, 2026. Token-efficient; often cheaper end-to-end than 5.4.
     "gpt-5.5",
+    # GPT-6 Astra — September 3, 2026 frontier model. Built for reasoning, coding,
+    # computer use, research. Long-context (>272K): $20/$75 per 1M for full request.
+    "gpt-6-astra",
 ]
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified September 23, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-6 Astra long-context: sessions >272K billed at $20/$75 per 1M.
 PRICING = {
     "gpt-4.1-nano":  {"input": 0.10, "output": 0.40},
     "gpt-4.1-mini":  {"input": 0.40, "output": 1.60},
@@ -38,6 +40,7 @@ PRICING = {
     "gpt-5.4-mini":  {"input": 0.75, "output": 4.50},
     "gpt-5.4":       {"input": 2.50, "output": 15.00},
     "gpt-5.5":       {"input": 5.00, "output": 30.00},  # standard (<=272K input)
+    "gpt-6-astra":   {"input": 10.00, "output": 50.00},  # standard (<=272K input)
 }
 
 results = []
@@ -79,14 +82,14 @@ print("-" * 60)
 for r in results:
     print(f"{r['model']:<18} {r['elapsed']:>7.2f}s {r['input_tokens']:>8} {r['output_tokens']:>8} ${r['cost']:>10.6f}")
 
-print("\n--- Relative to gpt-5.5 (current flagship) ---")
-base = results[-1]  # gpt-5.5
+print("\n--- Relative to gpt-6-astra (current frontier) ---")
+base = results[-1]  # gpt-6-astra
 for r in results:
     cost_ratio = r["cost"] / base["cost"] if base["cost"] > 0 else 0
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in April 2026 ---")
+print("\n--- Picking a model in September 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -94,12 +97,15 @@ print("  4.1:   When you need 1M context but not reasoning.")
 print()
 print("GPT-5.4 family (native reasoning, computer use, image gen):")
 print("  nano:  Budget reasoning. Better than 4.1-nano on hard tasks.")
-print("  mini:  The default for most new agentic workloads.")
-print("  5.4:   Still strong; cheaper per-token than 5.5 — keep for cost-sensitive flows.")
+print("  mini:  The default for most new agentic workloads where 5.5 is overkill.")
+print("  5.4:   Still strong; cheaper per-token than 5.5 for many workflows.")
 print()
 print("GPT-5.5 (April 23, 2026):")
-print("  More token-efficient than 5.4 for most tasks, so often cheaper end-to-end")
-print("  even at 2x the per-token price. Default choice for new high-quality flows.")
-print("  Note: shell tool docs and most new examples use gpt-5.5.")
-print("  Long-context gotcha: sessions >272K input tokens are billed at")
-print("  $10.00/$45.00 per 1M (2x/1.5x) for the full session, not just the overage.")
+print("  More token-efficient than 5.4. Long-context gotcha: sessions >272K tokens")
+print("  are billed at $10.00/$45.00 per 1M (2x/1.5x) for the full session.")
+print()
+print("GPT-6 Astra (September 3, 2026) — current frontier model:")
+print("  $10/$50 per 1M tokens (standard, <=272K input).")
+print("  Long-context gotcha: sessions >272K billed at $20/$75 per 1M for full request.")
+print("  Also available at $5/$25 (Batch/Flex) and $20/$100 (Fast) per 1M.")
+print("  Designed for reasoning, coding, computer use, and research-grade tasks.")
