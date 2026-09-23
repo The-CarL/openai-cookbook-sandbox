@@ -7,13 +7,18 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified July 4, 2026)
+# Pricing per 1M tokens (verified September 23, 2026)
 # Cached input prices follow the standard 10% rule for 4.1/5.4 and 5.5.
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
+# GPT-5.6: cache WRITES billed at 1.25× input rate; cache reads at standard 10%.
 PRICING = {
-    # GPT-5.5 (April 23, 2026 flagship) — 2x per-token price vs 5.4
-    # Standard pricing applies only to sessions with <=272K input tokens.
+    # GPT-5.6 family (GA July 9, 2026) — prices after July 30 + Aug 21 reductions
+    # Sol promo pricing through Nov 21, 2026.
+    "gpt-5.6-sol":   {"input": 4.00,  "output": 20.00, "cached_input": 0.40},
+    "gpt-5.6-terra": {"input": 2.00,  "output": 12.00, "cached_input": 0.20},
+    "gpt-5.6-luna":  {"input": 0.20,  "output": 1.20,  "cached_input": 0.02},
+    # GPT-5.5 (April 23, 2026) — standard pricing for sessions <=272K input tokens
     "gpt-5.5": {"input": 5.00, "output": 30.00, "cached_input": 0.50},
     "gpt-5.5-pro": {"input": 30.00, "output": 180.00, "cached_input": 3.00},
     # GPT-5.4 family (March 2026)
@@ -137,10 +142,10 @@ c5 = calculate_cost(r5)
 costs.append(c5)
 print_cost_report(c5)
 
-# Call 6: Current flagship — pricier per token but often more token-efficient
-print("\n--- Call 6: Same question on gpt-5.5 (April 23, 2026 flagship) ---")
+# Call 6: GPT-5.6 Terra — balanced 5.6 tier (GA July 9, 2026)
+print("\n--- Call 6: Same question on gpt-5.6-terra (balanced 5.6 tier) ---")
 r6 = client.responses.create(
-    model="gpt-5.5",
+    model="gpt-5.6-terra",
     input="Write a detailed 5-step implementation plan for deploying a RAG system in an enterprise environment.",
 )
 c6 = calculate_cost(r6)
@@ -169,21 +174,25 @@ print(f"Avg cost per call:  ${total_session / len(costs):.6f}")
 print(f"At {calls_per_day:,} calls/day: ${daily_cost:.2f}/day, ${monthly_cost:.2f}/month")
 
 print(f"\n--- Same prompt across model tiers ---")
-print(f"  4.1-mini:  {c2['total_tokens']:>6} tokens, ${c2['total_cost']:.6f}")
-print(f"  4.1:       {c4['total_tokens']:>6} tokens, ${c4['total_cost']:.6f}")
-print(f"  5.4-mini:  {c5['total_tokens']:>6} tokens, ${c5['total_cost']:.6f}")
-print(f"  5.5:       {c6['total_tokens']:>6} tokens, ${c6['total_cost']:.6f}")
+print(f"  4.1-mini:    {c2['total_tokens']:>6} tokens, ${c2['total_cost']:.6f}")
+print(f"  4.1:         {c4['total_tokens']:>6} tokens, ${c4['total_cost']:.6f}")
+print(f"  5.4-mini:    {c5['total_tokens']:>6} tokens, ${c5['total_cost']:.6f}")
+print(f"  5.6-terra:   {c6['total_tokens']:>6} tokens, ${c6['total_cost']:.6f}")
 if c2['total_cost'] > 0:
-    print(f"\n  4.1 is        {c4['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
-    print(f"  5.4-mini is   {c5['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
-    print(f"  5.5 is        {c6['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
+    print(f"\n  4.1 is          {c4['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
+    print(f"  5.4-mini is     {c5['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
+    print(f"  5.6-terra is    {c6['total_cost']/c2['total_cost']:.1f}x the cost of 4.1-mini")
 print()
-print("Watch token *count* not just per-token price — 5.5 is often cheaper")
-print("end-to-end than 5.4 because it produces more concise reasoning.")
+print("Watch token *count* not just per-token price — 5.6 models often produce")
+print("more concise output, so end-to-end cost can be lower despite higher rates.")
 print()
 print("GPT-5.5 caching gotcha: only EXTENDED prompt caching is supported.")
 print("In-memory caching is unsupported — your cached_tokens will be 0 unless")
 print("you've set up the extended prompt caching path (see prompt-caching docs).")
+print()
+print("GPT-5.6 caching gotcha: cache WRITES are billed at 1.25× the input rate.")
+print("This differs from 5.5 and earlier — factor cache-write costs into workloads")
+print("that refresh their cache frequently.")
 print()
 print("GPT-5.5 long-context gotcha: sessions with >272K input tokens are billed")
 print("at 2x input ($10.00/1M) and 1.5x output ($45.00/1M) for the FULL session.")
