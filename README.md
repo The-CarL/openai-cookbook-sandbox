@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified Sep 28, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -87,11 +87,12 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-4.1-mini` | 0.40 | 1.60 | 1M | High-volume production where 5.x is overkill |
 | `gpt-4.1` | 2.00 | 8.00 | 1M | 1M context without needing reasoning |
 | `gpt-5.4-nano` | 0.20 | 1.25 | — | Budget reasoning. Compaction only (no tool search / computer) |
-| `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
-| `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
+| `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Agentic workloads; tool search, computer, compaction |
+| `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5/6.x; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Apr 24 flagship. Token-efficient; long-ctx surcharge >272K |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
+| `gpt-6-astra` | 10.00 | 50.00 | 1M | Sep 3 flagship. Hardest reasoning/coding/research; same long-ctx surcharge as 5.5 |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
@@ -102,6 +103,7 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
+- **GPT-6 Astra cache writes are billed at 1.25× input rate ($12.50/M)**; cache reads at $1.00/M (10%).
 
 ### Other 2026 API capabilities not yet covered
 
