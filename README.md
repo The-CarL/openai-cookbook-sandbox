@@ -23,7 +23,7 @@ Numbered to be read in order — each builds on the previous.
 | 01 | Basic Responses API call | The core primitive: `client.responses.create()` |
 | 02 | Multi-turn via `previous_response_id` | API-managed conversation state |
 | 03 | Streaming events | TTFT, event types, `response.completed` |
-| 04 | Model comparison (4.1 / 5.4 / 5.5) | Cost vs latency vs quality picker |
+| 04 | Model comparison (4.1 / 5.4 / 5.5 / 6) | Cost vs latency vs quality picker |
 
 ### Built-in tools
 | # | Topic | Why |
@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 
-## Model lineup snapshot (verified July 4, 2026)
+## Model lineup snapshot (verified Sept 29, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -90,10 +90,12 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.4-mini` | 0.75 | 4.50 | 400K | Default for new agentic workloads. Tool search, computer, compaction |
 | `gpt-5.4` | 2.50 | 15.00 | 1M | Cheaper than 5.5; computer use, image gen, native compaction |
 | `gpt-5.4-pro` | — | — | 1M | March 5: computationally intensive problems |
-| `gpt-5.5` | 5.00 | 30.00 | 1M | New flagship (Apr 24). Token-efficient → often cheaper end-to-end |
+| `gpt-5.5` | 5.00 | 30.00 | 1M | Apr 24 flagship. Token-efficient → often cheaper end-to-end |
 | `gpt-5.5-pro` | 30.00 | 180.00 | 1M | Hardest reasoning, unchanged from 5.4 Pro pricing |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
+| `gpt-6-luna` | 0.10 | 0.50 | — | Sep 22: cost-efficient 6th-gen; 50% cheaper than 5.6 Luna |
+| `gpt-6-sol` | 2.00 | 10.00 | — | Sep 22: flagship 6th-gen; 50% cheaper than 5.6 Sol |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
@@ -106,6 +108,8 @@ Numbered to be read in order — each builds on the previous.
 ### Other 2026 API capabilities not yet covered
 
 The following exist on the platform and are worth follow-up exercises:
+
+- **GPT-6 Sol / Luna** (Sep 22, 2026) — gpt-6-sol ($2/$10/M) and gpt-6-luna ($0.10/$0.50/M); text+image input, text output; Responses and Chat Completions APIs. Same cache-write billing as 5.6 (1.25× input rate). 50% lower per-token cost than GPT-5.6 counterparts.
 
 - **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
