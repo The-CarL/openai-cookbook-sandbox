@@ -14,6 +14,10 @@ client = OpenAI()
 # GPT-5.6+ and GPT-6: cache WRITES billed at 1.25x input rate (not tracked here).
 # GPT-5.6 Sol: promotional input/output rate through at least Nov 21, 2026.
 PRICING = {
+    # GPT-6 Astra (September 3, 2026); Fast mode: $20/$100 per 1M.
+    # >272K input: 2x input + 1.5x output; cache writes: $12.50/M.
+    # calculate_cost() uses standard rates; these surcharges are not tracked.
+    "gpt-6-astra":   {"input": 10.00, "output": 50.00, "cached_input": 1.00},
     # GPT-6 family (September 22, 2026) — text+image input, text output
     "gpt-6-sol":     {"input": 2.00,  "output": 10.00,  "cached_input": 0.20},
     "gpt-6-luna":    {"input": 0.10,  "output": 0.50,   "cached_input": 0.01},
@@ -146,7 +150,7 @@ c5 = calculate_cost(r5)
 costs.append(c5)
 print_cost_report(c5)
 
-# Call 6: Current flagship — pricier per token but often more token-efficient
+# Call 6: April 2026 flagship — pricier per token but often more token-efficient
 print("\n--- Call 6: Same question on gpt-5.5 (April 23, 2026 flagship) ---")
 r6 = client.responses.create(
     model="gpt-5.5",
