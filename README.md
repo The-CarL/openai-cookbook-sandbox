@@ -80,7 +80,7 @@ Numbered to be read in order — each builds on the previous.
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 | 35 | GPT-5.6 family (Jul 2026) | Sol/Terra/Luna naming, cache breakpoints, post-launch price cuts |
 
-## Model lineup snapshot (verified Sept 29, 2026)
+## Model lineup snapshot (verified Oct 2, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -99,6 +99,7 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-6-luna` | 0.10 | 0.50 | — | Sep 22. 50% cheaper than 5.6 Luna; text+image input |
 | `gpt-6-sol` | 2.00 | 10.00 | — | Sep 22. 50% cheaper than 5.6 Sol; default for new high-quality flows |
 | `gpt-6-astra` | 10.00 | 50.00 | 1M | Sep 3. Hardest reasoning/coding/computer use/research; Fast mode at 2× |
+| `gpt-6.1-sol` | 2.00 | 10.00 | 1.05M | Sep 29 (DevDay). "Near-Astra at 1/5 cost"; default in Codex; cache writes 1.25× |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
 | `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
@@ -124,6 +125,8 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-5.6 family** (GA July 9, 2026) — covered by Exercise 35; Sol/Terra/Luna tiers, explicit cache breakpoints, and post-launch price cuts.
 - **GPT-6 Sol / Luna** (Sep 22, 2026) — gpt-6-sol ($2/$10/M) and gpt-6-luna ($0.10/$0.50/M); text+image input, text output; Responses and Chat Completions APIs. At least 50% lower per-token cost than GPT-5.6 counterparts. Same 1.25× cache-write billing.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100. Compare via Exercise 04.
+- **GPT-6.1 Sol** (Sep 29, 2026 — DevDay) — `gpt-6.1-sol`; $2/$10/M; 1.05M context; "near-Astra intelligence at 1/5 the cost"; cached input $0.10/M; now default in Codex. `gpt-6.1-astra` was pulled for safety review. Compare via Exercise 04.
+- **Decisions API** (Sep 29, 2026 — DevDay, limited preview) — `/v1/decisions`; GPT-6 Luna-based endpoint for near-instant bounded classification/routing (text + images). No docs/pricing yet; 403 for most API keys as of Oct 2. Watching for GA.
 - **GPT Image 2.5** (Sep 8, 2026) — Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Assistants API sunset (Aug 26, 2026)** — `/v1/assistants`, `/v1/threads`, and `/v1/threads/runs` are shut down. This repo uses the Responses API throughout; migrate with Responses API + Conversations API.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure

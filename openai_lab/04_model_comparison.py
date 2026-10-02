@@ -32,9 +32,12 @@ MODELS = [
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast mode at 2x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
+    # GPT-6.1 Sol — September 29, 2026 (DevDay). "Near-Astra intelligence at 1/5 the cost."
+    # 1.05M context; replaces gpt-6-sol as default in Codex; cache writes at 1.25x input.
+    "gpt-6.1-sol",
 ]
 
-# Pricing per 1M tokens (verified Sept 29, 2026)
+# Pricing per 1M tokens (verified Oct 2, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6 Sol: promotional rate through at least Nov 21, 2026 (standard: $5/$30).
@@ -54,6 +57,7 @@ PRICING = {
     "gpt-6-luna":     {"input": 0.10,  "output": 0.50},
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
+    "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # DevDay Sep 29, 2026
 }
 
 results = []
@@ -103,7 +107,7 @@ for r in results:
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in Sept 2026 ---")
+print("\n--- Picking a model in Oct 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -137,3 +141,8 @@ print("  Hardest reasoning, coding, computer use, and research; 1M context.")
 print("  $10/$50 per 1M standard; Fast mode $20/$100. Cached input: $1/M.")
 print("  Long-context: >272K input means 2x input + 1.5x output for the full session.")
 print("  Cache writes: 1.25x input ($12.50/M). Estimates above use standard rates.")
+print()
+print("GPT-6.1 Sol (September 29, 2026 — DevDay flagship):")
+print("  'Near-Astra intelligence at 1/5 the cost.' 1.05M context; $2/$10 per 1M.")
+print("  Cached input: $0.10/M. Cache writes at 1.25x input. Default model in Codex.")
+print("  Broadly available on GA; gpt-6.1-astra was pulled for safety review.")
