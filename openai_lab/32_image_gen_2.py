@@ -1,4 +1,12 @@
-"""Exercise 32: gpt-image-2 — direct Images API: generation, editing, token pricing, Batch."""
+"""Exercise 32: gpt-image-2 family — direct Images API: generation, editing, token pricing, Batch.
+
+Image model lineup (September 2026):
+  gpt-image-2             — original GA (May 2026); baseline for this exercise
+  gpt-image-2.5-flare     — Sep 8, 2026: same GPT Image 2 token rates, 50% lower latency
+  gpt-image-2.5-sunburst  — Sep 8, 2026: higher quality (editing precision focus)
+  Both 2.5 variants add quality="xhigh" and quality="max" settings.
+  Transparent backgrounds now in preview for all three (pass background="transparent").
+"""
 
 import base64
 import os
@@ -10,8 +18,8 @@ load_dotenv()
 
 client = OpenAI()
 
-# gpt-image-2 (API available to developers May 2026) is accessed via the Images API
-# directly — NOT via the Responses API image_generation tool used in Exercise 19.
+# gpt-image-2 and its 2.5 variants are accessed via the Images API directly —
+# NOT via the Responses API image_generation tool used in Exercise 19.
 #
 # Key differences from Exercise 19:
 #   API endpoint:  client.images.generate(model="gpt-image-2", ...)
@@ -19,6 +27,12 @@ client = OpenAI()
 #   Editing:       client.images.edit(model="gpt-image-2", ...) in one round-trip
 #   Batch API:     50% off all rates for async workloads
 #   Quality:       higher fidelity for multilingual text, infographics, diagrams
+#
+# To switch to a 2.5 variant, replace model="gpt-image-2" with:
+#   model="gpt-image-2.5-flare"    (faster, comparable quality)
+#   model="gpt-image-2.5-sunburst" (slower, higher editing precision)
+# Both support quality="xhigh" and quality="max" in addition to the existing
+# "low", "medium", "high", "auto" settings.
 
 # --- Overview ---
 print("=" * 60)
@@ -172,4 +186,11 @@ New in gpt-image-2 vs. gpt-image-1:
   - Higher fidelity for multilingual text, infographics, slides, diagrams
   - Token-based pricing instead of flat per-image fee
   - Batch API for 50% cost reduction on async workloads
+
+New in gpt-image-2.5 family (September 8, 2026):
+  - gpt-image-2.5-flare    — same token rates, 50% lower latency than gpt-image-2
+  - gpt-image-2.5-sunburst — higher quality, optimized for editing precision
+  - New quality levels: quality="xhigh" and quality="max"
+  - Transparent backgrounds in preview: response_format="b64_json" + background="transparent"
+  - Swap model= string only; everything else in this exercise stays the same
 """)
