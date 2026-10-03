@@ -117,10 +117,45 @@ if hasattr(icon_response, "usage") and icon_response.usage:
     print(f"Token usage — input: {getattr(u, 'input_tokens', '?')}, "
           f"output: {getattr(u, 'output_tokens', '?')}")
 
+# --- Example 4: Transparent background (preview, August 2026) ---
+print()
+print("=" * 60)
+print("EXAMPLE 4: Transparent background (background='transparent')")
+print("=" * 60)
+print()
+print("background='transparent' bakes the alpha channel into generation.")
+print("Output must be PNG or WebP. Works for generation, editing, and")
+print("the Responses API image_generation tool. No extra cost.")
+print()
+
+transparent_response = client.images.generate(
+    model="gpt-image-2",
+    prompt=(
+        "A product shot of a sleek black ceramic coffee mug, "
+        "studio lighting, isolated object, no background."
+    ),
+    n=1,
+    size="1024x1024",
+    background="transparent",    # alpha channel baked in during generation
+    output_format="png",         # must be png or webp for transparency
+    response_format="b64_json",
+)
+
+transparent_bytes = base64.b64decode(transparent_response.data[0].b64_json)
+with open("mug_transparent.png", "wb") as f:
+    f.write(transparent_bytes)
+print(f"Generated: mug_transparent.png ({len(transparent_bytes):,} bytes)")
+print("Drop this PNG onto any background — alpha channel is already correct.")
+
+if hasattr(transparent_response, "usage") and transparent_response.usage:
+    u = transparent_response.usage
+    print(f"Token usage — input: {getattr(u, 'input_tokens', '?')}, "
+          f"output: {getattr(u, 'output_tokens', '?')}")
+
 # --- Cleanup ---
 print()
 print("=== Cleanup ===")
-for path in ["arch_diagram.png", "arch_diagram_edited.png", "checkmark.png"]:
+for path in ["arch_diagram.png", "arch_diagram_edited.png", "checkmark.png", "mug_transparent.png"]:
     if os.path.exists(path):
         os.remove(path)
         print(f"Removed {path}")
@@ -139,6 +174,18 @@ Generation:
       size="1024x1024",          # or "256x256", "512x512", "1792x1024", etc.
       response_format="b64_json" # or "url"
   )
+
+Transparent background (preview, August 2026):
+  client.images.generate(
+      model="gpt-image-2",
+      prompt="...",
+      background="transparent",  # bakes alpha channel in during generation
+      output_format="png",       # must be "png" or "webp" for transparency
+      response_format="b64_json",
+  )
+  - Beats post-hoc background removal, especially on glass or thin fibers
+  - Works for generation, editing, and the Responses API image_generation tool
+  - No extra cost; tip: omit background description from the prompt
 
 Editing (key new capability vs. gpt-image-1):
   client.images.edit(
@@ -172,4 +219,5 @@ New in gpt-image-2 vs. gpt-image-1:
   - Higher fidelity for multilingual text, infographics, slides, diagrams
   - Token-based pricing instead of flat per-image fee
   - Batch API for 50% cost reduction on async workloads
+  - Transparent background generation (background='transparent', Aug 2026 preview)
 """)
