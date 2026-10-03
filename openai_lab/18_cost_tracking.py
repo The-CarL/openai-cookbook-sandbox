@@ -7,8 +7,9 @@ load_dotenv()
 
 client = OpenAI()
 
-# Pricing per 1M tokens (verified Sept 29, 2026)
-# Cached input prices follow the standard 10% rule for all families.
+# Pricing per 1M tokens (verified Oct 3, 2026)
+# Cached input prices follow the standard 10% rule for all families EXCEPT:
+#   gpt-6.1-sol cached input is $0.10/M (5% of input, vs 10% for gpt-6-sol).
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6+ and GPT-6: cache WRITES billed at 1.25x input rate (not tracked here).
@@ -18,7 +19,10 @@ PRICING = {
     # >272K input: 2x input + 1.5x output; cache writes: $12.50/M.
     # calculate_cost() uses standard rates; these surcharges are not tracked.
     "gpt-6-astra":   {"input": 10.00, "output": 50.00, "cached_input": 1.00},
-    # GPT-6 family (September 22, 2026) — text+image input, text output
+    # GPT-6.1 Sol (September 29, 2026 — DevDay). Near-Astra perf at 1/5 the price.
+    # Same I/O as gpt-6-sol; cached input halved to $0.10/M.
+    "gpt-6.1-sol":   {"input": 2.00,  "output": 10.00,  "cached_input": 0.10},
+    # GPT-6 family (September 22, 2026) — text+image input, text output; 1.05M context
     "gpt-6-sol":     {"input": 2.00,  "output": 10.00,  "cached_input": 0.20},
     "gpt-6-luna":    {"input": 0.10,  "output": 0.50,   "cached_input": 0.01},
     # GPT-5.6 family (GA July 9, 2026 — 1.05M context)

@@ -27,19 +27,24 @@ MODELS = [
     # Sol promo ($4/$20) active through at least Nov 21, 2026 (standard: $5/$30).
     "gpt-5.6-luna", "gpt-5.6-terra", "gpt-5.6-sol",
     # GPT-6 family — September 22, 2026. Text+image input. 50% cheaper than 5.6.
-    # Cache writes billed at 1.25x input rate (same as 5.6+).
+    # Cache writes billed at 1.25x input rate (same as 5.6+). 1.05M context.
     "gpt-6-luna", "gpt-6-sol",
+    # GPT-6.1 Sol — September 29, 2026 (DevDay). Near-Astra performance for coding
+    # and computer use at 1/5 of Astra's price. Same I/O pricing as gpt-6-sol but
+    # cached input cut to $0.10/M (vs $0.20/M for gpt-6-sol). 1.05M context.
+    "gpt-6.1-sol",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast mode at 2x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
 ]
 
-# Pricing per 1M tokens (verified Sept 29, 2026)
+# Pricing per 1M tokens (verified Oct 3, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6 Sol: promotional rate through at least Nov 21, 2026 (standard: $5/$30).
 # GPT-6 Astra: >272K input uses 2x input + 1.5x output for the full session.
 # Astra Fast mode: $20/$100 per 1M; comparison below uses standard rates.
+# GPT-6.1 Sol: cached input $0.10/M (50% below gpt-6-sol's $0.20/M).
 PRICING = {
     "gpt-4.1-nano":   {"input": 0.10,  "output": 0.40},
     "gpt-4.1-mini":   {"input": 0.40,  "output": 1.60},
@@ -53,6 +58,7 @@ PRICING = {
     "gpt-5.6-sol":    {"input": 4.00,  "output": 20.00},  # promo; see note above
     "gpt-6-luna":     {"input": 0.10,  "output": 0.50},
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
+    "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # cached: $0.10/M (see ex. 18)
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
 }
 
@@ -103,7 +109,7 @@ for r in results:
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in Sept 2026 ---")
+print("\n--- Picking a model in Oct 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -131,6 +137,11 @@ print("  luna: $0.10/$0.50. Cheapest capable model; 50% below 5.6 Luna.")
 print("  sol:  $2.00/$10.00. Default for new high-quality flows; 50% below 5.6 Sol.")
 print("  Cache write billing (1.25x input) applies, same as 5.6+.")
 
+print()
+print("GPT-6.1 Sol (September 29, 2026 — DevDay flagship):")
+print("  Near-Astra performance for coding and computer use at 1/5 of Astra's price.")
+print("  $2/$10 per 1M (same I/O as gpt-6-sol). Cached input: $0.10/M (50% below gpt-6-sol).")
+print("  1.05M context, 128K max output. Default upgrade path from gpt-6-sol.")
 print()
 print("GPT-6 Astra (September 3, 2026 — premium frontier model):")
 print("  Hardest reasoning, coding, computer use, and research; 1M context.")
