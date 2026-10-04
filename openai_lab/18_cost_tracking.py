@@ -18,6 +18,9 @@ PRICING = {
     # >272K input: 2x input + 1.5x output; cache writes: $12.50/M.
     # calculate_cost() uses standard rates; these surcharges are not tracked.
     "gpt-6-astra":   {"input": 10.00, "output": 50.00, "cached_input": 1.00},
+    # GPT-6.1 Sol (September 29, 2026) — near-Astra quality at 1/5 the price
+    # Same $2/$10/M as GPT-6 Sol; cached input halved to $0.10/M.
+    "gpt-6.1-sol":   {"input": 2.00,  "output": 10.00,  "cached_input": 0.10},
     # GPT-6 family (September 22, 2026) — text+image input, text output
     "gpt-6-sol":     {"input": 2.00,  "output": 10.00,  "cached_input": 0.20},
     "gpt-6-luna":    {"input": 0.10,  "output": 0.50,   "cached_input": 0.01},

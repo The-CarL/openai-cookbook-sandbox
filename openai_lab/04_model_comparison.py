@@ -29,6 +29,9 @@ MODELS = [
     # GPT-6 family — September 22, 2026. Text+image input. 50% cheaper than 5.6.
     # Cache writes billed at 1.25x input rate (same as 5.6+).
     "gpt-6-luna", "gpt-6-sol",
+    # GPT-6.1 Sol — September 29, 2026. Same $2/$10/M as GPT-6 Sol; near-Astra
+    # quality for agentic coding and professional work. Cached input $0.10/M.
+    "gpt-6.1-sol",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast mode at 2x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
@@ -53,6 +56,7 @@ PRICING = {
     "gpt-5.6-sol":    {"input": 4.00,  "output": 20.00},  # promo; see note above
     "gpt-6-luna":     {"input": 0.10,  "output": 0.50},
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
+    "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # Sep 29; near-Astra at 1/5 price
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
 }
 
