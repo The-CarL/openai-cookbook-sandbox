@@ -29,17 +29,20 @@ MODELS = [
     # GPT-6 family — September 22, 2026. Text+image input. 50% cheaper than 5.6.
     # Cache writes billed at 1.25x input rate (same as 5.6+).
     "gpt-6-luna", "gpt-6-sol",
+    # GPT-6.1 Sol — DevDay Sep 29, 2026. Stronger coding/computer-use than gpt-6-sol.
+    # Same input/output price; cached input cut to $0.10/M (vs $0.20/M for gpt-6-sol).
+    "gpt-6.1-sol",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
-    # 1M context; Fast mode at 2x standard rates; cache writes at 1.25x input.
+    # 1.05M context; Fast 2× ($20/$100) and Ultrafast 6× ($60/$300); cache writes 1.25× input.
     "gpt-6-astra",
 ]
 
-# Pricing per 1M tokens (verified Sept 29, 2026)
+# Pricing per 1M tokens (verified Oct 4, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6 Sol: promotional rate through at least Nov 21, 2026 (standard: $5/$30).
 # GPT-6 Astra: >272K input uses 2x input + 1.5x output for the full session.
-# Astra Fast mode: $20/$100 per 1M; comparison below uses standard rates.
+# Astra Fast $20/$100; Ultrafast $60/$300 per 1M; comparison below uses standard rates.
 PRICING = {
     "gpt-4.1-nano":   {"input": 0.10,  "output": 0.40},
     "gpt-4.1-mini":   {"input": 0.40,  "output": 1.60},
@@ -53,6 +56,7 @@ PRICING = {
     "gpt-5.6-sol":    {"input": 4.00,  "output": 20.00},  # promo; see note above
     "gpt-6-luna":     {"input": 0.10,  "output": 0.50},
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
+    "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # DevDay Sep 29; cached $0.10/M vs $0.20/M for 6-sol
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
 }
 
@@ -126,14 +130,17 @@ print("  sol:   $4.00/$20.00 (promo through Nov 2026). Hardest tasks in the 5.x 
 print("  Caching: explicit breakpoints; writes 1.25x input, reads ~10%, 30-min min lifetime.")
 print("  See Exercise 35 for the focused GPT-5.6 walkthrough and price-cut timeline.")
 print()
-print("GPT-6 family (September 22, 2026 — text+image input):")
-print("  luna: $0.10/$0.50. Cheapest capable model; 50% below 5.6 Luna.")
-print("  sol:  $2.00/$10.00. Default for new high-quality flows; 50% below 5.6 Sol.")
+print("GPT-6 family (September 22, 2026 — text+image input, 1.05M context):")
+print("  luna:    $0.10/$0.50. Cheapest capable model; 50% below 5.6 Luna.")
+print("  sol:     $2.00/$10.00. Strong reasoning; cached input $0.20/M.")
+print("  6.1-sol: $2.00/$10.00 (DevDay Sep 29). Stronger coding/computer-use than gpt-6-sol;")
+print("           cached input $0.10/M (50% cheaper cached than gpt-6-sol).")
 print("  Cache write billing (1.25x input) applies, same as 5.6+.")
 
 print()
 print("GPT-6 Astra (September 3, 2026 — premium frontier model):")
-print("  Hardest reasoning, coding, computer use, and research; 1M context.")
-print("  $10/$50 per 1M standard; Fast mode $20/$100. Cached input: $1/M.")
+print("  Hardest reasoning, coding, computer use, and research; 1.05M context.")
+print("  $10/$50 per 1M standard; Fast $20/$100; Ultrafast $60/$300 (DevDay Sep 29).")
+print("  Ultrafast: up to 6x faster; broadly available at low rate limits.")
 print("  Long-context: >272K input means 2x input + 1.5x output for the full session.")
 print("  Cache writes: 1.25x input ($12.50/M). Estimates above use standard rates.")
