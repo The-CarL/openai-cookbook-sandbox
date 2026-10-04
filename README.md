@@ -76,11 +76,14 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
-| 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
+| 33 | Realtime API v2.1 (May 2026) | `gpt-realtime-2.1` / translate / whisper WebSocket voice agents (gpt-realtime-2 deprecated Jul 20, removed Jan 20 2027) |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 | 35 | GPT-5.6 family (Jul 2026) | Sol/Terra/Luna naming, cache breakpoints, post-launch price cuts |
+| 36 | GPT-Image-2.5 (Sep 2026) | Flare/Sunburst split, xhigh/max quality, edit API |
+| 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
+| 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 
-## Model lineup snapshot (verified Sept 29, 2026)
+## Model lineup snapshot (verified Oct 4, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -97,11 +100,12 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.6-terra` | 2.00 | 12.00 | 1.05M | GA Jul 9. Balanced 5.6 tier; stronger coding/cybersecurity |
 | `gpt-5.6-sol` | 4.00† | 20.00† | 1.05M | GA Jul 9. Flagship 5.6; promo price through Nov 2026 |
 | `gpt-6-luna` | 0.10 | 0.50 | — | Sep 22. 50% cheaper than 5.6 Luna; text+image input |
-| `gpt-6-sol` | 2.00 | 10.00 | — | Sep 22. 50% cheaper than 5.6 Sol; default for new high-quality flows |
+| `gpt-6-sol` | 2.00 | 10.00 | — | Sep 22. 50% cheaper than 5.6 Sol; text+image input |
+| `gpt-6.1-sol` | 2.00 | 10.00 | 1.1M | Sep 29. Near-Astra coding/computer-use; cached input $0.10/M (95% off) |
 | `gpt-6-astra` | 10.00 | 50.00 | 1M | Sep 3. Hardest reasoning/coding/computer use/research; Fast mode at 2× |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
-| `gpt-5.2-codex` | — | — | — | Jan 14: earlier codex generation |
-| `o3` | 2.00 | 8.00 | — | Dedicated reasoning, complex proofs |
+| ~~`gpt-5.2-codex`~~ | — | — | — | Jan 14: earlier codex generation. **Shut down Jul 23, 2026.** |
+| ~~`o3`~~ | 2.00 | 8.00 | — | **Deprecated** — ChatGPT retired Aug 26, 2026; API (o3-2025-04-16) removed Dec 11, 2026. Use `gpt-5.6-sol` instead |
 | `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
 
 † GPT-5.6 Sol promotional price (was $5/$30); active through at least Nov 21, 2026.
@@ -113,18 +117,23 @@ Numbered to be read in order — each builds on the previous.
 - GPT-5.5 reasoning effort defaults to `medium`.
 - **GPT-5.6+ cache writes cost 1.25× the input rate** (new billing model). Minimum cache lifetime: 30 min. Cached reads remain ~10% of input. Applies to GPT-6 as well. GPT-5.6 requires explicit cache breakpoints (Exercise 35).
 - **GPT-6 Astra:** cached input $1.00/M; cache writes $12.50/M. Fast mode is 2× the standard rate ($20/$100 per 1M). Sessions >272K input tokens have the same long-context surcharge as GPT-5.5 (2× input, 1.5× output for the full session).
+- **GPT-6.1 Sol exception:** cached input is $0.10/M — a 95% discount off the standard $2/M input rate. All other GPT-6 family models follow the standard ~10% rule.
 
 ### Other 2026 API updates and follow-up exercises
 
 The following platform updates are relevant; items without a dedicated exercise are worth follow-up:
 
-- **GPT Image models** (covered by ex. 32) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
-- **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch
+- **GPT Image models** (covered by ex. 32 for gpt-image-2; ex. 36 for gpt-image-2.5) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
+- **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch. **⚠️ Videos API deprecated; aliases removed September 24, 2026.**
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
+- **GPT Transcribe + GPT Live Transcribe** (Jul 28, 2026) — Two dedicated transcription models: `gpt-transcribe` for async file transcription and batch workloads; `gpt-live-transcribe` for low-latency streaming transcript deltas. Both support tunable latency, keyword hints, free-form context, and multi-language input. Beat `gpt-realtime-whisper` by ~10% WER on real-world audio benchmarks.
 - **GPT-5.6 family** (GA July 9, 2026) — covered by Exercise 35; Sol/Terra/Luna tiers, explicit cache breakpoints, and post-launch price cuts.
 - **GPT-6 Sol / Luna** (Sep 22, 2026) — gpt-6-sol ($2/$10/M) and gpt-6-luna ($0.10/$0.50/M); text+image input, text output; Responses and Chat Completions APIs. At least 50% lower per-token cost than GPT-5.6 counterparts. Same 1.25× cache-write billing.
+- **GPT-6.1 Sol** (Sep 29, 2026) — `gpt-6.1-sol`, same $2/$10/M pricing as gpt-6-sol but with a 95% cached-input discount ($0.10/M vs the standard 10% rule). Near-Astra coding and computer-use performance (75.2% DeepSWE v1.1 at high reasoning effort vs gpt-6-sol's 68.8%). 1.1M context. New default model in Codex. Compare via Exercise 04.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100. Compare via Exercise 04.
-- **GPT Image 2.5** (Sep 8, 2026) — Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
+- **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
+- **Agents API** (public beta, Sep 10, 2026) — server-managed sessions, `client.beta.agents`; covered in Exercise 37.
+- **GPT-Live-1** (Sep 10, 2026) — full-duplex voice at $0.05/min; delegates reasoning to a backend agent; covered in Exercise 38.
 - **Assistants API sunset (Aug 26, 2026)** — `/v1/assistants`, `/v1/threads`, and `/v1/threads/runs` are shut down. This repo uses the Responses API throughout; migrate with Responses API + Conversations API.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
