@@ -143,3 +143,7 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **Batch API** (50% pricing for async workloads)
 - **Background mode** for long-running responses
 - **Fine-tuning + distillation**
+- **Agents API** (public beta Sep 10, 2026; billing starts Oct 5, 2026) — managed execution environment for building agents: hosted sandboxes, durable sessions, computer use, tool search, context compaction, multi-agent support, and MCP servers. Distinct from the Agents SDK (ex. 24) — OpenAI handles orchestration and session state. Pricing: $5/M input, $0.50/M cached, $25/M output; voice sessions $0.05/min. See [Agents API docs](https://developers.openai.com/api/docs/guides/agents-api/overview)
+- **Decisions API** (DevDay Sep 29, 2026) — focuses Luna-class model intelligence on a finite set of user-defined classification/routing questions. Real-time, low-latency decision-making
+- **GPT-Live 1 GA** (Sep 10, 2026) — full-duplex voice conversations (model can listen and respond simultaneously while backend handles reasoning and tools); complement to ex. 33 (Realtime API v2)
+- **GPT Image 2.5** (Sep 8, 2026) — `gpt-image-2.5-flare` (speed) and `gpt-image-2.5-sunburst` (detail), Sketch support, 50% latency reduction vs Image 2
