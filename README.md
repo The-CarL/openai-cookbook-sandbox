@@ -114,6 +114,7 @@ Numbered to be read in order — each builds on the previous.
 - GPT-5.5 reasoning effort defaults to `medium`.
 - **GPT-5.6+ cache writes cost 1.25× the input rate** (new billing model). Minimum cache lifetime: 30 min. Cached reads remain ~10% of input. Applies to GPT-6 as well. GPT-5.6 requires explicit cache breakpoints (Exercise 35).
 - **GPT-6 Astra:** cached input $1.00/M; cache writes $12.50/M. Fast mode is 2× the standard rate ($20/$100 per 1M). Sessions >272K input tokens have the same long-context surcharge as GPT-5.5 (2× input, 1.5× output for the full session).
+- **GPT-6.1 Sol exception:** cached input is $0.10/M — a 95% discount off the standard $2/M input rate. All other gpt-6 family models follow the standard ~10% rule.
 
 ### Other 2026 API updates and follow-up exercises
 
@@ -124,7 +125,7 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **GPT-5.6 family** (GA July 9, 2026) — covered by Exercise 35; Sol/Terra/Luna tiers, explicit cache breakpoints, and post-launch price cuts.
 - **GPT-6 Sol / Luna** (Sep 22, 2026) — gpt-6-sol ($2/$10/M) and gpt-6-luna ($0.10/$0.50/M); text+image input, text output; Responses and Chat Completions APIs. At least 50% lower per-token cost than GPT-5.6 counterparts. Same 1.25× cache-write billing.
-- **GPT-6.1 Sol** (Sep 29, 2026) — gpt-6.1-sol ($2/$10/M, cached $0.10/M); 1.05M context, 128K max output. Near-Astra coding and computer-use at 1/5 Astra's price; default model in Codex. Cached reads at 5% of uncached rate (vs 10% for earlier families). Available via API and ChatGPT Work.
+- **GPT-6.1 Sol** (Sep 29, 2026) — `gpt-6.1-sol` ($2/$10/M, cached $0.10/M); 1.05M context, 128K max output. Near-Astra coding and computer-use at 1/5 Astra's price (75.2% DeepSWE v1.1 vs gpt-6-sol's 68.8%); default model in Codex. Cached reads at 5% of uncached rate (vs 10% for earlier families). Available via API and ChatGPT Work. Compare via Exercise 04.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100. Compare via Exercise 04.
 - **GPT Image 2.5** (Sep 8, 2026) — Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Assistants API sunset (Aug 26, 2026)** — `/v1/assistants`, `/v1/threads`, and `/v1/threads/runs` are shut down. This repo uses the Responses API throughout; migrate with Responses API + Conversations API.

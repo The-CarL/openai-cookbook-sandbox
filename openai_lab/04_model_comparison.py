@@ -31,7 +31,7 @@ MODELS = [
     "gpt-6-luna", "gpt-6-sol",
     # GPT-6.1 Sol — September 29, 2026. Near-Astra coding/computer use at 1/5 Astra's price.
     # 1.05M context, 128K max output. Default model in Codex.
-    # Cached input at 5% of input rate (vs 10% for earlier families).
+    # Cached input at $0.10/M (5% of input — vs 10% for earlier families).
     "gpt-6.1-sol",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast mode at 2x standard rates; cache writes at 1.25x input.
@@ -108,7 +108,7 @@ for r in results:
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in Sept 2026 ---")
+print("\n--- Picking a model in Oct 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -132,9 +132,16 @@ print("  Caching: explicit breakpoints; writes 1.25x input, reads ~10%, 30-min m
 print("  See Exercise 35 for the focused GPT-5.6 walkthrough and price-cut timeline.")
 print()
 print("GPT-6 family (September 22, 2026 — text+image input):")
-print("  luna: $0.10/$0.50. Cheapest capable model; 50% below 5.6 Luna.")
-print("  sol:  $2.00/$10.00. Default for new high-quality flows; 50% below 5.6 Sol.")
+print("  luna:    $0.10/$0.50. Cheapest capable model; 50% below 5.6 Luna.")
+print("  sol:     $2.00/$10.00. Balanced; 50% below 5.6 Sol; text+image input.")
 print("  Cache write billing (1.25x input) applies, same as 5.6+.")
+
+print()
+print("GPT-6.1 Sol (September 29, 2026 — near-Astra at 6-Sol price):")
+print("  Same $2/$10/M as gpt-6-sol but stronger coding, computer use, and")
+print("  long-agentic tasks (75.2% DeepSWE v1.1 vs gpt-6-sol's 68.8%).")
+print("  Key pricing change: cached input is $0.10/M (95% off standard) -- not")
+print("  the usual 10% rule. New default model in Codex as of its 0.159.1 release.")
 
 print()
 print("GPT-6 Astra (September 3, 2026 — premium frontier model):")
