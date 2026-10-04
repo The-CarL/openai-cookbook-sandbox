@@ -76,7 +76,7 @@ Numbered to be read in order — each builds on the previous.
 | 30 | Tool search (Mar 2026) | `namespace` + `defer_loading` for huge tool surfaces |
 | 31 | `phase` field (Feb 2026) | Separate `commentary` from `final_answer` in agent UIs |
 | 32 | gpt-image-2 (Apr 2026) | Direct Images API: generation, editing, token pricing, Batch |
-| 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper WebSocket voice agents |
+| 33 | Realtime API v2 (May 2026) | `gpt-realtime-2` / translate / whisper; **see GPT-Live 1 update in file** |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 | 35 | GPT-5.6 family (Jul 2026) | Sol/Terra/Luna naming, cache breakpoints, post-launch price cuts |
 
@@ -127,6 +127,7 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT Image 2.5** (Sep 8, 2026) — Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Assistants API sunset (Aug 26, 2026)** — `/v1/assistants`, `/v1/threads`, and `/v1/threads/runs` are shut down. This repo uses the Responses API throughout; migrate with Responses API + Conversations API.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
+- **GPT-Live 1** (Sep 10, 2026) — `gpt-live-1`; full-duplex voice agent model; $0.05/min for the voice layer (billed/sec), backend model + tools billed separately; 12 voices; interruption-safe; no image input. **Billing starts Oct 5, 2026.** New projects should prefer this over `gpt-realtime-2` (see updated docstring in Exercise 33).
 - **WebSocket mode for Responses API** (Feb 23)
 - **Open Responses spec** (Jan 15) — open-source multi-provider interop
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory

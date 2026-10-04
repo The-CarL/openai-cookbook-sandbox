@@ -15,6 +15,22 @@ Unlike the Responses API (REST + stateless), the Realtime API is WebSocket-based
   - Bidirectional: you stream audio in while transcript/audio events stream out.
   - gpt-realtime-2 supports text-only mode — useful for testing without hardware.
 
+--- UPDATE: GPT-Live 1 (September 10, 2026) ---
+GPT-Live 1 is the successor to gpt-realtime-2 for full-duplex voice agents.
+Key differences from gpt-realtime-2:
+
+  gpt-live-1             — Full-duplex: listens and speaks simultaneously.
+                           Interruption-safe; delegates reasoning/tools to a backend model.
+                           Billing: $0.05/minute of voice (billed per second).
+                           Backend model + tool use billed separately at Responses API rates.
+                           12 voices; broader accent/dialect/language coverage.
+                           NOTE: does NOT accept image input (predecessor did).
+                           Billing starts October 5, 2026.
+
+For new voice agent projects, prefer gpt-live-1 over gpt-realtime-2.
+The examples below use gpt-realtime-2 (the original GA model) and remain
+valid for understanding the WebSocket session model.
+
 Requires: uv add websockets
 Reference: https://developers.openai.com/api/docs/realtime
 """
