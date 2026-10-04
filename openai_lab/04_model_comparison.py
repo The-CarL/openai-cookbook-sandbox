@@ -29,12 +29,16 @@ MODELS = [
     # GPT-6 family — September 22, 2026. Text+image input. 50% cheaper than 5.6.
     # Cache writes billed at 1.25x input rate (same as 5.6+).
     "gpt-6-luna", "gpt-6-sol",
+    # GPT-6.1 Sol — September 29, 2026. Near-Astra coding/computer use at 1/5 Astra's price.
+    # 1.05M context, 128K max output. Default model in Codex.
+    # Cached input at 5% of input rate (vs 10% for earlier families).
+    "gpt-6.1-sol",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast mode at 2x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
 ]
 
-# Pricing per 1M tokens (verified Sept 29, 2026)
+# Pricing per 1M tokens (verified October 4, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6 Sol: promotional rate through at least Nov 21, 2026 (standard: $5/$30).
@@ -53,6 +57,7 @@ PRICING = {
     "gpt-5.6-sol":    {"input": 4.00,  "output": 20.00},  # promo; see note above
     "gpt-6-luna":     {"input": 0.10,  "output": 0.50},
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
+    "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # same price as 6-sol; cached at $0.10 (5%, not 10%)
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
 }
 
