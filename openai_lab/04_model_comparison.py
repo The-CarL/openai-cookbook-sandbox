@@ -30,16 +30,18 @@ MODELS = [
     # Cache writes billed at 1.25x input rate (same as 5.6+).
     "gpt-6-luna", "gpt-6-sol",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
-    # 1M context; Fast mode at 2x standard rates; cache writes at 1.25x input.
+    # 1M context; Fast mode at 2x; Ultrafast mode via service_tier="ultrafast".
     "gpt-6-astra",
+    # GPT-6.1 Sol — September 29, 2026. Complex coding/professional work. Multi-agent beta.
+    # 1.05M context; 128K max output; cache write $2.50/M; >272K surcharge same as Astra.
+    "gpt-6.1-sol",
 ]
 
-# Pricing per 1M tokens (verified Sept 29, 2026)
+# Pricing per 1M tokens (verified October 4, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6 Sol: promotional rate through at least Nov 21, 2026 (standard: $5/$30).
-# GPT-6 Astra: >272K input uses 2x input + 1.5x output for the full session.
-# Astra Fast mode: $20/$100 per 1M; comparison below uses standard rates.
+# GPT-6 Astra / GPT-6.1 Sol: same >272K surcharge; Astra Fast $20/$100.
 PRICING = {
     "gpt-4.1-nano":   {"input": 0.10,  "output": 0.40},
     "gpt-4.1-mini":   {"input": 0.40,  "output": 1.60},
@@ -54,6 +56,7 @@ PRICING = {
     "gpt-6-luna":     {"input": 0.10,  "output": 0.50},
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
+    "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # Sep 29; same tier as gpt-6-sol
 }
 
 results = []
@@ -103,7 +106,7 @@ for r in results:
     speed_ratio = r["elapsed"] / base["elapsed"] if base["elapsed"] > 0 else 0
     print(f"{r['model']:<18} {cost_ratio:>5.1%} the cost, {speed_ratio:>5.1%} the latency")
 
-print("\n--- Picking a model in Sept 2026 ---")
+print("\n--- Picking a model in October 2026 ---")
 print("GPT-4.1 family (1M context, no native reasoning):")
 print("  nano:  Classification, routing, simple extraction at the lowest price.")
 print("  mini:  Sweet spot for high-volume production where 5.x is overkill.")
@@ -135,5 +138,12 @@ print()
 print("GPT-6 Astra (September 3, 2026 — premium frontier model):")
 print("  Hardest reasoning, coding, computer use, and research; 1M context.")
 print("  $10/$50 per 1M standard; Fast mode $20/$100. Cached input: $1/M.")
+print("  Ultrafast mode: service_tier='ultrafast' reduces inter-token latency.")
 print("  Long-context: >272K input means 2x input + 1.5x output for the full session.")
 print("  Cache writes: 1.25x input ($12.50/M). Estimates above use standard rates.")
+print()
+print("GPT-6.1 Sol (September 29, 2026 — coding / professional work):")
+print("  $2/$10 per 1M; cached read $0.10/M; cache write $2.50/M.")
+print("  1,050,000-token context, 128K max output.")
+print("  Multi-agent beta: model can delegate to subagents in a single Responses API call.")
+print("  Same long-context surcharge as Astra (>272K: 2x input + 1.5x output).")
