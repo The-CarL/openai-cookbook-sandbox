@@ -83,7 +83,7 @@ Numbered to be read in order — each builds on the previous.
 | 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 
-## Model lineup snapshot (verified Oct 4, 2026)
+## Model lineup snapshot (verified Oct 18, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -106,7 +106,7 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | ~~`gpt-5.2-codex`~~ | — | — | — | Jan 14: earlier codex generation. **Shut down Jul 23, 2026.** |
 | ~~`o3`~~ | 2.00 | 8.00 | — | **Deprecated** — ChatGPT retired Aug 26, 2026; API (o3-2025-04-16) removed Dec 11, 2026. Use `gpt-5.6-sol` instead |
-| `o4-mini` | 1.10 | 4.40 | — | Fast reasoning, math/code/visual |
+| ~~`o4-mini`~~ | 1.10 | 4.40 | — | **Removed Oct 23, 2026** — replace with `gpt-5.6-terra` |
 
 † GPT-5.6 Sol promotional price (was $5/$30); active through at least Nov 21, 2026.
 
@@ -134,6 +134,8 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Agents API** (public beta, Sep 10, 2026) — server-managed sessions, `client.beta.agents`; covered in Exercise 37.
 - **GPT-Live-1** (Sep 10, 2026) — full-duplex voice at $0.05/min; delegates reasoning to a backend agent; covered in Exercise 38.
+- **Model deprecations — Oct 23, 2026** (official notice Apr 22, 2026): `o4-mini`, `o1`, `o1-pro`, `gpt-4`, `gpt-4-turbo` removed. Replacements: `gpt-5.6-terra` (o4-mini), `gpt-5.6-sol` (o1, gpt-4). Separate notice (Oct 14, 2026): GPT-4o and GPT-4.1 mini dated snapshots removed Jan 14, 2027 → `gpt-6-luna`.
+- **Decisions API public beta** (Oct 6, 2026) — `POST /v1/decisions`, powered by `gpt-6-luna`. 10× faster than Responses API for classification/routing. Answer types: `predicate` (0–1 probability), `choice` (from fixed list), `score` (weighted mean). Potential Exercise 39.
 - **Assistants API sunset (Aug 26, 2026)** — `/v1/assistants`, `/v1/threads`, and `/v1/threads/runs` are shut down. This repo uses the Responses API throughout; migrate with Responses API + Conversations API.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
