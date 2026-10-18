@@ -134,6 +134,8 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Agents API** (public beta, Sep 10, 2026) — server-managed sessions, `client.beta.agents`; covered in Exercise 37.
 - **GPT-Live-1** (Sep 10, 2026) — full-duplex voice at $0.05/min; delegates reasoning to a backend agent; covered in Exercise 38.
+- **Decisions API** (public beta, Oct 6, 2026) — `/v1/decisions` endpoint; `gpt-6-luna` only; $0.10/M input tokens, **no output charges**; ~10× faster than Responses API. Use for high-volume classification and routing where you need a structured answer but not a full generation. GA expected within weeks. Docs: `developers.openai.com/api/docs/guides/decisions`.
+- **Custom voices / prompt-to-voice** (GA, Oct 16, 2026) — create a reusable voice from a text description via the voices endpoint (`type: "prompt"`). Free to create; up to 100 per org. Voices are reusable in GPT-Live sessions only (not Realtime API, TTS, or Chat Completions). Billing at standard GPT-Live rates ($0.05/min). 9 new multilingual stock voices also added. Docs: `developers.openai.com/api/docs/guides/custom-voices`.
 - **Assistants API sunset (Aug 26, 2026)** — `/v1/assistants`, `/v1/threads`, and `/v1/threads/runs` are shut down. This repo uses the Responses API throughout; migrate with Responses API + Conversations API.
 - **Secure MCP Tunnel** (June 2026) — enterprise feature allowing ChatGPT, Codex, Responses API, and AgentKit to connect to private or on-prem MCP servers without public exposure
 - **WebSocket mode for Responses API** (Feb 23)
