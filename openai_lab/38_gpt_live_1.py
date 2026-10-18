@@ -19,6 +19,13 @@ Key differences from gpt-realtime-2.1 (Exercise 33):
 
 Connection options: WebSocket, WebRTC (browser), SIP/telephony.
 
+Custom voices (Oct 16, 2026):
+  Generate a custom voice from a text description via the voices endpoint,
+  then pass its id in the session.update "voice" field. Project API key
+  needs the custom_voice write permission. The recording reference sample
+  must be ≥5 s of speech, ≤10 MiB. Consent audio and reference must come
+  from the same speaker.
+
 Requires: pip install "openai[realtime]>=3.8.0"
 Reference: https://openai.com/index/introducing-gpt-live-1-in-the-api/
 """
