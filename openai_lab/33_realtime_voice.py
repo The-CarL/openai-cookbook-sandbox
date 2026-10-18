@@ -26,6 +26,9 @@ Unlike the Responses API (REST + stateless), the Realtime API is WebSocket-based
   - Bidirectional: you stream audio in while transcript/audio events stream out.
   - gpt-realtime-2.1 supports text-only mode — useful for testing without hardware.
 
+For full-duplex voice agents (listen and speak at once, interruption-safe,
+reasoning delegated to a backend agent), see Exercise 38: GPT-Live-1.
+
 Requires: uv add websockets
 Reference: https://developers.openai.com/api/docs/realtime
 """
