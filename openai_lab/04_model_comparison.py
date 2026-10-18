@@ -32,6 +32,7 @@ MODELS = [
     # GPT-6.1 Sol — September 29, 2026. Same $2/$10/M as gpt-6-sol but near-Astra
     # coding/computer-use; cached input at $0.10/M (95% off, not the standard 10% rule).
     # 1.05M context, 128K max output; multi-agent beta.
+    # Ultrafast tier added Oct 8: service_tier="ultrafast" -> $12/$60/M, ~8x throughput.
     "gpt-6.1-sol",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast 2x / Ultrafast 6x standard rates; cache writes at 1.25x input.
@@ -144,6 +145,8 @@ print("  Key pricing change: cached input is $0.10/M (95% off standard) -- not")
 print("  the usual 10% rule. New default model in Codex.")
 print("  1.05M context, 128K max output. Multi-agent beta: delegates to subagents")
 print("  within a single Responses API request.")
+print("  Ultrafast tier (Oct 8): add service_tier='ultrafast' to responses.create()")
+print("  for ~8x throughput at $12/$60 per 1M (6x standard). Separate rate limits.")
 
 print()
 print("GPT-6 Astra (September 3, 2026 — premium frontier model):")
