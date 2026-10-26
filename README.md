@@ -82,6 +82,7 @@ Numbered to be read in order — each builds on the previous.
 | 36 | GPT-Image-2.5 (Sep 2026) | Flare/Sunburst split, xhigh/max quality, edit API |
 | 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
+| 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
 
 ## Model lineup snapshot (verified Oct 18, 2026)
 
@@ -115,7 +116,7 @@ Numbered to be read in order — each builds on the previous.
 - Verify hits via `usage.input_tokens_details.cached_tokens` (Exercise 25).
 - **GPT-5.5 only supports extended prompt caching — in-memory caching is unsupported.**
 - GPT-5.5 reasoning effort defaults to `medium`.
-- **GPT-5.6+ cache writes cost 1.25× the input rate** (new billing model). Minimum cache lifetime: 30 min. Cached reads remain ~10% of input. Applies to GPT-6 as well. GPT-5.6 requires explicit cache breakpoints (Exercise 35).
+- **GPT-5.6+ cache writes cost 1.25× the input rate** (new billing model). Minimum cache lifetime: 30 min. Cached reads remain ~10% of input. **12-hour caching** (Oct 20, 2026): set `prompt_cache_options.ttl` (or a per-breakpoint `ttl`) to `"12h"` in the Responses API; writes cost 2.5× input, reads unchanged. Applies to GPT-6 as well. GPT-5.6 requires explicit cache breakpoints (Exercise 35).
 - **GPT-6 Astra:** cached input $1.00/M; cache writes $12.50/M. Fast mode is 2× the standard rate ($20/$100 per 1M). **Ultrafast** (`service_tier: "ultrafast"`, DevDay Sep 29) is 6× ($60/$300 per 1M) for the lowest latency. Sessions >272K input tokens have the same long-context surcharge as GPT-5.5 (2× input, 1.5× output for the full session).
 - **GPT-6.1 Sol exception:** cached input is $0.10/M — a 95% discount off the standard $2/M input rate. All other GPT-6 family models follow the standard ~10% rule. Cache writes are still 1.25× input ($2.50/M), and the >272K long-context surcharge (2× input, 1.5× output) applies as on Astra.
 - **GPT-6.1 Sol Ultrafast** (Oct 8, 2026): `service_tier="ultrafast"` in `responses.create()` gives ~8× throughput at 6× the standard rate ($12/$60 per 1M). Separate rate limits from Standard.
@@ -134,7 +135,7 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Distinct from the client-side Agents SDK (Exercise 24).
-- **Decisions API** (announced DevDay Sep 29; public beta Oct 6, 2026) — `POST /v1/decisions`, powered by `gpt-6-luna` only. $0.10/M input, **no output charges**; ~10× faster than the Responses API. Answer types: `predicate` (0–1 probability), `choice` (from a fixed list), `score` (weighted mean). For high-volume classification, routing, moderation, and agent action selection. Candidate for Exercise 39.
+- **Decisions API** (public beta Oct 6; **GA Oct 22, 2026**) — covered by Exercise 39. `POST /v1/decisions`, powered by `gpt-6-luna` only. $0.10/M input, **no output charges**; ~10× faster than the Responses API. Answer types: `predicate` (0–1 probability), `choice` (from a fixed list), `score` (weighted mean). GA adds prompt caching, images in question instructions, `input_json`, and up to 400 questions per request (was 200).
 - **GPT-Live-1** (Sep 10, 2026; billing began Oct 5) — full-duplex voice at $0.05/min; delegates reasoning to a backend agent; no image input; covered in Exercise 38.
 - **Custom voices / prompt-to-voice** (GA, Oct 16, 2026) — create a reusable voice from a text description via the voices endpoint (`type: "prompt"`), then pass its `id` as `voice` in `session.update`. Free to create, up to 100 per org; GPT-Live sessions only (not Realtime API, TTS, or Chat Completions); billed at standard GPT-Live rates. Project key needs `custom_voice` write permission. 9 new multilingual stock voices shipped alongside.
 - **Model shutdowns — Oct 23, 2026** — removed: `o4-mini`, `o1`, `o1-pro`, `gpt-4` / `gpt-4-0613`, `gpt-4-turbo`, `gpt-3.5-turbo-0125`, `gpt-4o-2024-05-13`. Pinned IDs fail with no automatic fallback. Replacements: `gpt-5.6-terra` (o4-mini), `gpt-5.6-sol` (o1, gpt-4). Next waves: Dec 11, 2026 (GPT-5 and o3 snapshots); Jan 14, 2027 (GPT-4o and GPT-4.1 mini dated snapshots → `gpt-6-luna`).

@@ -91,9 +91,8 @@ print("""
           {
               "role": "system",
               "content": [
-                  {"type": "text", "text": "<long system prompt here>"},
-                  # Mark the cache breakpoint after your static prefix:
-                  {"type": "cache_control", "cache_type": "ephemeral"},
+                  {"type": "input_text", "text": "<long system prompt here>",
+                   "prompt_cache_breakpoint": {"mode": "explicit"}},
               ],
           },
           {"role": "user", "content": "User message here"},
@@ -103,10 +102,10 @@ print("""
 print("Cost model for cache breakpoints:")
 print("  Write:  1.25× input rate (billed on the first request that sets the breakpoint)")
 print("  Read:   0.10× input rate (billed on subsequent requests that hit the cache)")
-print("  Minimum cache lifetime: 30 minutes")
+print("  Minimum cache lifetime: 30 minutes (default) or 12 hours (ttl=\"12h\", 2.5× write)")
 print()
-print("Important: if you DON'T set a breakpoint, GPT-5.6 will NOT automatically")
-print("cache your prefix — you must opt in explicitly (unlike GPT-5.4/5.5).")
+print("Note: in explicit mode (prompt_cache_options.mode=\"explicit\") a request with")
+print("no breakpoints does no caching; implicit mode also works.")
 
 # --- Example 3: Run a real cached call ---
 print()
@@ -125,8 +124,8 @@ input_with_breakpoint = [
     {
         "role": "system",
         "content": [
-            {"type": "text", "text": STATIC_SYSTEM},
-            {"type": "cache_control", "cache_type": "ephemeral"},
+            {"type": "input_text", "text": STATIC_SYSTEM,
+             "prompt_cache_breakpoint": {"mode": "explicit"}},
         ],
     },
     {"role": "user", "content": "What is the Responses API?"},
@@ -175,8 +174,12 @@ Naming history:
   Older models still use nano/mini/base naming; new families from 5.6 onward use S/T/L.
 
 Cache breakpoints (GPT-5.6-specific):
-  - Required: you MUST set {"type": "cache_control", "cache_type": "ephemeral"}
-    at the end of your static prefix — implicit caching does NOT apply.
+  - Implicit and explicit caching are both supported. For explicit control set
+    prompt_cache_options.mode="explicit" and add
+    {"prompt_cache_breakpoint": {"mode": "explicit"}} to a content block at the
+    end of your static prefix (up to 4 writes per request).
+  - Lifetime: "30m" (default, 1.25x write) or "12h" (Oct 20, 2026, 2.5x write) via
+    prompt_cache_options.ttl or a per-breakpoint "ttl". Reads are the same either way.
   - Write cost: 1.25× input rate (first call setting the breakpoint)
   - Read cost:  0.10× input rate (subsequent cache hits)
   - Min lifetime: 30 minutes
