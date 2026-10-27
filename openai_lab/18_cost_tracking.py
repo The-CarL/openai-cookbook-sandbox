@@ -24,6 +24,8 @@ PRICING = {
     # GPT-6.1 Sol (September 29, 2026) — same $/token as gpt-6-sol but 95% cache discount
     # Cache writes $2.50/M; >272K input: 2x input + 1.5x output (not tracked).
     "gpt-6.1-sol":   {"input": 2.00,  "output": 10.00,  "cached_input": 0.10},
+    # GPT-6.1 Terra (October 26, 2026) — $1/$5, cached input $0.05/M
+    "gpt-6.1-terra": {"input": 1.00,  "output": 5.00,   "cached_input": 0.05},
     # GPT-5.6 family (GA July 9, 2026 — 1.05M context)
     # Sol promo: active through at least Nov 21, 2026 (standard: $5/$30).
     "gpt-5.6-sol":   {"input": 4.00,  "output": 20.00,  "cached_input": 0.40},
