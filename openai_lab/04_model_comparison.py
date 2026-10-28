@@ -34,6 +34,9 @@ MODELS = [
     # 1.05M context, 128K max output; multi-agent beta.
     # Ultrafast tier added Oct 8: service_tier="ultrafast" -> $12/$60/M, ~8x throughput.
     "gpt-6.1-sol",
+    # GPT-6.1 Terra — October 26, 2026. $1/$5/M, cached input $0.05/M; 1.05M context,
+    # 128K max output. Fast, efficient visual reasoning / computer use / writing.
+    "gpt-6.1-terra",
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast 2x / Ultrafast 6x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
@@ -59,6 +62,7 @@ PRICING = {
     "gpt-6-luna":     {"input": 0.10,  "output": 0.50},
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
     "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # cached input $0.10/M (95% off)
+    "gpt-6.1-terra":  {"input": 1.00,  "output": 5.00},   # cached input $0.05/M
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
 }
 
