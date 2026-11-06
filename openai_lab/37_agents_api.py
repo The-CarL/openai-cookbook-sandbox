@@ -174,6 +174,12 @@ Event types (streaming):
   agent.tool_result         — Tool result received
   agent.session.completed   — Run done; includes usage stats
 
+Automatic review (Oct 30, 2026; eligible projects only):
+  Set the session's `review` field to "auto_review" and a model approves or
+  denies supported tool/permission requests based on intent and risk, instead
+  of waiting for a human. Additional token billing applies.
+  client.beta.agents.sessions.create(..., review="auto_review")
+
 Billing:
   Model tokens (standard Responses API rates) + tool calls at standard rates.
   Container time (openai_hosted): per-minute billing, 5-minute minimum.
