@@ -83,6 +83,7 @@ Numbered to be read in order — each builds on the previous.
 | 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 | 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
+| 40 | GPT-Image-2.6 (Nov 4, 2026) | `complexity`, SVG + animated GIF output, markup-guided edits |
 
 ## Model lineup snapshot (verified Oct 18, 2026)
 
@@ -135,6 +136,7 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-6.1 Sol** (Sep 29, 2026) — `gpt-6.1-sol`, same $2/$10/M pricing as gpt-6-sol but with a 95% cached-input discount ($0.10/M vs the standard 10% rule). Near-Astra coding and computer-use performance (75.2% DeepSWE v1.1 at high reasoning effort vs gpt-6-sol's 68.8%). 1.05M context, 128K max output. Multi-agent beta: the model can delegate to subagents within a single Responses API request. New default model in Codex. Ultrafast tier added Oct 8 ($12/$60/M, ~8× throughput). Compare via Exercise 04.
 - **GPT-6.1 Terra** (Oct 26, 2026) — `gpt-6.1-terra`, $1/$5/M, cached input $0.05/M, 1.05M context, 128K max output. Visual reasoning, precise computer use, natural writing; supports hosted shell, apply patch, skills, computer use, MCP, tool search. Compare via Exercise 04.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
+- **GPT Image 2.6** (Nov 4, 2026) — covered by Exercise 40. `gpt-image-2.6-flare` / `gpt-image-2.6-sunburst`; same token pricing as 2.5. Adds `complexity` (low/medium/high), `output_format` `svg` / `gif` (`frame_count`, `frame_duration_ms`), and `markup` edits (also on 2.5).
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Distinct from the client-side Agents SDK (Exercise 24).
 - **Decisions API** (public beta Oct 6; **GA Oct 22, 2026**) — covered by Exercise 39. `POST /v1/decisions`, powered by `gpt-6-luna` only. $0.10/M input, **no output charges**; ~10× faster than the Responses API. Answer types: `predicate` (0–1 probability), `choice` (from a fixed list), `score` (weighted mean). GA adds prompt caching, images in question instructions, `input_json`, and up to 400 questions per request (was 200).
