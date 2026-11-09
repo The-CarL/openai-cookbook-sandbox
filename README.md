@@ -83,6 +83,7 @@ Numbered to be read in order — each builds on the previous.
 | 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 | 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
+| 40 | GPT-Image-2.6 (Nov 2026) | `complexity`, SVG / animated GIF output, markup-guided edits |
 
 ## Model lineup snapshot (verified Oct 18, 2026)
 
@@ -126,7 +127,7 @@ Numbered to be read in order — each builds on the previous.
 
 The following platform updates are relevant; items without a dedicated exercise are worth follow-up:
 
-- **GPT Image models** (covered by ex. 32 for gpt-image-2; ex. 36 for gpt-image-2.5) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
+- **GPT Image models** (covered by ex. 32 for gpt-image-2; ex. 36 for gpt-image-2.5; ex. 40 for gpt-image-2.6) — gpt-image-1.5, gpt-image-1-mini also available; Batch 50% off. **`dall-e-2` and `dall-e-3` removed May 12, 2026.**
 - **Sora 2 / sora-2-pro** (Mar 12) — video gen up to 20s, 1080p, video extensions, Batch. **⚠️ Videos API deprecated; aliases removed September 24, 2026.**
 - **`gpt-audio-1.5`** (Feb 23) — Chat Completions audio model
 - **GPT Transcribe + GPT Live Transcribe** (Jul 28, 2026) — Two dedicated transcription models: `gpt-transcribe` for async file transcription and batch workloads; `gpt-live-transcribe` for low-latency streaming transcript deltas. Both support tunable latency, keyword hints, free-form context, and multi-language input. Beat `gpt-realtime-whisper` by ~10% WER on real-world audio benchmarks.
@@ -136,6 +137,8 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-6.1 Terra** (Oct 26, 2026) — `gpt-6.1-terra`, $1/$5/M, cached input $0.05/M, 1.05M context, 128K max output. Visual reasoning, precise computer use, natural writing; supports hosted shell, apply patch, skills, computer use, MCP, tool search. Compare via Exercise 04.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
+- **GPT Image 2.6** (Nov 4, 2026) — covered by Exercise 40. `gpt-image-2.6-flare` / `-sunburst`; `complexity` setting, SVG and animated GIF output, markup-guided edits. Pricing unchanged from 2.5.
+- **`gpt-6-cyber`** (Nov 5, 2026) — specialized vulnerability-investigation model; requires Daybreak setup before first request. Not covered. **Live API outbound SIP calling** (Nov 2, 2026) — GA for all orgs via `v1/live/sessions`; see Exercise 38.
 - **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Distinct from the client-side Agents SDK (Exercise 24).
 - **Decisions API** (public beta Oct 6; **GA Oct 22, 2026**) — covered by Exercise 39. `POST /v1/decisions`, powered by `gpt-6-luna` only. $0.10/M input, **no output charges**; ~10× faster than the Responses API. Answer types: `predicate` (0–1 probability), `choice` (from a fixed list), `score` (weighted mean). GA adds prompt caching, images in question instructions, `input_json`, and up to 400 questions per request (was 200).
 - **GPT-Live-1** (Sep 10, 2026; billing began Oct 5) — full-duplex voice at $0.05/min; delegates reasoning to a backend agent; no image input; covered in Exercise 38.
