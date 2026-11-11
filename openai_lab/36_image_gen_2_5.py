@@ -17,6 +17,11 @@ Pricing (September 2026) — token-based, same for both Flare and Sunburst:
   Text input tokens:   $5.00 / 1M
   Cached text input:   $1.25 / 1M
 
+Update (Nov 4, 2026): gpt-image-2.6-flare / gpt-image-2.6-sunburst succeed 2.5 on the same
+endpoints and at the same listed token pricing. They add adjustable complexity, SVG and
+animated GIF generation, and markup-guided editing (also supported on 2.5). To try them,
+swap the model IDs below; see the image generation guide for the new parameters.
+
 Access via the Images API endpoint (not the Responses API image_generation tool).
 Both support Batch API at 50% off for async generation workloads.
 """
