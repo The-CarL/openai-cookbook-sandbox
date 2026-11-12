@@ -179,5 +179,18 @@ Billing:
   Container time (openai_hosted): per-minute billing, 5-minute minimum.
   No additional orchestration fee.
 
+Oct 30, 2026 updates (see changelog):
+  Update tools mid-session  — each update replaces the full tool list. Function
+                              tools / MCP servers change on the next model call;
+                              built-in tools by the next turn.
+  Async compaction          — background context compaction is now the default;
+                              set compaction.async=False for blocking compaction
+                              (background may increase token usage).
+  Time awareness (opt-in)   — experimental.time_awareness enables periodic
+                              current-time reminders to the model.
+  Automatic review          — session review="auto_review": a model approves or
+                              denies supported tool/permission requests based on
+                              intent and risk. Extra token billing applies.
+
 SDK requirement: openai>=3.8.0 (beta.agents namespace)
 """)
