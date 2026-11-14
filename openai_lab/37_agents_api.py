@@ -22,6 +22,14 @@ Billing: tokens + tool calls at standard rates; no additional orchestration fee.
 
 Requires: pip install "openai>=3.8.0"   (beta.agents namespace added in 3.8)
 Reference: https://developers.openai.com/api/docs/guides/agents-api
+Oct 30, 2026 updates:
+  - Update an existing session's tool list; each update REPLACES the full list.
+    Function tools / MCP servers apply on the next model call; built-in tools by the next turn.
+  - Context compaction now runs in the background by default. Set compaction.async=False
+    for blocking compaction (background compaction may increase token usage).
+  - review="auto_review" on the session lets a model approve/deny supported tool and
+    permission requests (adds token billing).
+  - Opt-in experimental.time_awareness (off by default).
 """
 
 from dotenv import load_dotenv
@@ -178,6 +186,10 @@ Billing:
   Model tokens (standard Responses API rates) + tool calls at standard rates.
   Container time (openai_hosted): per-minute billing, 5-minute minimum.
   No additional orchestration fee.
+
+Oct 30 updates: replace-the-list tool updates on live sessions, background compaction
+(compaction.async=False to block), review="auto_review", experimental.time_awareness (opt-in).
+Changelog: https://developers.openai.com/api/docs/changelog
 
 SDK requirement: openai>=3.8.0 (beta.agents namespace)
 """)

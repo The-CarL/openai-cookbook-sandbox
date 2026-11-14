@@ -80,7 +80,7 @@ Numbered to be read in order — each builds on the previous.
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 | 35 | GPT-5.6 family (Jul 2026) | Sol/Terra/Luna naming, cache breakpoints, post-launch price cuts |
 | 36 | GPT-Image-2.5 (Sep 2026) | Flare/Sunburst split, xhigh/max quality, edit API |
-| 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
+| 37 | Agents API (Sep 2026; Oct 30 updates) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events, live tool-list updates, `auto_review`, async compaction |
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 | 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
 
@@ -136,7 +136,7 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-6.1 Terra** (Oct 26, 2026) — `gpt-6.1-terra`, $1/$5/M, cached input $0.05/M, 1.05M context, 128K max output. Visual reasoning, precise computer use, natural writing; supports hosted shell, apply patch, skills, computer use, MCP, tool search. Compare via Exercise 04.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
-- **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Distinct from the client-side Agents SDK (Exercise 24).
+- **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Oct 30 update: session tool lists can be replaced live, compaction runs in the background by default (`compaction.async=false` to block), `review: "auto_review"` lets a model approve/deny tool/permission requests (extra token billing), opt-in `experimental.time_awareness`. Distinct from the client-side Agents SDK (Exercise 24).
 - **Decisions API** (public beta Oct 6; **GA Oct 22, 2026**) — covered by Exercise 39. `POST /v1/decisions`, powered by `gpt-6-luna` only. $0.10/M input, **no output charges**; ~10× faster than the Responses API. Answer types: `predicate` (0–1 probability), `choice` (from a fixed list), `score` (weighted mean). GA adds prompt caching, images in question instructions, `input_json`, and up to 400 questions per request (was 200).
 - **GPT-Live-1** (Sep 10, 2026; billing began Oct 5) — full-duplex voice at $0.05/min; delegates reasoning to a backend agent; no image input; covered in Exercise 38.
 - **Custom voices / prompt-to-voice** (GA, Oct 16, 2026) — create a reusable voice from a text description via the voices endpoint (`type: "prompt"`), then pass its `id` as `voice` in `session.update`. Free to create, up to 100 per org; GPT-Live sessions only (not Realtime API, TTS, or Chat Completions); billed at standard GPT-Live rates. Project key needs `custom_voice` write permission. 9 new multilingual stock voices shipped alongside.
