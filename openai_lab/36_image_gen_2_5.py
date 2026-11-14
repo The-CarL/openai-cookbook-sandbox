@@ -19,6 +19,13 @@ Pricing (September 2026) — token-based, same for both Flare and Sunburst:
 
 Access via the Images API endpoint (not the Responses API image_generation tool).
 Both support Batch API at 50% off for async generation workloads.
+
+Update Nov 4, 2026: gpt-image-2.6-sunburst and gpt-image-2.6-flare succeed 2.5 on the same
+Images generations/edits endpoints. New: adjustable complexity, SVG generation, animated GIF
+generation; markup-guided editing for supported 2.5 and 2.6 models. Pricing was not published
+in the changelog entry - check https://openai.com/api/pricing/ before relying on the
+2.5 rates below.
+Changelog: https://developers.openai.com/api/docs/changelog
 """
 
 import base64

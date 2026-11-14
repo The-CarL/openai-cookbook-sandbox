@@ -79,7 +79,7 @@ Numbered to be read in order — each builds on the previous.
 | 33 | Realtime API v2.1 (May 2026) | `gpt-realtime-2.1` / translate / whisper WebSocket voice agents (gpt-realtime-2 deprecated Jul 20, removed Jan 20 2027) |
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 | 35 | GPT-5.6 family (Jul 2026) | Sol/Terra/Luna naming, cache breakpoints, post-launch price cuts |
-| 36 | GPT-Image-2.5 (Sep 2026) | Flare/Sunburst split, xhigh/max quality, edit API |
+| 36 | GPT-Image-2.5 (Sep 2026; 2.6 note Nov 4) | Flare/Sunburst split, xhigh/max quality, edit API; 2.6 adds SVG/GIF output |
 | 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 | 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
@@ -135,6 +135,9 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-6.1 Sol** (Sep 29, 2026) — `gpt-6.1-sol`, same $2/$10/M pricing as gpt-6-sol but with a 95% cached-input discount ($0.10/M vs the standard 10% rule). Near-Astra coding and computer-use performance (75.2% DeepSWE v1.1 at high reasoning effort vs gpt-6-sol's 68.8%). 1.05M context, 128K max output. Multi-agent beta: the model can delegate to subagents within a single Responses API request. New default model in Codex. Ultrafast tier added Oct 8 ($12/$60/M, ~8× throughput). Compare via Exercise 04.
 - **GPT-6.1 Terra** (Oct 26, 2026) — `gpt-6.1-terra`, $1/$5/M, cached input $0.05/M, 1.05M context, 128K max output. Visual reasoning, precise computer use, natural writing; supports hosted shell, apply patch, skills, computer use, MCP, tool search. Compare via Exercise 04.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
+- **GPT Image 2.6** (Nov 4, 2026) — `gpt-image-2.6-sunburst` / `gpt-image-2.6-flare`: adjustable complexity, SVG and animated GIF generation, markup-guided editing (also on 2.5). Same Images endpoints; pricing not yet verified. Noted in Exercise 36.
+- **Specialized models** (Oct 30 / Nov 5, 2026) — `gpt-6-rosalind` (life sciences, trusted-access approval only) and `gpt-6-cyber` (vulnerability finding/verification; requires Daybreak setup). Not covered by an exercise.
+- **Outbound SIP calling** (Nov 2, 2026) — GPT-Live (`gpt-live-1`) can place calls via your SIP provider through the Live API; available to all orgs. See Exercise 38 for GPT-Live basics.
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Distinct from the client-side Agents SDK (Exercise 24).
 - **Decisions API** (public beta Oct 6; **GA Oct 22, 2026**) — covered by Exercise 39. `POST /v1/decisions`, powered by `gpt-6-luna` only. $0.10/M input, **no output charges**; ~10× faster than the Responses API. Answer types: `predicate` (0–1 probability), `choice` (from a fixed list), `score` (weighted mean). GA adds prompt caching, images in question instructions, `input_json`, and up to 400 questions per request (was 200).
