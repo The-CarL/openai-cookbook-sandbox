@@ -80,7 +80,7 @@ Numbered to be read in order — each builds on the previous.
 | 34 | Inline moderation (Jun 2026) | Safety scores alongside `responses.create()` in one call |
 | 35 | GPT-5.6 family (Jul 2026) | Sol/Terra/Luna naming, cache breakpoints, post-launch price cuts |
 | 36 | GPT-Image-2.5 (Sep 2026) | Flare/Sunburst split, xhigh/max quality, edit API |
-| 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events |
+| 37 | Agents API (Sep 2026) | `client.beta.agents.sessions.create()`, hosted sandbox, streaming events; Oct 30: session tool updates, async compaction, `auto_review` |
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 | 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
 
