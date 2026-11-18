@@ -21,6 +21,10 @@ PRICING = {
     # GPT-6 family (September 22, 2026) — text+image input, text output
     "gpt-6-sol":     {"input": 2.00,  "output": 10.00,  "cached_input": 0.20},
     "gpt-6-luna":    {"input": 0.10,  "output": 0.50,   "cached_input": 0.01},
+    # GPT-6.2 (November 17, 2026) — >272K input: 2x input/cache + 1.5x output (not tracked).
+    # Background completion windows (beta): 2h = 30% off, 8h = 40% off Standard (not tracked).
+    "gpt-6.2-astra": {"input": 8.00,  "output": 40.00,  "cached_input": 0.40},
+    "gpt-6.2-sol":   {"input": 2.00,  "output": 10.00,  "cached_input": 0.10},
     # GPT-6.1 Sol (September 29, 2026) — same $/token as gpt-6-sol but 95% cache discount
     # Cache writes $2.50/M; >272K input: 2x input + 1.5x output (not tracked).
     "gpt-6.1-sol":   {"input": 2.00,  "output": 10.00,  "cached_input": 0.10},

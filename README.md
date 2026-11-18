@@ -104,6 +104,8 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-6-sol` | 2.00 | 10.00 | — | Sep 22. 50% cheaper than 5.6 Sol; text+image input |
 | `gpt-6.1-sol` | 2.00 | 10.00 | 1.05M | Sep 29. Near-Astra coding/computer-use; cached input $0.10/M (95% off); 128K max output; Ultrafast 6× (Oct 8) |
 | `gpt-6.1-terra` | 1.00 | 5.00 | 1.05M | Oct 26. Fast/efficient visual reasoning, computer use, writing; cached input $0.05/M; 128K max output |
+| `gpt-6.2-sol` | 2.00 | 10.00 | 1.05M | Nov 17. Everyday coding/agent workflows; cached input $0.10/M; 128K max output |
+| `gpt-6.2-astra` | 8.00 | 40.00 | 1.05M | Nov 17. Demanding reasoning/coding; cached $0.40/M, cache writes $10/M; 20% cheaper than 6 Astra; Ultrafast 3× through Feb 28, 2027 then 6× |
 | `gpt-6-astra` | 10.00 | 50.00 | 1M | Sep 3. Hardest reasoning/coding/computer use/research; Fast 2×, Ultrafast 6× |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | ~~`gpt-5.2-codex`~~ | — | — | — | Jan 14: earlier codex generation. **Shut down Jul 23, 2026.** |
@@ -134,6 +136,11 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-6 Sol / Luna** (Sep 22, 2026) — gpt-6-sol ($2/$10/M) and gpt-6-luna ($0.10/$0.50/M); text+image input, text output; Responses and Chat Completions APIs. At least 50% lower per-token cost than GPT-5.6 counterparts. Same 1.25× cache-write billing.
 - **GPT-6.1 Sol** (Sep 29, 2026) — `gpt-6.1-sol`, same $2/$10/M pricing as gpt-6-sol but with a 95% cached-input discount ($0.10/M vs the standard 10% rule). Near-Astra coding and computer-use performance (75.2% DeepSWE v1.1 at high reasoning effort vs gpt-6-sol's 68.8%). 1.05M context, 128K max output. Multi-agent beta: the model can delegate to subagents within a single Responses API request. New default model in Codex. Ultrafast tier added Oct 8 ($12/$60/M, ~8× throughput). Compare via Exercise 04.
 - **GPT-6.1 Terra** (Oct 26, 2026) — `gpt-6.1-terra`, $1/$5/M, cached input $0.05/M, 1.05M context, 128K max output. Visual reasoning, precise computer use, natural writing; supports hosted shell, apply patch, skills, computer use, MCP, tool search. Compare via Exercise 04.
+- **GPT-6.2 Sol / Astra** (Nov 17, 2026) — `gpt-6.2-sol` ($2/$10/M) and `gpt-6.2-astra` ($8/$40/M); 1.05M context, 128K max output; tool calling requires the Responses API. Changed how the Responses API preserves reasoning when a conversation prefix is edited and how top-level `instructions` is handled — check the migration guide. Reasoning effort `none` is rejected. Compare via Exercise 04.
+- **Background completion windows** (public beta, Nov 17, 2026) — pick a 2-hour (30% off) or 8-hour (40% off) completion window in the Responses API for gpt-6.2-astra/sol, gpt-6.1-terra, gpt-6-luna. Not yet covered by an exercise.
+- **GPT-Image-2.6 Sunburst / Flare** (Nov 4, 2026) — `gpt-image-2.6-sunburst`, `gpt-image-2.6-flare`; adjustable complexity, SVG and animated GIF generation; markup-guided editing (also for 2.5). Not yet covered by an exercise.
+- **Agents API updates** (Oct 30, 2026) — update tools on an existing session, background context compaction by default (`compaction.async`), experimental `experimental.time_awareness`, and `review: "auto_review"` (extra token billing). See Exercise 37.
+- **Other Oct–Nov 2026 models** — `gpt-6-cyber` (Nov 5, Daybreak setup), `gpt-6-rosalind` (Oct 30, approved life-sciences orgs), `omni-moderation-csam-latest` (Nov 16, approved orgs), outbound SIP calling for `gpt-live-1` (Nov 2).
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Distinct from the client-side Agents SDK (Exercise 24).
@@ -148,5 +155,5 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **Agents SDK update** (Apr 15) — controlled sandboxes, inspectable harness, memory
 - **Hosted Evals product** (`client.evals.*`)
 - **Batch API** (50% pricing for async workloads)
-- **Background mode** for long-running responses
+- **Background mode** for long-running responses (see also background completion windows above)
 - **Fine-tuning + distillation**
