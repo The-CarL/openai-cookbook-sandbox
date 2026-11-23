@@ -40,6 +40,10 @@ MODELS = [
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast 2x / Ultrafast 6x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
+    # GPT-6.2 — November 17, 2026. Astra $8/$40 (cheaper than gpt-6-astra), Sol $2/$10.
+    # 1.05M context, 128K max output; cached input Astra $0.40 / Sol $0.10.
+    # Ultrafast is 3x standard through Feb 28, 2027, then 6x.
+    "gpt-6.2-sol", "gpt-6.2-astra",
 ]
 
 # Pricing per 1M tokens (verified Sept 29, 2026)
@@ -64,6 +68,8 @@ PRICING = {
     "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # cached input $0.10/M (95% off)
     "gpt-6.1-terra":  {"input": 1.00,  "output": 5.00},   # cached input $0.05/M
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
+    "gpt-6.2-sol":    {"input": 2.00,  "output": 10.00},  # cached input $0.10/M
+    "gpt-6.2-astra":  {"input": 8.00,  "output": 40.00},  # standard, <=272K input; cached $0.40/M
 }
 
 results = []
