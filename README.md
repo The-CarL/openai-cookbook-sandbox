@@ -84,7 +84,7 @@ Numbered to be read in order — each builds on the previous.
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 | 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
 
-## Model lineup snapshot (verified Oct 18, 2026)
+## Model lineup snapshot (verified Nov 24, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -104,6 +104,8 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-6-sol` | 2.00 | 10.00 | — | Sep 22. 50% cheaper than 5.6 Sol; text+image input |
 | `gpt-6.1-sol` | 2.00 | 10.00 | 1.05M | Sep 29. Near-Astra coding/computer-use; cached input $0.10/M (95% off); 128K max output; Ultrafast 6× (Oct 8) |
 | `gpt-6.1-terra` | 1.00 | 5.00 | 1.05M | Oct 26. Fast/efficient visual reasoning, computer use, writing; cached input $0.05/M; 128K max output |
+| `gpt-6.2-sol` | 2.00 | 10.00 | 1.05M | Nov 17. Everyday coding/agent work; 128K max output; tool calling needs Responses API |
+| `gpt-6.2-astra` | 8.00 | 40.00 | 1.05M | Nov 17. Demanding reasoning/coding; effort low–max; 20% cheaper than 6-astra |
 | `gpt-6-astra` | 10.00 | 50.00 | 1M | Sep 3. Hardest reasoning/coding/computer use/research; Fast 2×, Ultrafast 6× |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | ~~`gpt-5.2-codex`~~ | — | — | — | Jan 14: earlier codex generation. **Shut down Jul 23, 2026.** |
@@ -134,6 +136,12 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-6 Sol / Luna** (Sep 22, 2026) — gpt-6-sol ($2/$10/M) and gpt-6-luna ($0.10/$0.50/M); text+image input, text output; Responses and Chat Completions APIs. At least 50% lower per-token cost than GPT-5.6 counterparts. Same 1.25× cache-write billing.
 - **GPT-6.1 Sol** (Sep 29, 2026) — `gpt-6.1-sol`, same $2/$10/M pricing as gpt-6-sol but with a 95% cached-input discount ($0.10/M vs the standard 10% rule). Near-Astra coding and computer-use performance (75.2% DeepSWE v1.1 at high reasoning effort vs gpt-6-sol's 68.8%). 1.05M context, 128K max output. Multi-agent beta: the model can delegate to subagents within a single Responses API request. New default model in Codex. Ultrafast tier added Oct 8 ($12/$60/M, ~8× throughput). Compare via Exercise 04.
 - **GPT-6.1 Terra** (Oct 26, 2026) — `gpt-6.1-terra`, $1/$5/M, cached input $0.05/M, 1.05M context, 128K max output. Visual reasoning, precise computer use, natural writing; supports hosted shell, apply patch, skills, computer use, MCP, tool search. Compare via Exercise 04.
+- **GPT-6.2 Astra / Sol** (Nov 17, 2026) — `gpt-6.2-astra` ($8/$40/M) and `gpt-6.2-sol` ($2/$10/M); 1.05M context, 128K max output, text+image input. Responses migration notes: changed reasoning preservation when a conversation prefix is edited, and changed handling of top-level `instructions`. No Flex support. Compare via Exercise 04.
+- **Responses background completion window (public beta, Nov 17)** — 2-hour (30% off) or 8-hour (40% off) windows for `gpt-6.2-astra`, `gpt-6.2-sol`, `gpt-6.1-terra`, `gpt-6-luna`. Flex winds down for older models. Not yet covered by an exercise.
+- **GPT-Image-2.6 Sunburst/Flare** (Nov 4) — `gpt-image-2.6-sunburst`/`-flare`: adjustable complexity, SVG and animated GIF output, markup-guided editing (also on 2.5). Not yet covered by an exercise.
+- **GPT-Live-1.1** (Nov 19) — `gpt-live-1.1` on `v1/live/sessions`; better multilingual pronunciation; WebRTC standby mode; outbound SIP calling GA (Nov 2). See Exercise 38 for GPT-Live-1.
+- **Agents API updates** (Oct 30) — mutable session tool lists, async compaction by default, `review: "auto_review"`, `experimental.time_awareness`. See Exercise 37.
+- **Specialized models** — `gpt-6-cyber` (Nov 5, Daybreak approval), `gpt-6-rosalind` (Oct 30, approved orgs), `omni-moderation-csam-latest` (Nov 16, approved orgs).
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.
 - **Agents API** (public beta, Sep 10, 2026; billing began Oct 5) — server-managed sessions, `client.beta.agents`; covered in Exercise 37. Distinct from the client-side Agents SDK (Exercise 24).

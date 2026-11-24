@@ -14,6 +14,10 @@ client = OpenAI()
 # GPT-5.6+ and GPT-6: cache WRITES billed at 1.25x input rate (not tracked here).
 # GPT-5.6 Sol: promotional input/output rate through at least Nov 21, 2026.
 PRICING = {
+    # GPT-6.2 (November 17, 2026). Cached-input rates not published on the models page;
+    # 10% of input is assumed here -- verify before relying on cached-cost figures.
+    "gpt-6.2-astra": {"input": 8.00,  "output": 40.00, "cached_input": 0.80},
+    "gpt-6.2-sol":   {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
     # GPT-6 Astra (September 3, 2026); Fast mode: $20/$100, Ultrafast: $60/$300 per 1M.
     # >272K input: 2x input + 1.5x output; cache writes: $12.50/M.
     # calculate_cost() uses standard rates; these surcharges are not tracked.
