@@ -12,7 +12,7 @@ client = OpenAI()
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6+ and GPT-6: cache WRITES billed at 1.25x input rate (not tracked here).
-# GPT-5.6 Sol: promotional input/output rate through at least Nov 21, 2026.
+# GPT-5.6 Sol: promotional input/output rate through Nov 30, 2026.
 PRICING = {
     # GPT-6 Astra (September 3, 2026); Fast mode: $20/$100, Ultrafast: $60/$300 per 1M.
     # >272K input: 2x input + 1.5x output; cache writes: $12.50/M.
@@ -21,13 +21,17 @@ PRICING = {
     # GPT-6 family (September 22, 2026) — text+image input, text output
     "gpt-6-sol":     {"input": 2.00,  "output": 10.00,  "cached_input": 0.20},
     "gpt-6-luna":    {"input": 0.10,  "output": 0.50,   "cached_input": 0.01},
+    # GPT-6.2 (November 17, 2026) — cache writes: Astra $10/M, Sol $2.50/M (not tracked).
+    # Ultrafast is 3x standard through Feb 28, 2027, then 6x from Mar 1, 2027.
+    "gpt-6.2-astra": {"input": 8.00,  "output": 40.00,  "cached_input": 0.40},
+    "gpt-6.2-sol":   {"input": 2.00,  "output": 10.00,  "cached_input": 0.10},
     # GPT-6.1 Sol (September 29, 2026) — same $/token as gpt-6-sol but 95% cache discount
     # Cache writes $2.50/M; >272K input: 2x input + 1.5x output (not tracked).
     "gpt-6.1-sol":   {"input": 2.00,  "output": 10.00,  "cached_input": 0.10},
     # GPT-6.1 Terra (October 26, 2026) — $1/$5, cached input $0.05/M
     "gpt-6.1-terra": {"input": 1.00,  "output": 5.00,   "cached_input": 0.05},
     # GPT-5.6 family (GA July 9, 2026 — 1.05M context)
-    # Sol promo: active through at least Nov 21, 2026 (standard: $5/$30).
+    # Sol promo: active through Nov 30, 2026 (standard: $5/$30).
     "gpt-5.6-sol":   {"input": 4.00,  "output": 20.00,  "cached_input": 0.40},
     "gpt-5.6-terra": {"input": 2.00,  "output": 12.00,  "cached_input": 0.20},
     "gpt-5.6-luna":  {"input": 0.20,  "output": 1.20,   "cached_input": 0.02},

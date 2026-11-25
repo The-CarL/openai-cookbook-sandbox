@@ -84,7 +84,7 @@ Numbered to be read in order — each builds on the previous.
 | 38 | GPT-Live-1 (Sep 2026) | Full-duplex voice model; $0.05/min; interrupt-safe; backend agent delegation |
 | 39 | Decisions API (GA Oct 22, 2026) | `POST /v1/decisions` with `gpt-6-luna`: predicate/choice/score answers, `input_json`, prompt caching |
 
-## Model lineup snapshot (verified Oct 18, 2026)
+## Model lineup snapshot (verified Nov 25, 2026)
 
 | Model | Input $/M | Output $/M | Context | When to reach for it |
 |---|---|---|---|---|
@@ -105,12 +105,14 @@ Numbered to be read in order — each builds on the previous.
 | `gpt-6.1-sol` | 2.00 | 10.00 | 1.05M | Sep 29. Near-Astra coding/computer-use; cached input $0.10/M (95% off); 128K max output; Ultrafast 6× (Oct 8) |
 | `gpt-6.1-terra` | 1.00 | 5.00 | 1.05M | Oct 26. Fast/efficient visual reasoning, computer use, writing; cached input $0.05/M; 128K max output |
 | `gpt-6-astra` | 10.00 | 50.00 | 1M | Sep 3. Hardest reasoning/coding/computer use/research; Fast 2×, Ultrafast 6× |
+| `gpt-6.2-sol` | 2.00 | 10.00 | 1.05M | Nov 17. Everyday coding/agents; cached input $0.10/M; 128K max output; no Flex |
+| `gpt-6.2-astra` | 8.00 | 40.00 | 1.05M | Nov 17. Frontier reasoning/coding, 20% cheaper than `gpt-6-astra`; cached input $0.40/M |
 | `gpt-5.3-codex` | — | — | — | Feb 24: dedicated agentic coding model |
 | ~~`gpt-5.2-codex`~~ | — | — | — | Jan 14: earlier codex generation. **Shut down Jul 23, 2026.** |
 | ~~`o3`~~ | 2.00 | 8.00 | — | **Deprecated** — ChatGPT retired Aug 26, 2026; API (o3-2025-04-16) removed Dec 11, 2026. Use `gpt-5.6-sol` instead |
 | ~~`o4-mini`~~ | 1.10 | 4.40 | — | **Removed Oct 23, 2026** — replace with `gpt-5.6-terra` |
 
-† GPT-5.6 Sol promotional price (was $5/$30); active through at least Nov 21, 2026.
+† GPT-5.6 Sol promotional price (was $5/$30); active through Nov 30, 2026.
 
 ### Caching gotchas
 - Cached input is ~10% of standard input across the GPT families.
@@ -133,6 +135,7 @@ The following platform updates are relevant; items without a dedicated exercise 
 - **GPT-5.6 family** (GA July 9, 2026) — covered by Exercise 35; Sol/Terra/Luna tiers, explicit cache breakpoints, and post-launch price cuts.
 - **GPT-6 Sol / Luna** (Sep 22, 2026) — gpt-6-sol ($2/$10/M) and gpt-6-luna ($0.10/$0.50/M); text+image input, text output; Responses and Chat Completions APIs. At least 50% lower per-token cost than GPT-5.6 counterparts. Same 1.25× cache-write billing.
 - **GPT-6.1 Sol** (Sep 29, 2026) — `gpt-6.1-sol`, same $2/$10/M pricing as gpt-6-sol but with a 95% cached-input discount ($0.10/M vs the standard 10% rule). Near-Astra coding and computer-use performance (75.2% DeepSWE v1.1 at high reasoning effort vs gpt-6-sol's 68.8%). 1.05M context, 128K max output. Multi-agent beta: the model can delegate to subagents within a single Responses API request. New default model in Codex. Ultrafast tier added Oct 8 ($12/$60/M, ~8× throughput). Compare via Exercise 04.
+- **GPT-6.2 Astra / Sol** (Nov 17, 2026) — `gpt-6.2-astra` ($8/$40/M, cached $0.40) and `gpt-6.2-sol` ($2/$10/M, cached $0.10); 1.05M context, 128K max output, text+image in, text out; Responses + Chat Completions (tools need Responses). Cache writes $10/$2.50 per M. Ultrafast 3× through Feb 28, 2027, then 6×. **Background completion windows** (public beta): 2h/8h windows are 30%/40% below Standard for 6.2 Astra/Sol, 6.1 Terra, 6 Luna. Flex is winding down and not supported on new models. Compare via Exercise 04.
 - **GPT-6.1 Terra** (Oct 26, 2026) — `gpt-6.1-terra`, $1/$5/M, cached input $0.05/M, 1.05M context, 128K max output. Visual reasoning, precise computer use, natural writing; supports hosted shell, apply patch, skills, computer use, MCP, tool search. Compare via Exercise 04.
 - **GPT-6 Astra** (Sep 3, 2026) — `gpt-6-astra`, $10/$50 per 1M tokens, 1M context; cached input $1/M; Fast mode $20/$100; Ultrafast $60/$300 (`service_tier: "ultrafast"`, DevDay Sep 29). Compare via Exercise 04.
 - **GPT Image 2.5** (Sep 8, 2026) — covered by Exercise 36. Flare (speed) and Sunburst (detail), Sketch support, 50% latency reduction. Model IDs: `gpt-image-2.5-flare`, `gpt-image-2.5-sunburst`.

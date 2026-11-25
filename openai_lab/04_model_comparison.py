@@ -24,7 +24,7 @@ MODELS = [
     # GPT-5.5 — April 23, 2026. Token-efficient; good fallback if 5.6/6 unavailable.
     "gpt-5.5",
     # GPT-5.6 family — GA July 9, 2026 (1.05M ctx). Cache writes billed at 1.25x input.
-    # Sol promo ($4/$20) active through at least Nov 21, 2026 (standard: $5/$30).
+    # Sol promo ($4/$20) active through Nov 30, 2026 (standard: $5/$30).
     "gpt-5.6-luna", "gpt-5.6-terra", "gpt-5.6-sol",
     # GPT-6 family — September 22, 2026. Text+image input. 50% cheaper than 5.6.
     # Cache writes billed at 1.25x input rate (same as 5.6+).
@@ -40,12 +40,15 @@ MODELS = [
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast 2x / Ultrafast 6x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
+    # GPT-6.2 — November 17, 2026. Astra $8/$40 (cheaper than gpt-6-astra), Sol $2/$10.
+    # 1.05M context, 128K max output, cache writes 1.25x input. Recommended for new work.
+    "gpt-6.2-sol", "gpt-6.2-astra",
 ]
 
 # Pricing per 1M tokens (verified Sept 29, 2026)
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
-# GPT-5.6 Sol: promotional rate through at least Nov 21, 2026 (standard: $5/$30).
+# GPT-5.6 Sol: promotional rate through Nov 30, 2026 (standard: $5/$30).
 # GPT-6 Astra: >272K input uses 2x input + 1.5x output for the full session.
 # Astra Fast mode: $20/$100, Ultrafast: $60/$300 per 1M; comparison below uses standard rates.
 PRICING = {
@@ -64,6 +67,8 @@ PRICING = {
     "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # cached input $0.10/M (95% off)
     "gpt-6.1-terra":  {"input": 1.00,  "output": 5.00},   # cached input $0.05/M
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
+    "gpt-6.2-sol":    {"input": 2.00,  "output": 10.00},  # cached input $0.10/M
+    "gpt-6.2-astra":  {"input": 8.00,  "output": 40.00},  # cached input $0.40/M
 }
 
 results = []

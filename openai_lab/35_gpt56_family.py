@@ -31,7 +31,7 @@ client = OpenAI()
 #   gpt-5.6-terra: $2.00 input / $12.00 output per 1M tokens
 #                  (cut from $2.50/$15.00 on Jul 30, 2026)
 #   gpt-5.6-sol:   $4.00 input / $20.00 output per 1M tokens (promotional)
-#                  (promotional through Nov 21, 2026; launch price was $5.00/$30.00)
+#                  (promotional through Nov 30, 2026; launch price was $5.00/$30.00)
 #                  (20% cut applied Aug 21, 2026)
 
 PROMPT = (
@@ -165,7 +165,7 @@ print("""
 Model IDs:
   gpt-5.6-luna    — cost tier    ($0.20 / $1.20 per 1M — after Jul 30 cut)
   gpt-5.6-terra   — balanced     ($2.00 / $12.00 per 1M — after Jul 30 cut)
-  gpt-5.6-sol     — flagship     ($4.00 / $20.00 per 1M — promotional to Nov 21)
+  gpt-5.6-sol     — flagship     ($4.00 / $20.00 per 1M — promotional to Nov 30)
 
 Context:  1.05M tokens on all tiers
 
@@ -192,5 +192,5 @@ When to pick each tier:
 Price-cut timeline (Luna/Terra — Sol promotional):
   July 9, 2026:   GA launch — Luna $1/$6, Terra $2.50/$15, Sol $5/$30
   July 30, 2026:  Luna −80% → $0.20/$1.20; Terra −20% → $2.00/$12.00; Sol unchanged
-  Aug 21, 2026:   Sol −20% → $4.00/$20.00 (promotional through Nov 21, 2026)
+  Aug 21, 2026:   Sol −20% → $4.00/$20.00 (promotional through Nov 30, 2026)
 """)
