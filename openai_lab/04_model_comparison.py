@@ -40,9 +40,12 @@ MODELS = [
     # GPT-6 Astra — September 3, 2026. Hardest reasoning/coding/computer use/research.
     # 1M context; Fast 2x / Ultrafast 6x standard rates; cache writes at 1.25x input.
     "gpt-6-astra",
+    # GPT-6.2 family — November 17, 2026. Text+image in, text out; 1.05M context, 128K max output.
+    # Tool calling requires the Responses API. Not available on Flex processing.
+    "gpt-6.2-sol", "gpt-6.2-astra",
 ]
 
-# Pricing per 1M tokens (verified Sept 29, 2026)
+# Standard pricing per 1M tokens
 # GPT-5.5 long-context: sessions >272K input tokens are billed at 2x input
 # ($10.00/1M) and 1.5x output ($45.00/1M) for the ENTIRE session.
 # GPT-5.6 Sol: promotional rate through at least Nov 21, 2026 (standard: $5/$30).
@@ -63,6 +66,8 @@ PRICING = {
     "gpt-6-sol":      {"input": 2.00,  "output": 10.00},
     "gpt-6.1-sol":    {"input": 2.00,  "output": 10.00},  # cached input $0.10/M (95% off)
     "gpt-6.1-terra":  {"input": 1.00,  "output": 5.00},   # cached input $0.05/M
+    "gpt-6.2-sol":    {"input": 2.00,  "output": 10.00},
+    "gpt-6.2-astra":  {"input": 8.00,  "output": 40.00},
     "gpt-6-astra":    {"input": 10.00, "output": 50.00},  # standard, <=272K input
 }
 

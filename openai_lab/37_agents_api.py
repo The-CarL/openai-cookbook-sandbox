@@ -180,4 +180,17 @@ Billing:
   No additional orchestration fee.
 
 SDK requirement: openai>=3.8.0 (beta.agents namespace)
+
+Oct 30, 2026 updates (API changelog):
+  - Update tools on an existing session: each update REPLACES the full tool list.
+    Function tools / MCP servers apply on the next model call; built-in tools by
+    the next turn.
+  - Context compaction now runs in the background by default. Set
+    compaction.async=False to make it blocking. Background compaction may
+    increase token usage.
+  - On eligible projects, review="auto_review" lets a model approve or deny supported
+    tool and permission requests based on intent and risk (additional token billing applies).
+  - experimental.time_awareness (opt-in, off by default): periodic current-time
+    reminders for the model.
+  Exact request shapes: https://developers.openai.com/api/docs/guides/agents-api
 """)
