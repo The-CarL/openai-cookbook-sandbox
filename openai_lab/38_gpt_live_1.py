@@ -193,6 +193,8 @@ Notes:
   - backend_agent.type="responses_api" delegates reasoning to a Responses API model
   - Omit backend_agent to use GPT-Live-1's built-in reasoning (no separate backend)
   - Connection: WebSocket, WebRTC, or SIP — same session.update payload
+  - Outbound SIP calling (Nov 2, 2026): available to all orgs via the Live API
+    (v1/live/sessions); connect GPT-Live to a phone number through your SIP provider
   - Billing: $0.05/min for the voice layer only; backend agent billed separately
 """)
 
